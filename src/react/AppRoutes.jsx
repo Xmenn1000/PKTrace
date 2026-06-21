@@ -3,6 +3,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import Home from './Pages/Home'
+import Welcome from './Pages/tutorial/Welcome'
 import CatNames from './Pages/CatNames/CatNames'
 import Profile from './Pages/Profile/Profile'
 import ProfileOverview from './Pages/Profile/ProfileOverview'
@@ -12,6 +13,7 @@ import Error404 from './Pages/Error404'
 
 const AppRoutes = () => (
   <Routes>
+    <Route path="/tutorial" element={<Welcome/>} />
     <Route path="/" element={<Home />} />
     <Route path="/profile" element={<Profile />}>
       <Route path="" element={<ProfileOverview />} />

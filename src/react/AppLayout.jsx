@@ -66,7 +66,7 @@ const AppLayout = () => {
             }}
           />
           <Typography variant="h5">
-            My Mobile Health App
+            Mobile Health: PK Trace
           </Typography>
         </Stack>
         <Paper
