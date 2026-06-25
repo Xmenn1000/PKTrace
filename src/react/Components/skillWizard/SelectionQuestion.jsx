@@ -2,7 +2,12 @@ import React from 'react'
 import { Typography, FormControl, FormLabel, FormControlLabel, RadioGroup, Radio, Stack, FormHelperText } from '@mui/material'
 import { margin } from '@mui/system'
 
-const Question2 = ({ onJumpSelect }) => (
+// https://mui.com/material-ui/react-stack/
+// https://mui.com/material-ui/react-radio-button/
+// https://mui.com/material-ui/api/form-control/
+
+const SelectionQuestion = ({ question, options, onSelect, currentValue }) => (
+
   <Stack sx={{
     justifyContent: 'center',
     alignItems: 'center'
@@ -13,24 +18,23 @@ const Question2 = ({ onJumpSelect }) => (
       textAlign="center"
       sx={{ marginBottom: 2 }}
     >
-      Schaffst du einen 1,5m Präzisions Sprung?
+      { question }
     </Typography>
     <FormControl>
       <RadioGroup
         aria-labelledby="years-label"
-        defaultValue="female"
         name="radio-buttons-group"
+        value={currentValue}
         onChange={(value) => {
-          onYearSelect(value.target.value)
+          onSelect(value.target.value)
           console.log(`Question 1 Answered with: ${value.target.value}`)
         }}
-      >
-        <FormControlLabel value="ja" control={<Radio />} label="< 1 Jahr" />
-        <FormControlLabel value="2" control={<Radio />} label="1 - 2 Jahre" />
 
+      >
+        {options.map((singleOption) => <FormControlLabel id="{singleOption.label}" value={singleOption.value} control={<Radio />} label={singleOption.label} />)}
       </RadioGroup>
     </FormControl>
   </Stack>
 )
 
-export default Question2
+export default SelectionQuestion

@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { Stack, Box } from '@mui/system'
 
 import { Typography, Button, Divider, LinearProgress } from '@mui/material'
-import Question1 from '../../Components/skillWizard/Question1'
-import Question2 from '../../Components/skillWizard/Question2'
+import SelectionQuestion from '../../Components/skillWizard/SelectionQuestion'
+import YesNoQuestion from '../../Components/skillWizard/YesNoQuestion'
 import Question3 from '../../Components/skillWizard/Question3'
+import SkillLevel from './level'
 
 // https://mui.com/material-ui/react-progress/
 
@@ -12,15 +13,29 @@ const SkillWizard = () => {
   const TOTAL_QUESTIONS = 3
   // one based
   const [progress, setprogress] = useState(1)
-  const [years, setYears] = useState()
-  const [canDoJump, setCanDoJump] = useState()
+  const [years, setYears] = useState('')
+  const [canDoJump, setCanDoJump] = useState('')
 
   const isActive = (number) => progress === number
-  const currentProgress = () => (Math.ceil(100 / TOTAL_QUESTIONS) * progress)
+  const clamp = (val, min, max) => Math.min(Math.max(val, min), max)
+  const currentProgress = () => clamp(0, 100, Math.ceil(100 / TOTAL_QUESTIONS) * progress)
   const lastPage = () => progress === 3
 
+  const calculteScore = () => ((years * 10) + (canDoJump === 'yes' ? 20 : 0))
+
+  const calculateSkillLevel = (score) => {
+    if (score < 33) {
+      return SkillLevel.LOW
+    } if (score < 66) {
+      return SkillLevel.MID
+    }
+    return SkillLevel.HIGH
+  }
+
   const handleFinishClick = () => {
-    // TODO: Handle Finish And Save
+    const score = calculteScore()
+    const level = calculateSkillLevel(score)
+    console.log(`Your score ${score} is ${level}`)
   }
 
   const handleContinueClick = () => {
@@ -37,15 +52,23 @@ const SkillWizard = () => {
 
   const isCurrentAnswerSelected = () => {
     if (progress === 1) {
-      return years !== null && years !== '' && years !== undefined
+      return !!years
     }
     if (progress === 2) {
-      return canDoJump !== null && canDoJump !== '' && canDoJump !== undefined
+      return !!canDoJump
     }
     if (progress === 3) {
       return true
     }
   }
+
+  const yearOptions = [
+    { value: '1', label: '< 1 Jahr' },
+    { value: '2', label: '1 - 2 Jahre' },
+    { value: '3', label: '2 - 4 Jahre' },
+    { value: '4', label: '> 4 Jahre' }
+  ]
+
   return (
     <Stack
       flex="1 1 auto"
@@ -76,8 +99,8 @@ const SkillWizard = () => {
           paddingY: 3
         }}
       >
-        {isActive(1) && <Question1 onYearSelect={setYears} />}
-        {isActive(2) && <Question2 onJumpSelect={setCanDoJump} />}
+        {isActive(1) && <SelectionQuestion question="Schaffst du einen 1,5m Präzisions Sprung?" onSelect={setYears} options={yearOptions} currentValue={years} />}
+        {isActive(2) && <YesNoQuestion question="Wie lange machst du schon Parkour?" onSelect={setCanDoJump} currentValue={canDoJump} />}
         {isActive(3) && <Question3 />}
       </Stack>
 

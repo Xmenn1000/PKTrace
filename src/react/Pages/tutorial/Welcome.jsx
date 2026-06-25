@@ -36,6 +36,7 @@ const Welcome = () => {
         label="Name"
         variant="outlined"
         value={name}
+        required
         fullWidth
         onChange={(event) => {
           setName(event.target.value)
