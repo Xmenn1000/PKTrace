@@ -3,18 +3,18 @@ import {
   Stack,
   Typography,
   Select,
-  Link,
   MenuItem,
   TextField,
   FormControl,
   InputLabel
-} from "@mui/material";
-import React, { useState } from "react";
-import SkillLevel from "../level";
+} from '@mui/material'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import SkillLevel from './level'
 
 const Welcome = () => {
-  const [name, setName] = useState("");
-  const [level, setLevel] = useState("");
+  const [name, setName] = useState('')
+  const [level, setLevel] = useState('')
 
   return (
     <Stack
@@ -38,7 +38,7 @@ const Welcome = () => {
         value={name}
         fullWidth
         onChange={(event) => {
-          setName(event.target.value);
+          setName(event.target.value)
         }}
       />
 
@@ -55,7 +55,7 @@ const Welcome = () => {
           value={level}
           label="Skilllevel"
           onChange={(event) => {
-            setLevel(event.target.value);
+            setLevel(event.target.value)
           }}
         >
           <MenuItem value={SkillLevel.LOW}>Beginner</MenuItem>
@@ -64,15 +64,16 @@ const Welcome = () => {
         </Select>
       </FormControl>
 
-      <Link href="#">
+      <Link to="/tutorial">
         Du kannst dein Skill nicht so gut einschätzen? Starte hier unseren Skilltest!
       </Link>
 
+      {/* TODO: ADD SAVE USER  */}
       <Button variant="contained" disabled={!name || !level}>
         Weiter
       </Button>
     </Stack>
-  );
-};
+  )
+}
 
-export default Welcome;
+export default Welcome

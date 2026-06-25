@@ -16,6 +16,9 @@
   "scripts": {
     "start": "cd build && ws --spa index.html",
     "start:dev": "cd build && ws --spa index.html",
+    "lint:fix": "eslint --fix src/",
+    "db:up" : "docker compose up -d",
+    "db:down" : "docker compose down -v",
     "build": "yarn clean && yarn webpack",
     "watch": "yarn clean && yarn webpack:dev  --watch",
     "clean": "rimraf build && mkdirp build",
@@ -97,6 +100,7 @@
     "i18next": "23.2.3",
     "lodash": "4.17.21",
     "luxon": "3.5.0",
+    "mongoose": "^9.7.2",
     "path": "^0.12.7",
     "process": "^0.11.10",
     "prop-types": "^15.8.1",
