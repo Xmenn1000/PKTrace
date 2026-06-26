@@ -31,7 +31,7 @@ const SelectionQuestion = ({ question, options, onSelect, currentValue }) => (
         }}
 
       >
-        {options.map((singleOption) => <FormControlLabel id="{singleOption.label}" value={singleOption.value} control={<Radio />} label={singleOption.label} />)}
+        {options.map((singleOption) => <FormControlLabel key={singleOption.label} value={singleOption.value} control={<Radio />} label={singleOption.label} />)}
       </RadioGroup>
     </FormControl>
   </Stack>

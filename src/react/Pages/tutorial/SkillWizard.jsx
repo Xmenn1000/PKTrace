@@ -2,25 +2,33 @@ import React, { useState } from 'react'
 import { Stack, Box } from '@mui/system'
 
 import { Typography, Button, Divider, LinearProgress } from '@mui/material'
-import SelectionQuestion from '../../Components/skillWizard/SelectionQuestion'
+import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal'
+import SingleSelectionQuestion from '../../Components/skillWizard/SingleSelectionQuestion'
 import YesNoQuestion from '../../Components/skillWizard/YesNoQuestion'
-import Question3 from '../../Components/skillWizard/Question3'
 import SkillLevel from './level'
+import { cleanQuestion, jumpQuestion, knownMovesOptions, knownMovesQuestion, pushupsQuestion, pushupsQuestionOptions, standingJumpQuestion, standingJumpQuestionOptions, stickQuestion, stickQuestionOptions, yearOptions, yearQuestion } from '../../questions/questions'
+import MultiSelectionQuestion from '../../Components/skillWizard/MultiSelectionQuestion'
+import SliderQuestion from '../../Components/skillWizard/SliderQuestion'
 
 // https://mui.com/material-ui/react-progress/
 
+const NUMBER_OF_QUESTIONS = 7
+
 const SkillWizard = () => {
-  const TOTAL_QUESTIONS = 3
   // one based
   const [progress, setprogress] = useState(1)
   const [years, setYears] = useState('')
   const [canDoJump, setCanDoJump] = useState('')
+  const [canDoCleanMoves, setcanDoCleanMoves] = useState('')
+  const [knowMoves, setKnowMoves] = useState([])
+  const [standingJumpCount, setStandingJumpCount] = useState('')
+  const [pushUpCount, setPushUpCount] = useState('')
+  const [correctStickCount, setCorrectStickCount] = useState('')
 
   const isActive = (number) => progress === number
   const clamp = (val, min, max) => Math.min(Math.max(val, min), max)
-  const currentProgress = () => clamp(0, 100, Math.ceil(100 / TOTAL_QUESTIONS) * progress)
-  const lastPage = () => progress === 3
-
+  const currentProgress = () => clamp(Math.ceil(100 / NUMBER_OF_QUESTIONS) * progress, 0, 100)
+  const lastPage = () => progress === NUMBER_OF_QUESTIONS
   const calculteScore = () => ((years * 10) + (canDoJump === 'yes' ? 20 : 0))
 
   const calculateSkillLevel = (score) => {
@@ -39,7 +47,7 @@ const SkillWizard = () => {
   }
 
   const handleContinueClick = () => {
-    if (progress !== TOTAL_QUESTIONS) {
+    if (progress !== NUMBER_OF_QUESTIONS) {
       setprogress(progress + 1)
     }
   }
@@ -60,14 +68,11 @@ const SkillWizard = () => {
     if (progress === 3) {
       return true
     }
+    if (progress === 4) {
+      return true
+    }
+    return true
   }
-
-  const yearOptions = [
-    { value: '1', label: '< 1 Jahr' },
-    { value: '2', label: '1 - 2 Jahre' },
-    { value: '3', label: '2 - 4 Jahre' },
-    { value: '4', label: '> 4 Jahre' }
-  ]
 
   return (
     <Stack
@@ -80,9 +85,12 @@ const SkillWizard = () => {
       }}
     >
       <Stack width="100%" spacing={1}>
-        <Typography variant="h4" textAlign="center">
-          PK Trace Skilltest
-        </Typography>
+        <Stack direction="row" spacing={1} justifyContent="center" alignItems="center">
+          <Typography variant="h4" textAlign="center">
+            PK SkillWizard
+          </Typography>
+          <AutoFixNormalIcon />
+        </Stack>
         <Divider sx={{
           borderBottomWidth: 5,
           width: '100%'
@@ -99,9 +107,13 @@ const SkillWizard = () => {
           paddingY: 3
         }}
       >
-        {isActive(1) && <SelectionQuestion question="Schaffst du einen 1,5m Präzisions Sprung?" onSelect={setYears} options={yearOptions} currentValue={years} />}
-        {isActive(2) && <YesNoQuestion question="Wie lange machst du schon Parkour?" onSelect={setCanDoJump} currentValue={canDoJump} />}
-        {isActive(3) && <Question3 />}
+        {isActive(1) && <SingleSelectionQuestion question={yearQuestion} onSelect={setYears} options={yearOptions} currentValue={years} />}
+        {isActive(2) && <YesNoQuestion question={jumpQuestion} onSelect={setCanDoJump} currentValue={canDoJump} />}
+        {isActive(3) && <MultiSelectionQuestion question={knownMovesQuestion} options={knownMovesOptions} onSelect={setKnowMoves} currentValues={knowMoves} />}
+        {isActive(4) && <YesNoQuestion question={cleanQuestion} onSelect={setcanDoCleanMoves} currentValue={canDoCleanMoves} />}
+        {isActive(5) && <SliderQuestion question={standingJumpQuestion} options={standingJumpQuestionOptions} currentValue={standingJumpCount} onSelect={setStandingJumpCount} />}
+        {isActive(6) && <SliderQuestion question={pushupsQuestion} options={pushupsQuestionOptions} currentValue={pushUpCount} onSelect={setPushUpCount} />}
+        {isActive(7) && <SliderQuestion question={stickQuestion} options={stickQuestionOptions} currentValue={correctStickCount} onSelect={setCorrectStickCount} />}
       </Stack>
 
       <Stack
@@ -115,7 +127,7 @@ const SkillWizard = () => {
           {' '}
           von
           {' '}
-          {TOTAL_QUESTIONS}
+          {NUMBER_OF_QUESTIONS}
         </Typography>
         <LinearProgress
           variant="determinate"
