@@ -1,12 +1,23 @@
 import React, { useState } from 'react'
-import { Stack, Box } from '@mui/system'
+import { Stack } from '@mui/system'
 
 import { Typography, Button, Divider, LinearProgress } from '@mui/material'
 import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal'
 import SingleSelectionQuestion from '../../Components/skillWizard/SingleSelectionQuestion'
 import YesNoQuestion from '../../Components/skillWizard/YesNoQuestion'
 import SkillLevel from './level'
-import { cleanQuestion, jumpQuestion, knownMovesOptions, knownMovesQuestion, pushupsQuestion, pushupsQuestionOptions, standingJumpQuestion, standingJumpQuestionOptions, stickQuestion, stickQuestionOptions, yearOptions, yearQuestion } from '../../questions/questions'
+import { cleanQuestion,
+  jumpQuestion,
+  knownMovesOptions,
+  knownMovesQuestion,
+  pushupsQuestion,
+  pushupsQuestionOptions,
+  standingJumpQuestion,
+  standingJumpQuestionOptions,
+  stickQuestion,
+  stickQuestionOptions,
+  yearOptions,
+  yearQuestion } from '../../questions/questions'
 import MultiSelectionQuestion from '../../Components/skillWizard/MultiSelectionQuestion'
 import SliderQuestion from '../../Components/skillWizard/SliderQuestion'
 
@@ -24,6 +35,8 @@ const SkillWizard = () => {
   const [standingJumpCount, setStandingJumpCount] = useState('')
   const [pushUpCount, setPushUpCount] = useState('')
   const [correctStickCount, setCorrectStickCount] = useState('')
+// Effekt: Lade-State. Lädt seine Daten selbst.
+// Ein State statt vieler kleiner.
 
   const isActive = (number) => progress === number
   const clamp = (val, min, max) => Math.min(Math.max(val, min), max)
