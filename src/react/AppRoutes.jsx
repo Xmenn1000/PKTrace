@@ -5,15 +5,21 @@ import Home from './Pages/Home'
 import Welcome from './Pages/tutorial/Welcome'
 import CatNames from './Pages/CatNames/CatNames'
 import Profile from './Pages/Profile/Profile'
+import Map from './Pages/Spots/Map'
 import ProfileOverview from './Pages/Profile/ProfileOverview'
 import ProfileSettings from './Pages/Profile/ProfileSettings'
 
 import Error404 from './Pages/Error404'
 import SkillWizard from './Pages/tutorial/SkillWizard'
+import SpotsList from './Pages/Spots/SpotsList'
+import Spot from './Pages/Spots/Spot'
 
 const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<Welcome />} />
+    <Route path="/map" element={<Map />} />
+    <Route path="/spots" element={<SpotsList />} />
+    <Route path="spot/:spotId" element={<Spot />} />
     <Route path="/tutorial" element={<SkillWizard />} />
     <Route path="/Home" element={<Home />} />
     <Route path="/profile" element={<Profile />}>

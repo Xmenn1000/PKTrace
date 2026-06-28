@@ -6539,6 +6539,7 @@ __metadata:
     local-web-server: "npm:^5.4.0"
     lodash: "npm:4.17.21"
     luxon: "npm:^3.3.0"
+    mapbox-gl: "npm:^3.25.0"
     mini-css-extract-plugin: "npm:^2.6.1"
     mkdirp: "npm:^3.0.1"
     mongoose: "npm:^9.7.2"
@@ -8203,6 +8204,13 @@ __metadata:
     promise-retry: "npm:^2.0.1"
     ssri: "npm:^10.0.0"
   checksum: 10c0/df5f4dbb6d98153b751bccf4dc4cc500de85a96a9331db9805596c46aa9f99d9555983954e6c1266d9f981ae37a9e4647f42b9a4bb5466f867f4012e582c9e7e
+  languageName: node
+  linkType: hard
+
+"mapbox-gl@npm:^3.25.0":
+  version: 3.25.0
+  resolution: "mapbox-gl@npm:3.25.0"
+  checksum: 10c0/7dc45817aea1879fa115f0314607cc8435f125a16a72ddf25e60d921ce965b57a2d5b469516288600f6f5aff47981958ee5efafcba327d20bb8d8ce9e45fc802
   languageName: node
   linkType: hard
 
