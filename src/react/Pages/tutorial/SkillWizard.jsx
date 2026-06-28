@@ -17,7 +17,7 @@ import { cleanQuestion,
   stickQuestion,
   stickQuestionOptions,
   yearOptions,
-  yearQuestion } from '../../questions/questions'
+  yearQuestion } from '../../../data/questions'
 import MultiSelectionQuestion from '../../Components/skillWizard/MultiSelectionQuestion'
 import SliderQuestion from '../../Components/skillWizard/SliderQuestion'
 

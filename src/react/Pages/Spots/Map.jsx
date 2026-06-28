@@ -35,7 +35,7 @@ const Map = () => {
 
   useEffect(() => {
     mapRef.current = new mapboxgl.Map({
-      accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
+      accessToken: process.env.MAPBOX_TOKEN,
       container: mapContainerRef.current,
       style: 'mapbox://styles/mapbox/standard',
       center: INITIAL_CENTER,
