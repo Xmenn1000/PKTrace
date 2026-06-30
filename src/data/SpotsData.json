@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "title": "Velodrom - Fritz-Riedel-Straße",
+    "lat": 52.52951665670229,
+    "lng": 13.450865958654386,
+    "zoom": 17.32
+  },
+  {
+    "id": 2,
+    "title": "Trace Space Anton-Saefkow-Park",
+    "lat": 52.5353,
+    "lng": 13.4457,
+    "zoom": 13.1
+  },
+  {
+    "id": 3,
+    "title": "Blauer Spielplatz",
+    "lat": 52.5232,
+    "lng": 13.5854,
+    "zoom": 13.2
+  },
+  {
+    "id": 4,
+    "title": "Sundi",
+    "lat": 52.4286,
+    "lng": 13.2478,
+    "zoom": 13.3
+  },
+  {
+    "id": 5,
+    "title": "Volkspark Friedrichshain",
+    "lat": 52.5280,
+    "lng": 13.4362,
+    "zoom": 13.4
+  },
+  {
+    "id": 6,
+    "title": "Kulturforum Potsdamer Platz",
+    "lat": 52.5085,
+    "lng": 13.3666,
+    "zoom": 13.5
+  },
+  {
+    "id": 7,
+    "title": "Parkour-Anlage Gropiusstadt",
+    "lat": 52.4280,
+    "lng": 13.4600,
+    "zoom": 13.6
+  },
+  {
+    "id": 8,
+    "title": "Parkour-Insel Tempelhofer Feld",
+    "lat": 52.4813,
+    "lng": 13.4125,
+    "zoom": 13.7
+  },
+  {
+    "id": 9,
+    "title": "PK Park Spandau - Spektesee",
+    "lat": 52.5493,
+    "lng": 13.1668,
+    "zoom": 13.8
+  },
+  {
+    "id": 10,
+    "title": "X-Move Obstallee Spandau",
+    "lat": 52.5320,
+    "lng": 13.1720,
+    "zoom": 13.9
+  }
+]

@@ -6,6 +6,7 @@ import { Stack, Typography, IconButton, Divider } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { Link, useSearchParams } from 'react-router-dom'
 import { useDataBase } from '../../../hooks/useDataBase'
+import Marker from '../../Components/Marker'
 
 const INITIAL_CENTER = [13.4505, 52.5252]
 const INITIAL_ZOOM = 15.62
@@ -15,6 +16,7 @@ const Map = () => {
   const [center, setCenter] = useState(INITIAL_CENTER)
   const [zoom, setZoom] = useState(INITIAL_ZOOM)
   const [searchParams] = useSearchParams()
+  const [mapReady, setMapReady] = useState(false)
 
   const db = useDataBase()
   const mapRef = useRef()
@@ -58,11 +60,13 @@ const Map = () => {
       setZoom(mapZoom)
     })
 
-    db.spots.getAll().forEach((singleSpot) => {
-      new mapboxgl.Marker()
-        .setLngLat([singleSpot.lng, singleSpot.lat])
-        .addTo(mapRef.current)
-    })
+    // db.spots.getAll().forEach((singleSpot) => {
+    //   new mapboxgl.Marker()
+    //     .setLngLat([singleSpot.lng, singleSpot.lat])
+    //     .addTo(mapRef.current)
+    // })
+
+    mapRef.current.on('load', () => setMapReady(true))
 
     return () => {
       mapRef.current.remove()
@@ -107,6 +111,9 @@ const Map = () => {
         {zoom.toFixed(2)}
       </div>
       <div id="map-container" ref={mapContainerRef} />
+      {mapReady && db.spots.getAll().map((singleSpot) => (
+        <Marker key={singleSpot.id} map={mapRef} coordinates={[singleSpot.lng, singleSpot.lat]} spot={singleSpot} />
+      ))}
       <Stack />
     </Stack>
   )
