@@ -24,9 +24,8 @@ const Welcome = () => {
       setLevel(detectedLevel)
     }
   }, [location.state])
-
   const handleClick = () => {
-    navigate('/profile')
+    navigate('/spots', { state: { name, level } })
   }
 
   return (
