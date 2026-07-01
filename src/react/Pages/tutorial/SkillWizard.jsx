@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Stack } from '@mui/system'
+import { useNavigate } from 'react-router-dom'
 
 import { Typography, Button, Divider, LinearProgress } from '@mui/material'
 import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal'
@@ -26,6 +27,7 @@ import SliderQuestion from '../../Components/skillWizard/SliderQuestion'
 const NUMBER_OF_QUESTIONS = 7
 
 const SkillWizard = () => {
+  const navigate = useNavigate()
   // one based
   const [progress, setprogress] = useState(1)
   const [years, setYears] = useState('')
@@ -35,8 +37,8 @@ const SkillWizard = () => {
   const [standingJumpCount, setStandingJumpCount] = useState('')
   const [pushUpCount, setPushUpCount] = useState('')
   const [correctStickCount, setCorrectStickCount] = useState('')
-// Effekt: Lade-State. Lädt seine Daten selbst.
-// Ein State statt vieler kleiner.
+  // Effekt: Lade-State. Lädt seine Daten selbst.
+  // Ein State statt vieler kleiner.
 
   const isActive = (number) => progress === number
   const clamp = (val, min, max) => Math.min(Math.max(val, min), max)
@@ -57,6 +59,7 @@ const SkillWizard = () => {
     const score = calculteScore()
     const level = calculateSkillLevel(score)
     console.log(`Your score ${score} is ${level}`)
+    navigate('/', { state: { detectedLevel: level } })
   }
 
   const handleContinueClick = () => {

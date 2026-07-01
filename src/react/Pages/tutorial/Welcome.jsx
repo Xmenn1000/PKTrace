@@ -8,13 +8,26 @@ import {
   FormControl,
   InputLabel
 } from '@mui/material'
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import SkillLevel from './level'
 
 const Welcome = () => {
   const [name, setName] = useState('')
   const [level, setLevel] = useState('')
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    const detectedLevel = location.state?.detectedLevel
+    if (detectedLevel && Object.values(SkillLevel).includes(detectedLevel)) {
+      setLevel(detectedLevel)
+    }
+  }, [location.state])
+
+  const handleClick = () => {
+    navigate('/profile')
+  }
 
   return (
     <Stack
@@ -70,7 +83,7 @@ const Welcome = () => {
       </Link>
 
       {/* TODO: ADD SAVE USER  */}
-      <Button variant="contained" disabled={!name || !level}>
+      <Button variant="contained" disabled={!name || !level} onClick={handleClick}>
         Weiter
       </Button>
     </Stack>
