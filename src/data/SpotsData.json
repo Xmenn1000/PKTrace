@@ -2,6 +2,7 @@
   {
     "id": 1,
     "title": "Velodrom - Fritz-Riedel-Straße",
+    "description": "Klassischer Berliner Parkour-Spot in Prenzlauer Berg: breite Treppen, Stufen und ein großer Vorplatz rund um die Radsporthalle. Auch fester Trainingsort von ParkourONE.",
     "lat": 52.52951665670229,
     "lng": 13.450865958654386,
     "zoom": 17.32
@@ -9,64 +10,81 @@
   {
     "id": 2,
     "title": "Trace Space Anton-Saefkow-Park",
+    "description": "Parkour-Spot im Anton-Saefkow-Park, von ParkourONE für Trainings genutzt. Ruhige Grünanlage mit Mauern, Stufen und Bewegungsflächen.",
     "lat": 52.5353,
     "lng": 13.4457,
-    "zoom": 13.1
+    "zoom": 16.5
   },
   {
     "id": 3,
-    "title": "Blauer Spielplatz",
-    "lat": 52.5232,
-    "lng": 13.5854,
-    "zoom": 13.2
+    "title": "Volkspark Friedrichshain",
+    "description": "Beliebter Treffpunkt für Parkour mit vielen natürlichen Hindernissen: Treppen, Bänke, Mauern und Geländer. Viel Platz und unterschiedliche Schwierigkeitsgrade.",
+    "lat": 52.528,
+    "lng": 13.4362,
+    "zoom": 16
   },
   {
     "id": 4,
-    "title": "Sundi",
-    "lat": 52.4286,
-    "lng": 13.2478,
-    "zoom": 13.3
+    "title": "Kulturforum Potsdamer Platz",
+    "description": "Bekannter Spot rund um das Kulturforum mit Treppen, Geländern und offenen Plätzen – urbane Architektur direkt am Potsdamer Platz.",
+    "lat": 52.5085,
+    "lng": 13.3666,
+    "zoom": 16.5
   },
   {
     "id": 5,
-    "title": "Volkspark Friedrichshain",
-    "lat": 52.5280,
-    "lng": 13.4362,
-    "zoom": 13.4
+    "title": "Weinbergspark",
+    "description": "Parkanlage in Mitte mit Hängen, Treppen und Mauern. Fester Trainingsort von ParkourONE, gut für Anfänger und Fortgeschrittene.",
+    "lat": 52.53,
+    "lng": 13.4022,
+    "zoom": 16.5
   },
   {
     "id": 6,
-    "title": "Kulturforum Potsdamer Platz",
-    "lat": 52.5085,
-    "lng": 13.3666,
-    "zoom": 13.5
+    "title": "Brosepark Niederschönhausen",
+    "description": "Ruhiger Park im Norden Berlins, von ParkourONE für Trainings genutzt. Grünanlage mit Wegen, Stufen und Bewegungsflächen.",
+    "lat": 52.5808,
+    "lng": 13.4045,
+    "zoom": 16.5
   },
   {
     "id": 7,
     "title": "Parkour-Anlage Gropiusstadt",
-    "lat": 52.4280,
-    "lng": 13.4600,
-    "zoom": 13.6
+    "description": "Öffentliche, kostenlose Outdoor-Parkour-Anlage in Buckow/Neukölln, Teil der erneuerten Gropiusmeile am Wildmeisterdamm. Mauern, Stufen und Hindernisse für jedes Level.",
+    "lat": 52.428,
+    "lng": 13.46,
+    "zoom": 16.5
   },
   {
     "id": 8,
-    "title": "Parkour-Insel Tempelhofer Feld",
-    "lat": 52.4813,
-    "lng": 13.4125,
-    "zoom": 13.7
+    "title": "Parkour-Anlage Stadtpark Steglitz",
+    "description": "Dedizierte Parkour-Anlage auf dem Campus Albert Schweitzer im Stadtpark Steglitz – beliebt bei Fitness- und Parkour-Fans.",
+    "lat": 52.4575,
+    "lng": 13.327,
+    "zoom": 16.5
   },
   {
     "id": 9,
-    "title": "PK Park Spandau - Spektesee",
-    "lat": 52.5493,
-    "lng": 13.1668,
-    "zoom": 13.8
+    "title": "Parkour-Insel Tempelhofer Feld",
+    "description": "Parkour-Bereich auf dem weitläufigen ehemaligen Flughafengelände – viel Platz, freie Sicht und urbanes Flair.",
+    "lat": 52.4813,
+    "lng": 13.4125,
+    "zoom": 16
   },
   {
     "id": 10,
+    "title": "PK Park Spandau - Spektesee",
+    "description": "Kostenlose, öffentliche Outdoor-Anlage am Spektesee in Spandau – Fitness- und Parkour-Hotspot in naturnaher Lage am Wasser.",
+    "lat": 52.5493,
+    "lng": 13.1668,
+    "zoom": 16.5
+  },
+  {
+    "id": 11,
     "title": "X-Move Obstallee Spandau",
-    "lat": 52.5320,
-    "lng": 13.1720,
-    "zoom": 13.9
+    "description": "Bewegungs- und Parkour-Spot an der Obstallee in Spandau, gut erreichbar im Wohnumfeld.",
+    "lat": 52.532,
+    "lng": 13.172,
+    "zoom": 16.5
   }
 ]

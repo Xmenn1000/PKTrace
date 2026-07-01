@@ -88,6 +88,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@fontsource/roboto": "^4.5.8",
+    "@mapbox/mapbox-gl-geocoder": "^5.1.2",
     "@mui/icons-material": "^6.0.2",
     "@mui/material": "^6.0.2",
     "@mui/styles": "^6.0.2",

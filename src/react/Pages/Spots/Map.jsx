@@ -5,8 +5,11 @@ import './Map.css'
 import { Stack, Typography, IconButton, Divider } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { Link, useSearchParams } from 'react-router-dom'
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
 import { useDataBase } from '../../../hooks/useDataBase'
 import Marker from '../../Components/Marker'
+import MarkerPopUp from '../../Components/MarkerPopUp'
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 
 const INITIAL_CENTER = [13.4505, 52.5252]
 const INITIAL_ZOOM = 15.62
@@ -53,18 +56,25 @@ const Map = () => {
       }
     })
 
+    // https://docs.mapbox.com/api/search/geocoding/
+    mapRef.current.addControl(
+      new MapboxGeocoder({
+        accessToken: process.env.MAPBOX_TOKEN,
+        useBrowserFocus: true,
+        mapboxgl,
+        autocomplete: true,
+        limit: 5,
+        bbox: [13.088, 52.338, 13.761, 52.675],
+        proximity: [13.4055, 52.5200]
+      })
+    )
+
     mapRef.current.on('move', () => {
       const mapCenter = mapRef.current.getCenter()
       const mapZoom = mapRef.current.getZoom()
       setCenter([mapCenter.lng, mapCenter.lat])
       setZoom(mapZoom)
     })
-
-    // db.spots.getAll().forEach((singleSpot) => {
-    //   new mapboxgl.Marker()
-    //     .setLngLat([singleSpot.lng, singleSpot.lat])
-    //     .addTo(mapRef.current)
-    // })
 
     mapRef.current.on('load', () => setMapReady(true))
 
@@ -112,7 +122,7 @@ const Map = () => {
       </div>
       <div id="map-container" ref={mapContainerRef} />
       {mapReady && db.spots.getAll().map((singleSpot) => (
-        <Marker key={singleSpot.id} map={mapRef} coordinates={[singleSpot.lng, singleSpot.lat]} spot={singleSpot} />
+        <Marker key={singleSpot.id} map={mapRef} coordinates={[singleSpot.lng, singleSpot.lat]} spot={singleSpot} onSelect={setCurrentSpot} />
       ))}
       <Stack />
     </Stack>
