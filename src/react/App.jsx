@@ -8,6 +8,7 @@ import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import AppLayout from './AppLayout'
+import { DBProvider } from '../hooks/useDataBase'
 
 const theme = createTheme({
   components: {
@@ -36,8 +37,10 @@ const root = createRoot(container)
 root.render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
-    <Router>
-      <AppLayout />
-    </Router>
+    <DBProvider>
+      <Router>
+        <AppLayout />
+      </Router>
+    </DBProvider>
   </ThemeProvider>
 )

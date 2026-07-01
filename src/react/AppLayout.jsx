@@ -16,6 +16,7 @@ import {
   Pets as CatIcon,
   Person4 as ProfileIcon
 } from '@mui/icons-material'
+import MapIcon from '@mui/icons-material/Map'
 
 import AppRoutes from './AppRoutes'
 
@@ -107,9 +108,9 @@ const AppLayout = () => {
                 onClick={() => navigate('/')}
               />
               <BottomNavigationAction
-                label="Cat Names"
-                icon={<CatIcon />}
-                onClick={() => navigate('/catnames')}
+                label="Locations"
+                icon={<MapIcon />}
+                onClick={() => navigate('/spots')}
               />
               <BottomNavigationAction
                 label="Profile"

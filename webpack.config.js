@@ -12,6 +12,8 @@ const require = createRequire(import.meta.url)
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+require('dotenv').config()
+
 const pkg = require('./package.json')
 
 const plugins = [
@@ -23,6 +25,7 @@ const plugins = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     'process.env.TARGET': JSON.stringify('web'),
+    'process.env.MAPBOX_TOKEN': JSON.stringify(process.env.MAPBOX_TOKEN),
     TARGET: JSON.stringify('web')
   }),
   new HtmlWebpackPlugin({
@@ -45,7 +48,7 @@ const plugins = [
         // android: true, // Create Android homescreen icon. `boolean` or `{ offset, background }` or an array of sources
         // appleIcon: true, // Create Apple touch icons. `boolean` or `{ offset, background }` or an array of sources
         // appleStartup: true, // Create Apple startup images. `boolean` or `{ offset, background }` or an array of sources
-        favicons: true, // Create regular favicons. `boolean` or `{ offset, background }` or an array of sources
+        favicons: true // Create regular favicons. `boolean` or `{ offset, background }` or an array of sources
         // windows: true // Create Windows 8 tile icons. `boolean` or `{ offset, background }` or an array of sources
       }
     }
@@ -54,7 +57,7 @@ const plugins = [
 
 export default {
   entry: {
-    app: './src/react/App.jsx',
+    app: './src/react/App.jsx'
   },
   output: {
     filename: 'app.[contenthash].js',
@@ -98,7 +101,7 @@ export default {
       },
       {
         test: /\.(jpg|jpeg|png|gif|svg)$/i,
-        type: "asset"
+        type: 'asset'
       },
       {
         test: /\.(pdf)$/i,
@@ -115,7 +118,7 @@ export default {
         test: /\.css$/i,
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader"
+          'css-loader'
         ]
       }
     ]
@@ -128,10 +131,10 @@ export default {
           implementation: ImageMinimizerPlugin.imageminMinify,
           options: {
             plugins: [
-              "imagemin-gifsicle",
-              "imagemin-mozjpeg",
-              "imagemin-pngquant",
-              "imagemin-svgo"
+              'imagemin-gifsicle',
+              'imagemin-mozjpeg',
+              'imagemin-pngquant',
+              'imagemin-svgo'
             ]
           }
         }
@@ -139,10 +142,10 @@ export default {
     ]
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: ['.js', '.jsx'],
     fallback: {
-      crypto: require.resolve("crypto-browserify"),
-      stream: require.resolve("stream-browserify")
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify')
     }
   },
   target: 'web',
