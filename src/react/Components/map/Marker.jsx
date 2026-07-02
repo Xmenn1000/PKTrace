@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import mapboxgl from 'mapbox-gl'
 import { Button, Zoom } from '@mui/material'
-import parkourImg from '../../assets/MarkerGimp.png'
+import parkourImg from '../../../assets/MarkerGimp.png'
 
 // example code from https://docs.mapbox.com/mapbox-gl-js/guides/add-your-data/markers/
 

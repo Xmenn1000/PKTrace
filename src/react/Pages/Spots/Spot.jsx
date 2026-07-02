@@ -1,19 +1,34 @@
-import React from 'react'
-import { Stack, Typography, Divider, List, ListItem, ListItemText, ListItemButton, ListItemIcon, IconButton, Button } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { Stack, Typography, Divider, List, ListItem, ListItemText, Tooltip, ToggleButton, ListItemButton, ListItemIcon, ToggleButtonGroup, IconButton, Button } from '@mui/material'
 import StarIcon from '@mui/icons-material/Star'
 import HomeIcon from '@mui/icons-material/Home'
 import { Link, useParams } from 'react-router-dom'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
+import MapIcon from '@mui/icons-material/Map'
+import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary'
 import { useDataBase } from '../../../hooks/useDataBase'
 import spots from '../../../data/SpotsData.json'
+import Map from '../../Components/map/Map'
 
 const Spot = () => {
+  const [currentScreen, setCurrentScreen] = useState('map')
+  const [currentSpot, setCurrentSpot] = useState(undefined)
+
+  const isActive = (screen) => currentScreen === screen
+
   const db = useDataBase()
   const params = useParams()
 
-  const currentSpot = db.spots.getById(Number(params.spotId))
-  console.log(params.spotId)
-  console.log(currentSpot)
+  const handleAlignment = (event, newAlignment) => {
+    if (newAlignment !== null) {
+      setCurrentScreen(newAlignment)
+    }
+  }
+
+  useEffect(() => {
+    setCurrentSpot(db.spots.getById(Number(params.spotId)))
+  }, [])
 
   return (
     <Stack
@@ -29,11 +44,11 @@ const Spot = () => {
             <ArrowBackIcon />
           </IconButton>
           <Stack>
-            <Typography variant="h4" textAlign="center">
+            <Typography variant="h5" textAlign="center">
               Trainingsspot
             </Typography>
-            <Typography variant="h4" textAlign="center">
-              {currentSpot.title}
+            <Typography variant="h6" textAlign="center">
+              {currentSpot?.title}
             </Typography>
           </Stack>
         </Stack>
@@ -42,20 +57,35 @@ const Spot = () => {
 
       <Stack
         width="100%"
-        justifyContent="start"
-        alignItems="center"
-        flex="1 1 auto"
         sx={{ paddingY: 3 }}
       >
-        <Stack direction="row" spacing={2}>
-          <Button component={Link} to="/challenges" variant="contained" color="primary">
-            Challenges
-          </Button>
-          <Button component={Link} to={`/map?spotId=${currentSpot.id}`} variant="contained" color="primary">
-            Karten Ansichtmap
-          </Button>
-        </Stack>
+        <ToggleButtonGroup
+          value={currentScreen}
+          exclusive
+          onChange={handleAlignment}
+          aria-label="text alignment"
+          sx={{ width: '100%' }}
+          size="small"
+        >
+          <Tooltip title="Map">
+            <ToggleButton value="map" aria-label="map" sx={{ flex: 1 }}>
+              <MapIcon />
+            </ToggleButton>
+          </Tooltip>
+          <Tooltip title="Challenges">
+            <ToggleButton value="challenges" aria-label="challenges" sx={{ flex: 1 }}>
+              <EmojiEventsIcon />
+            </ToggleButton>
+          </Tooltip>
+          <Tooltip title="Photos">
+            <ToggleButton value="photos" aria-label="photos" sx={{ flex: 1 }}>
+              <PhotoLibraryIcon />
+            </ToggleButton>
+          </Tooltip>
+        </ToggleButtonGroup>
       </Stack>
+
+      {isActive('map') && <Map spot={currentSpot} onSpotChange={setCurrentSpot} />}
 
       <Divider sx={{ borderBottomWidth: 5, width: '100%' }} />
       <Stack spacing={1.5}>

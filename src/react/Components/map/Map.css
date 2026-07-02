@@ -7,7 +7,8 @@
 }
 
 #map-container {
-    height: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
     width: 100%;
     /* temporarily set the background color so we can tell where the map container is positioned */
     background-color: lightgrey;
