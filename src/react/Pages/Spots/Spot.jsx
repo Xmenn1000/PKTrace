@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Stack, Typography, Divider, List, ListItem, ListItemText, Tooltip, ToggleButton, ListItemButton, ListItemIcon, ToggleButtonGroup, IconButton, Button } from '@mui/material'
+import { Stack, Typography, Divider, List, ListItem, ListItemText, Tooltip, ToggleButton, ListItemButton, ListItemIcon, ToggleButtonGroup, IconButton, Button, CircularProgress } from '@mui/material'
 import StarIcon from '@mui/icons-material/Star'
 import HomeIcon from '@mui/icons-material/Home'
 import { Link, useParams } from 'react-router-dom'
@@ -94,7 +94,9 @@ const Spot = () => {
         justifyContent="center"
         alignItems="center"
       >
-        {isActive('map') && <Map spot={currentSpot} onSpotChange={setCurrentSpot} />}
+        <Stack sx={{ display: isActive('map') ? 'flex' : 'none' }} flex="1 1 auto" width="100%" minHeight={0}>
+          {currentSpot ? <Map spot={currentSpot} onSpotChange={setCurrentSpot} /> : <CircularProgress />}
+        </Stack>
         {isActive('challenges') && <Challenges />}
         {isActive('photos') && <PhotoGallery />}
       </Stack>

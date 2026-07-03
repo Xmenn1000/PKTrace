@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './Map.css'
-import { Stack, Typography, IconButton, Divider, TextField, Autocomplete, createFilterOptions, Tooltip, useColorScheme } from '@mui/material'
+import { Stack, Typography, IconButton, Divider, TextField, Autocomplete, createFilterOptions, Tooltip, useColorScheme, CircularProgress } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { Link, useSearchParams } from 'react-router-dom'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
@@ -14,16 +14,12 @@ import MarkerPopUp from './MarkerPopUp'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import useGeoLocation from '../../../hooks/useGeoLocation'
 
-const INITIAL_CENTER = [13.4505, 52.5252]
-const INITIAL_ZOOM = 15.62
-
 const Map = ({ spot, onSpotChange }) => {
-  const [center, setCenter] = useState(INITIAL_CENTER)
-  const [zoom, setZoom] = useState(INITIAL_ZOOM)
+  const [center, setCenter] = useState([spot.lng, spot.lat])
+  const [zoom, setZoom] = useState(spot.zoom)
   const [mapReady, setMapReady] = useState(false)
-  const { mode, setMode } = useColorScheme()
-
-  const { watchId, longitude, latitude, error } = useGeoLocation()
+  const { mode } = useColorScheme()
+  const { longitude, latitude, error: locationError, getGeoLocation, loading: loadingLocation } = useGeoLocation()
 
   const db = useDataBase()
   const mapRef = useRef()
@@ -31,20 +27,37 @@ const Map = ({ spot, onSpotChange }) => {
 
   useEffect(
     () => {
+      console.log('change')
+      if (latitude == null || longitude == null) return
+      mapRef.current.flyTo({ center: [longitude, latitude] })
+    },
+    [longitude, latitude]
+  )
+
+  useEffect(
+    () => {
       if (mapRef.current && spot) {
-        mapRef.current.flyTo({ center: [spot.lng, spot.lat] })
+        flyToSpot(spot)
       }
     },
     [mapRef.current, spot]
   )
+
+  const flyToSpot = (spot) => {
+    mapRef.current.flyTo({ center: [spot.lng, spot.lat], zoom: spot.zoom })
+  }
+
+  const onGetGeoLocaton = () => {
+    getGeoLocation()
+  }
 
   useEffect(() => {
     mapRef.current = new mapboxgl.Map({
       accessToken: process.env.MAPBOX_TOKEN,
       container: mapContainerRef.current,
       style: 'mapbox://styles/mapbox/standard',
-      center: INITIAL_CENTER,
-      zoom: INITIAL_ZOOM,
+      center: [spot.lng, spot.lat],
+      zoom: spot.zoom,
       pitch: 60,
       bearing: -17.6,
       config: {
@@ -117,11 +130,14 @@ const Map = ({ spot, onSpotChange }) => {
       </div>
       <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
         <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }} />
-        <Tooltip title="find Location">
-          <IconButton aria-label="mylocation" sx={{ position: 'absolute', right: 5, top: 5 }} color="primary">
-            <MyLocationIcon />
-          </IconButton>
-        </Tooltip>
+        <div style={{ position: 'absolute', right: 5, top: 5 }}>
+          {loadingLocation && <CircularProgress aria-label="Loading…" />}
+          {!loadingLocation && <Tooltip title="find Location">
+            <IconButton aria-label="mylocation" color="primary" onClick={() => onGetGeoLocaton()}>
+              <MyLocationIcon />
+            </IconButton>
+          </Tooltip>}
+        </div>
         {mapReady && db.spots.getAll().map((singleSpot) => (
           <Marker key={singleSpot.id} map={mapRef} coordinates={[singleSpot.lng, singleSpot.lat]} spot={singleSpot} onSelect={onSpotChange} />
         ))}

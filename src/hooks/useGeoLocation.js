@@ -1,47 +1,44 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 const useGeoLocation = () => {
-  const [watchId, setWatchId] = useState()
-  const [latitude, setLat] = useState('52.45')
-  const [longitude, setLong] = useState('13.52')
+  const [latitude, setLat] = useState()
+  const [longitude, setLong] = useState()
   const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const getGeoLocation = () => new Promise((resolve, reject) => {
-    const newId = navigator.geolocation.watchPosition((position, error) => {
-      const lat = position.coords.latitude
-      const long = position.coords.longitude
-      if (error) {
-        console.log(error)
-        return reject(error)
-      }
-      // console.log(lat, long);
-      resolve(position)
-    })
-  })
-
-  useEffect(() => {
-    const run = async () => {
-      try {
-        const position = await getGeoLocation()
-        setWatchId(position)
-        setLat(position.coords.latitude)
-        setLong(position.coords.longitude)
-        // console.log(position)
-      } catch (e) {
-        console.log(e)
-        setLocationError(true)
-      } // console.log(position)
+  const getGeoLocation = useCallback(() => new Promise((resolve, reject) => {
+    setLat(undefined)
+    setLong(undefined)
+    setLoading(true)
+    function successCallBack(geoLocationPos) {
+      const crd = geoLocationPos.coords
+      setLat(crd.latitude)
+      setLong(crd.longitude)
+      setError(false)
+      resolve(geoLocationPos)
+      setLoading(false)
     }
-    run()
 
-    return () => navigator.geolocation.clearWatch(watchId)
-  }, [])
+    function errorCallBack(err) {
+      console.warn(`ERROR (${err.code}): ${err.message}`)
+      setError(true)
+      reject(err)
+      setLoading(false)
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      successCallBack,
+      errorCallBack,
+      { enableHighAccuracy: true, timeout: 10000 }
+    )
+  }), [])
 
   return {
-    watchId,
+    getGeoLocation,
     longitude,
     latitude,
-    error
+    error,
+    loading
   }
 }
 export default useGeoLocation
