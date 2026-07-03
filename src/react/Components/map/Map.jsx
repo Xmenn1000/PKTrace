@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './Map.css'
-import { Stack, Typography, IconButton, Divider } from '@mui/material'
+import { Stack, Typography, IconButton, Divider, TextField, Autocomplete } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { Link, useSearchParams } from 'react-router-dom'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
@@ -15,10 +15,8 @@ const INITIAL_CENTER = [13.4505, 52.5252]
 const INITIAL_ZOOM = 15.62
 
 const Map = ({ spot, onSpotChange }) => {
-  const [currentSpot, setCurrentSpot] = useState(spot)
   const [center, setCenter] = useState(INITIAL_CENTER)
   const [zoom, setZoom] = useState(INITIAL_ZOOM)
-  const [searchParams] = useSearchParams()
   const [mapReady, setMapReady] = useState(false)
 
   const db = useDataBase()
@@ -31,7 +29,7 @@ const Map = ({ spot, onSpotChange }) => {
         mapRef.current.flyTo({ center: [spot.lng, spot.lat] })
       }
     },
-    [mapRef.current]
+    [mapRef.current, spot]
   )
 
   useEffect(() => {
@@ -52,18 +50,18 @@ const Map = ({ spot, onSpotChange }) => {
       }
     })
 
-    // https://docs.mapbox.com/api/search/geocoding/
-    mapRef.current.addControl(
-      new MapboxGeocoder({
-        accessToken: process.env.MAPBOX_TOKEN,
-        useBrowserFocus: true,
-        mapboxgl,
-        autocomplete: true,
-        limit: 5,
-        bbox: [13.088, 52.338, 13.761, 52.675],
-        proximity: [13.4055, 52.5200]
-      })
-    )
+    // // https://docs.mapbox.com/api/search/geocoding/
+    // mapRef.current.addControl(
+    //   new MapboxGeocoder({
+    //     accessToken: process.env.MAPBOX_TOKEN,
+    //     useBrowserFocus: true,
+    //     mapboxgl,
+    //     autocomplete: true,
+    //     limit: 5,
+    //     bbox: [13.088, 52.338, 13.761, 52.675],
+    //     proximity: [13.4055, 52.5200]
+    //   })
+    // )
 
     mapRef.current.on('move', () => {
       const mapCenter = mapRef.current.getCenter()
@@ -79,8 +77,20 @@ const Map = ({ spot, onSpotChange }) => {
     }
   }, [])
 
+  const options = db.spots.getAll()
+
   return (
     <Stack width="100%" flex="1 1 auto" minHeight={0}>
+      <Autocomplete
+        options={options}
+        getOptionLabel={(option) => option.title}
+        isOptionEqualToValue={(option, value) => option.id === value.id}
+        sx={{ width: '100%' }}
+        renderInput={(params) => <TextField {...params} label="Spots" />}
+        onChange={(event, newValue) => {
+          onSpotChange(newValue)
+        }}
+      />
       <div className="sidebar">
         Longitude:
         {' '}
