@@ -99,7 +99,7 @@ const Spot = () => {
         {isActive('photos') && <PhotoGallery />}
       </Stack>
 
-      <Divider sx={{ borderBottomWidth: 5, width: '100%' }} />
+      <Divider sx={{ borderBottomWidth: 5, width: '100%', marginTop: '10px' }} />
       <Stack spacing={1.5}>
         <IconButton component={Link} to="/">
           <HomeIcon />

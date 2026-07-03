@@ -2,14 +2,17 @@ import React, { useRef, useEffect, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './Map.css'
-import { Stack, Typography, IconButton, Divider, TextField, Autocomplete } from '@mui/material'
+import { Stack, Typography, IconButton, Divider, TextField, Autocomplete, createFilterOptions, Tooltip, useColorScheme } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { Link, useSearchParams } from 'react-router-dom'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
+import MyLocationIcon from '@mui/icons-material/MyLocation'
+import { light } from '@mui/material/styles/createPalette'
 import { useDataBase } from '../../../hooks/useDataBase'
 import Marker from './Marker'
 import MarkerPopUp from './MarkerPopUp'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
+import useGeoLocation from '../../../hooks/useGeoLocation'
 
 const INITIAL_CENTER = [13.4505, 52.5252]
 const INITIAL_ZOOM = 15.62
@@ -18,6 +21,9 @@ const Map = ({ spot, onSpotChange }) => {
   const [center, setCenter] = useState(INITIAL_CENTER)
   const [zoom, setZoom] = useState(INITIAL_ZOOM)
   const [mapReady, setMapReady] = useState(false)
+  const { mode, setMode } = useColorScheme()
+
+  const { watchId, longitude, latitude, error } = useGeoLocation()
 
   const db = useDataBase()
   const mapRef = useRef()
@@ -43,9 +49,7 @@ const Map = ({ spot, onSpotChange }) => {
       bearing: -17.6,
       config: {
         basemap: {
-          colorBuildingHighlight: '#93C5FD',
-          colorBuildingSelect: '#1E40AF',
-          show3dLandmarks: false
+          lightPreset: mode === 'light' ? 'day' : 'night'
         }
       }
     })
@@ -79,18 +83,25 @@ const Map = ({ spot, onSpotChange }) => {
 
   const options = db.spots.getAll()
 
+  const filterOptions = createFilterOptions({
+    limit: 5
+  })
+
   return (
     <Stack width="100%" flex="1 1 auto" minHeight={0}>
-      <Autocomplete
-        options={options}
-        getOptionLabel={(option) => option.title}
-        isOptionEqualToValue={(option, value) => option.id === value.id}
-        sx={{ width: '100%' }}
-        renderInput={(params) => <TextField {...params} label="Spots" />}
-        onChange={(event, newValue) => {
-          onSpotChange(newValue)
-        }}
-      />
+      <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" marginBottom="5px">
+        <Autocomplete
+          options={options}
+          filterOptions={filterOptions}
+          getOptionLabel={(option) => option.title}
+          isOptionEqualToValue={(option, value) => option.id === value.id}
+          sx={{ width: '100%' }}
+          renderInput={(params) => <TextField {...params} label="Spots" />}
+          onChange={(event, newValue) => {
+            onSpotChange(newValue)
+          }}
+        />
+      </Stack>
       <div className="sidebar">
         Longitude:
         {' '}
@@ -104,10 +115,17 @@ const Map = ({ spot, onSpotChange }) => {
         {' '}
         {zoom.toFixed(2)}
       </div>
-      <div id="map-container" ref={mapContainerRef} />
-      {mapReady && db.spots.getAll().map((singleSpot) => (
-        <Marker key={singleSpot.id} map={mapRef} coordinates={[singleSpot.lng, singleSpot.lat]} spot={singleSpot} onSelect={onSpotChange} />
-      ))}
+      <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
+        <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }} />
+        <Tooltip title="find Location">
+          <IconButton aria-label="mylocation" sx={{ position: 'absolute', right: 5, top: 5 }} color="primary">
+            <MyLocationIcon />
+          </IconButton>
+        </Tooltip>
+        {mapReady && db.spots.getAll().map((singleSpot) => (
+          <Marker key={singleSpot.id} map={mapRef} coordinates={[singleSpot.lng, singleSpot.lat]} spot={singleSpot} onSelect={onSpotChange} />
+        ))}
+      </div>
       <Stack />
     </Stack>
   )

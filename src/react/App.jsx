@@ -11,6 +11,9 @@ import AppLayout from './AppLayout'
 import { DBProvider } from '../hooks/useDataBase'
 
 const theme = createTheme({
+  colorSchemes: {
+    dark: true
+  },
   components: {
     MuiCssBaseline: {
       styleOverrides: defaultTheme => ({
@@ -29,6 +32,12 @@ const theme = createTheme({
         }
       })
     }
+  }
+})
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark'
   }
 })
 

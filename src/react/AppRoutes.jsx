@@ -3,7 +3,6 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from './Pages/Home'
 import Welcome from './Pages/tutorial/Welcome'
-import CatNames from './Pages/CatNames/CatNames'
 import Profile from './Pages/Profile/Profile'
 import Map from './Components/map/Map'
 import ProfileOverview from './Pages/Profile/ProfileOverview'
@@ -17,7 +16,6 @@ import Spot from './Pages/Spots/Spot'
 const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<Welcome />} />
-    <Route path="/map" element={<Map />} />
     <Route path="/spots" element={<SpotsList />} />
     <Route path="spot/:spotId" element={<Spot />} />
     <Route path="/tutorial" element={<SkillWizard />} />
@@ -26,7 +24,6 @@ const AppRoutes = () => (
       <Route path="" element={<ProfileOverview />} />
       <Route path="settings" element={<ProfileSettings />} />
     </Route>
-    <Route path="/catnames" element={<CatNames />} />
     <Route path="*" element={<Error404 />} />
   </Routes>
 )
