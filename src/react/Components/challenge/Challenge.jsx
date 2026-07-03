@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Button, CardContent, Typography, Stack } from '@mui/material'
+import { Button, CardContent, Typography, Stack, Card, Box } from '@mui/material'
 import { Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { Box } from '@mui/system'
 import CommentSection from '../commentSection/CommentSection'
+import CommonPage from '../../Pages/CommonPage'
+import Stopwatch from '../stopwatch/Stopwatch'
 
-const Challenge = ({ title, descriptions = [], level, images = [], onStart }) => {
+const Challenge = ({descriptions = [], images = [], commentSection, onStart }) => {
   const alt = 'Image not Found!'
   const [currentDescriptionIndex, setCurrentDescriptionIndex] = useState(0)
+  const [started, setStarted] = useState(false)
   const currentDescription = descriptions[currentDescriptionIndex]
-
   // Use num negative for left, positive for right
   const handleNextDescription = (num) => {
     setCurrentDescriptionIndex(prev => {
@@ -31,63 +32,69 @@ const Challenge = ({ title, descriptions = [], level, images = [], onStart }) =>
   }
 
   return (
-    <Box sx={{ maxWidth: 300, mx: 'auto', mt: 4 }}>
-      <CardContent>
-        <Stack spacing={2}>
-          <Box>
-            <Typography variant="h5" fontWeight={700} align="center">
-              {title}
-            </Typography>
+    <Box sx={{
+      height: '100vh',
+      overflowY: 'auto',
+      WebkitOverflowScrolling: 'touch'
+    }}
+    >
+      <Stack spacing={2} alignItems="center">
+        <Typography textAlign="center" color="text.secondary">
+          {currentDescription}
+        </Typography>
+        <Stack direction="row" spacing={2}>
+          <Button variant="outlined" onClick={() => handleNextDescription(-1)}>
+            {'<'}
+          </Button>
 
-            <Typography variant="h6" align="center" fontSize={14}>
-              {level}
-            </Typography>
-
-            <Stack direction="row" alignItems="center" spacing={1}>
-              <Button onClick={() => handleNextDescription(-1)}>{"<"}</Button>
-              <Typography color="text.secondary">{currentDescription}</Typography>
-              <Button onClick={() => handleNextDescription(1)}>{">"}</Button>
-            </Stack>
-          </Box>
-
-          <Box>
-            <Swiper
-              modules={[Pagination]}
-              pagination={{ clickable: true }}
-            >
-              {images.map((image) => (
-                <SwiperSlide key={image.url}>
-                  <Box
-                    component="img"
-                    src={image.url}
-                    alt={alt}
-                    sx={{
-                      width: '100%',
-                      height: '300px',
-                      borderRadius: 2
-                    }}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </Box>
-
-          <Button variant="contained" onClick={onStart}>
-            Start Challenge
+          <Button variant="outlined" onClick={() => handleNextDescription(1)}>
+            {'>'}
           </Button>
         </Stack>
-      </CardContent>
+        <Box sx={{
+          pb: 1,
+          width: '100%',
+          '& .swiper-pagination': {
+            bottom: '-20px !important'
+          } }}
+        >
+          <Swiper modules={[Pagination]} pagination={{ el: '.challenge-pagination', clickable: true }}>
+            {images.map((image) => (
+              <SwiperSlide key={image.url}>
+                <Box
+                  component="img"
+                  src={image.url}
+                  alt={alt}
+                  sx={{
+                    width: '100%',
+                    height: 280,
+                    objectFit: 'cover',
+                    display: 'block',
+                    borderRadius: 2
+                  }}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <Box className="challenge-pagination" sx={{ display: 'flex', justifyContent: 'center', mt: 1 }} />
+        </Box>
+
+        <Button variant="contained" onClick={() => setStarted(prev => !prev)}>
+          {started ? 'Finish' : 'Start'}
+        </Button>
+        <Stopwatch isRunning={started} />
+        {commentSection}
+      </Stack>
     </Box>
   )
 }
 
 Challenge.propTypes = {
-  title: PropTypes.string.isRequired,
   descriptions: PropTypes.arrayOf(PropTypes.string),
   images: PropTypes.arrayOf(PropTypes.shape({
     url: PropTypes.string.isRequired
   })),
-  level: PropTypes.string.isRequired,
+  commentSection: PropTypes.node,
   onStart: PropTypes.func
 }
 
