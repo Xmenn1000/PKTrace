@@ -10,6 +10,8 @@ import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary'
 import { useDataBase } from '../../../hooks/useDataBase'
 import spots from '../../../data/SpotsData.json'
 import Map from '../../Components/map/Map'
+import Challenges from '../../Components/challenges/Challenges'
+import PhotoGallery from '../../Components/photos/PhotoGallery'
 
 const Spot = () => {
   const [currentScreen, setCurrentScreen] = useState('map')
@@ -33,9 +35,9 @@ const Spot = () => {
   return (
     <Stack
       flex="1 1 auto"
-      justifyContent="space-between"
       alignItems="center"
       width={320}
+      minHeight={0}
       sx={{ paddingY: 2 }}
     >
       <Stack width="100%" spacing={1}>
@@ -85,7 +87,17 @@ const Spot = () => {
         </ToggleButtonGroup>
       </Stack>
 
-      {isActive('map') && <Map spot={currentSpot} onSpotChange={setCurrentSpot} />}
+      <Stack
+        flex="1 1 auto"
+        width="100%"
+        minHeight={0}
+        justifyContent="center"
+        alignItems="center"
+      >
+        {isActive('map') && <Map spot={currentSpot} onSpotChange={setCurrentSpot} />}
+        {isActive('challenges') && <Challenges />}
+        {isActive('photos') && <PhotoGallery />}
+      </Stack>
 
       <Divider sx={{ borderBottomWidth: 5, width: '100%' }} />
       <Stack spacing={1.5}>
