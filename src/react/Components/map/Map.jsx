@@ -2,41 +2,35 @@ import React, { useRef, useEffect, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './Map.css'
-import { Stack, Typography, IconButton, Divider } from '@mui/material'
+import { Stack, Typography, IconButton, Divider, TextField, Autocomplete } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { Link, useSearchParams } from 'react-router-dom'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
 import { useDataBase } from '../../../hooks/useDataBase'
-import Marker from '../../Components/Marker'
-import MarkerPopUp from '../../Components/MarkerPopUp'
+import Marker from './Marker'
+import MarkerPopUp from './MarkerPopUp'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 
 const INITIAL_CENTER = [13.4505, 52.5252]
 const INITIAL_ZOOM = 15.62
 
-const Map = () => {
-  const [currentSpot, setCurrentSpot] = useState(undefined)
+const Map = ({ spot, onSpotChange }) => {
   const [center, setCenter] = useState(INITIAL_CENTER)
   const [zoom, setZoom] = useState(INITIAL_ZOOM)
-  const [searchParams] = useSearchParams()
   const [mapReady, setMapReady] = useState(false)
 
   const db = useDataBase()
   const mapRef = useRef()
   const mapContainerRef = useRef()
 
-  useEffect(() => {
-    const spotId = Number(searchParams.get('spotId'))
-
-    if (spotId) {
-      const foundSpot = db.spots.getById(spotId)
-      setCurrentSpot(foundSpot)
-
-      if (mapRef.current && foundSpot) {
-        mapRef.current.flyTo({ center: [foundSpot.lng, foundSpot.lat] })
+  useEffect(
+    () => {
+      if (mapRef.current && spot) {
+        mapRef.current.flyTo({ center: [spot.lng, spot.lat] })
       }
-    }
-  }, [mapRef.current])
+    },
+    [mapRef.current, spot]
+  )
 
   useEffect(() => {
     mapRef.current = new mapboxgl.Map({
@@ -56,18 +50,18 @@ const Map = () => {
       }
     })
 
-    // https://docs.mapbox.com/api/search/geocoding/
-    mapRef.current.addControl(
-      new MapboxGeocoder({
-        accessToken: process.env.MAPBOX_TOKEN,
-        useBrowserFocus: true,
-        mapboxgl,
-        autocomplete: true,
-        limit: 5,
-        bbox: [13.088, 52.338, 13.761, 52.675],
-        proximity: [13.4055, 52.5200]
-      })
-    )
+    // // https://docs.mapbox.com/api/search/geocoding/
+    // mapRef.current.addControl(
+    //   new MapboxGeocoder({
+    //     accessToken: process.env.MAPBOX_TOKEN,
+    //     useBrowserFocus: true,
+    //     mapboxgl,
+    //     autocomplete: true,
+    //     limit: 5,
+    //     bbox: [13.088, 52.338, 13.761, 52.675],
+    //     proximity: [13.4055, 52.5200]
+    //   })
+    // )
 
     mapRef.current.on('move', () => {
       const mapCenter = mapRef.current.getCenter()
@@ -83,30 +77,20 @@ const Map = () => {
     }
   }, [])
 
+  const options = db.spots.getAll()
+
   return (
-    <Stack
-      flex="1 1 auto"
-      justifyContent="space-between"
-      alignItems="center"
-      width={320}
-      sx={{ paddingY: 2 }}
-    >
-      <Stack width="100%" spacing={1}>
-        <Stack direction="row" spacing={1} justifyContent="center" alignItems="center">
-          <IconButton component={Link} to="/spots">
-            <ArrowBackIcon />
-          </IconButton>
-          <Stack>
-            <Typography variant="h4" textAlign="center">
-              Trainingsspot
-            </Typography>
-            <Typography variant="h4" textAlign="center">
-              {currentSpot?.title}
-            </Typography>
-          </Stack>
-        </Stack>
-        <Divider sx={{ borderBottomWidth: 5, width: '100%' }} />
-      </Stack>
+    <Stack width="100%" flex="1 1 auto" minHeight={0}>
+      <Autocomplete
+        options={options}
+        getOptionLabel={(option) => option.title}
+        isOptionEqualToValue={(option, value) => option.id === value.id}
+        sx={{ width: '100%' }}
+        renderInput={(params) => <TextField {...params} label="Spots" />}
+        onChange={(event, newValue) => {
+          onSpotChange(newValue)
+        }}
+      />
       <div className="sidebar">
         Longitude:
         {' '}
@@ -122,7 +106,7 @@ const Map = () => {
       </div>
       <div id="map-container" ref={mapContainerRef} />
       {mapReady && db.spots.getAll().map((singleSpot) => (
-        <Marker key={singleSpot.id} map={mapRef} coordinates={[singleSpot.lng, singleSpot.lat]} spot={singleSpot} onSelect={setCurrentSpot} />
+        <Marker key={singleSpot.id} map={mapRef} coordinates={[singleSpot.lng, singleSpot.lat]} spot={singleSpot} onSelect={onSpotChange} />
       ))}
       <Stack />
     </Stack>

@@ -5,7 +5,7 @@ import Home from './Pages/Home'
 import Welcome from './Pages/tutorial/Welcome'
 import CatNames from './Pages/CatNames/CatNames'
 import Profile from './Pages/Profile/Profile'
-import Map from './Pages/Spots/Map'
+import Map from './Components/map/Map'
 import ProfileOverview from './Pages/Profile/ProfileOverview'
 import ProfileSettings from './Pages/Profile/ProfileSettings'
 
