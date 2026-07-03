@@ -6994,6 +6994,7 @@ __metadata:
     react-router-dom: "npm:^6.26.1"
     rimraf: "npm:^6.1.3"
     stream-browserify: "npm:^3.0.0"
+    swiper: "npm:^14.0.1"
     wait-cli: "npm:^1.0.0"
     watch: "npm:^1.0.1"
     webpack: "npm:^5.74.0"
@@ -11853,6 +11854,13 @@ __metadata:
   bin:
     svgo: bin/svgo
   checksum: 10c0/0741f5d5cad63111a90a0ce7a1a5a9013f6d293e871b75efe39addb57f29a263e45294e485a4d2ff9cc260a5d142c8b5937b2234b4ef05efdd2706fb2d360ecc
+  languageName: node
+  linkType: hard
+
+"swiper@npm:^14.0.1":
+  version: 14.0.1
+  resolution: "swiper@npm:14.0.1"
+  checksum: 10c0/3d4f2cdeef9fec9ee3ad2b2dafc883f168a0d5c0909ebb269ef405043162645e94548b81bb6aea5208e632af0cbf09f9d4483956c4a6dd2374f4a89ae074c6ac
   languageName: node
   linkType: hard
 

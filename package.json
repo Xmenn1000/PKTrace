@@ -111,6 +111,7 @@
     "react-portal": "^4.2.2",
     "react-router": "^6.26.1",
     "react-router-dom": "^6.26.1",
-    "stream-browserify": "^3.0.0"
+    "stream-browserify": "^3.0.0",
+    "swiper": "^14.0.1"
   }
 }
