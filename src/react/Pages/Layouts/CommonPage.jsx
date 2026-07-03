@@ -4,8 +4,9 @@ import React, { Children } from 'react'
 import { Link } from 'react-router-dom'
 import HomeIcon from '@mui/icons-material/Home'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import PropTypes from 'prop-types'
 
-const CommonPage = ({ title, subtitle, backUrl, children }) => (
+const CommonPage = ({ title, subtitle, headerAktions, backUrl, showHome, children }) => (
   <Stack
     flex="1 1 auto"
     spacing={1}
@@ -13,13 +14,13 @@ const CommonPage = ({ title, subtitle, backUrl, children }) => (
     justifyContent="space-between"
     width={320}
     minHeight={0}
-    marginY="5px"
+    marginY="20px"
   >
     <Stack width="100%" spacing={1}>
       <Stack direction="row" spacing={1} justifyContent="center" alignItems="center">
-        <IconButton component={Link} to={backUrl}>
+        {backUrl && <IconButton component={Link} to={backUrl}>
           <ArrowBackIcon />
-        </IconButton>
+        </IconButton>}
         <Stack>
           <Typography variant="h5" textAlign="center">
             {title}
@@ -28,6 +29,7 @@ const CommonPage = ({ title, subtitle, backUrl, children }) => (
             {subtitle}
           </Typography>
         </Stack>
+        {headerAktions}
       </Stack>
       <Divider sx={{ borderBottomWidth: 5, width: '100%' }} />
     </Stack>
@@ -40,7 +42,7 @@ const CommonPage = ({ title, subtitle, backUrl, children }) => (
       {children}
     </Stack>
 
-    <Stack spacing={1.5} sx={{ width: '100%' }} justifyContent="center" alignItems="center">
+    {showHome && <Stack spacing={1.5} sx={{ width: '100%' }} justifyContent="center" alignItems="center">
       <Divider sx={{ borderBottomWidth: 5, width: '100%', marginTop: '10px' }} />
       <IconButton
         component={Link}
@@ -50,8 +52,21 @@ const CommonPage = ({ title, subtitle, backUrl, children }) => (
       >
         <HomeIcon />
       </IconButton>
-    </Stack>
+    </Stack>}
   </Stack>
 )
+
+CommonPage.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  headerAktions: PropTypes.element,
+  backUrl: PropTypes.string,
+  showHome: PropTypes.bool,
+  children: PropTypes.element
+}
+
+CommonPage.defaultProps = {
+  showHome: true
+}
 
 export default CommonPage

@@ -21,6 +21,7 @@ import { cleanQuestion,
   yearQuestion } from '../../../data/questions'
 import MultiSelectionQuestion from '../../Components/skillWizard/MultiSelectionQuestion'
 import SliderQuestion from '../../Components/skillWizard/SliderQuestion'
+import CommonPage from '../Layouts/CommonPage'
 
 // https://mui.com/material-ui/react-progress/
 
@@ -91,28 +92,7 @@ const SkillWizard = () => {
   }
 
   return (
-    <Stack
-      flex="1 1 auto"
-      justifyContent="space-between"
-      alignItems="center"
-      width={320}
-      sx={{
-        paddingY: 6
-      }}
-    >
-      <Stack width="100%" spacing={1}>
-        <Stack direction="row" spacing={1} justifyContent="center" alignItems="center">
-          <Typography variant="h4" textAlign="center">
-            PK SkillWizard
-          </Typography>
-          <AutoFixNormalIcon />
-        </Stack>
-        <Divider sx={{
-          borderBottomWidth: 5,
-          width: '100%'
-        }}
-        />
-      </Stack>
+    <CommonPage title="   PK SkillWizard" headerAktions={<AutoFixNormalIcon />} showHome={false}>
 
       <Stack
         width="100%"
@@ -177,7 +157,7 @@ const SkillWizard = () => {
           )}
         </Stack>
       </Stack>
-    </Stack>
+    </CommonPage>
   )
 }
 

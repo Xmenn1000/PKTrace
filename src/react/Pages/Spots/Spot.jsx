@@ -12,7 +12,7 @@ import spots from '../../../data/SpotsData.json'
 import Map from '../../Components/map/Map'
 import Challenges from '../../Components/challenges/Challenges'
 import PhotoGallery from '../../Components/photos/PhotoGallery'
-import CommonPage from '../CommonPage'
+import CommonPage from '../Layouts/CommonPage'
 
 const Spot = () => {
   const [currentScreen, setCurrentScreen] = useState('map')

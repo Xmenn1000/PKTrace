@@ -2,7 +2,7 @@ import React from 'react'
 import { Stack, Typography, Divider, List, ListItem, ListItemText, ListItemButton, ListItemIcon, IconButton } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { useDataBase } from '../../../hooks/useDataBase'
-import CommonPage from '../CommonPage'
+import CommonPage from '../Layouts/CommonPage'
 
 const SpotsList = () => {
   const db = useDataBase()
