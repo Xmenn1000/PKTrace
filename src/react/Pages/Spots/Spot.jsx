@@ -35,10 +35,11 @@ const Spot = () => {
   return (
     <Stack
       flex="1 1 auto"
+      spacing={1}
       alignItems="center"
+      justifyContent="space-between"
       width={320}
       minHeight={0}
-      sx={{ paddingY: 2 }}
     >
       <Stack width="100%" spacing={1}>
         <Stack direction="row" spacing={1} justifyContent="center" alignItems="center">
@@ -59,7 +60,8 @@ const Spot = () => {
 
       <Stack
         width="100%"
-        sx={{ paddingY: 3 }}
+        flex="1 1 auto"
+        minHeight={0}
       >
         <ToggleButtonGroup
           value={currentScreen}
@@ -85,24 +87,24 @@ const Spot = () => {
             </ToggleButton>
           </Tooltip>
         </ToggleButtonGroup>
-      </Stack>
 
-      <Stack
-        flex="1 1 auto"
-        width="100%"
-        minHeight={0}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Stack sx={{ display: isActive('map') ? 'flex' : 'none' }} flex="1 1 auto" width="100%" minHeight={0}>
-          {currentSpot ? <Map spot={currentSpot} onSpotChange={setCurrentSpot} /> : <CircularProgress />}
+        <Stack
+          width="100%"
+          minHeight={0}
+          justifyContent="flex-start"
+          alignItems="center"
+          flex="3"
+        >
+          <Stack sx={{ display: isActive('map') ? 'flex' : 'none' }} flex="1 1 auto" width="100%" minHeight={0}>
+            {currentSpot ? <Map spot={currentSpot} onSpotChange={setCurrentSpot} /> : <CircularProgress />}
+          </Stack>
+          {isActive('challenges') && <Challenges />}
+          {isActive('photos') && <PhotoGallery />}
         </Stack>
-        {isActive('challenges') && <Challenges />}
-        {isActive('photos') && <PhotoGallery />}
       </Stack>
 
-      <Divider sx={{ borderBottomWidth: 5, width: '100%', marginTop: '10px' }} />
-      <Stack spacing={1.5}>
+      <Stack spacing={1.5} sx={{ width: '100%' }}>
+        <Divider sx={{ borderBottomWidth: 5, width: '100%', marginTop: '10px' }} />
         <IconButton component={Link} to="/">
           <HomeIcon />
         </IconButton>

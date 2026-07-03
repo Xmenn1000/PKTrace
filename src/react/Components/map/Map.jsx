@@ -128,7 +128,7 @@ const Map = ({ spot, onSpotChange }) => {
         {' '}
         {zoom.toFixed(2)}
       </div>
-      <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
+      <div style={{ position: 'relative', width: '100%', flex: '1 1 auto', minHeight: 0 }}>
         <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }} />
         <div style={{ position: 'absolute', right: 5, top: 5 }}>
           {loadingLocation && <CircularProgress aria-label="Loading…" />}
