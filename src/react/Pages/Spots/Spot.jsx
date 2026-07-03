@@ -12,6 +12,7 @@ import spots from '../../../data/SpotsData.json'
 import Map from '../../Components/map/Map'
 import Challenges from '../../Components/challenges/Challenges'
 import PhotoGallery from '../../Components/photos/PhotoGallery'
+import CommonPage from '../CommonPage'
 
 const Spot = () => {
   const [currentScreen, setCurrentScreen] = useState('map')
@@ -33,83 +34,47 @@ const Spot = () => {
   }, [])
 
   return (
-    <Stack
-      flex="1 1 auto"
-      spacing={1}
-      alignItems="center"
-      justifyContent="space-between"
-      width={320}
-      minHeight={0}
-    >
-      <Stack width="100%" spacing={1}>
-        <Stack direction="row" spacing={1} justifyContent="center" alignItems="center">
-          <IconButton component={Link} to="/spots">
-            <ArrowBackIcon />
-          </IconButton>
-          <Stack>
-            <Typography variant="h5" textAlign="center">
-              Trainingsspot
-            </Typography>
-            <Typography variant="h6" textAlign="center">
-              {currentSpot?.title}
-            </Typography>
-          </Stack>
-        </Stack>
-        <Divider sx={{ borderBottomWidth: 5, width: '100%' }} />
-      </Stack>
+    <CommonPage title="Trainingsspot" subtitle={currentSpot?.title} backUrl="/spots">
+      <ToggleButtonGroup
+        value={currentScreen}
+        exclusive
+        onChange={handleAlignment}
+        aria-label="text alignment"
+        sx={{ width: '100%', marginBottom: '10px' }}
+        size="small"
+      >
+        <Tooltip title="Map">
+          <ToggleButton value="map" aria-label="map" sx={{ flex: 1 }}>
+            <MapIcon />
+          </ToggleButton>
+        </Tooltip>
+        <Tooltip title="Challenges">
+          <ToggleButton value="challenges" aria-label="challenges" sx={{ flex: 1 }}>
+            <EmojiEventsIcon />
+          </ToggleButton>
+        </Tooltip>
+        <Tooltip title="Photos">
+          <ToggleButton value="photos" aria-label="photos" sx={{ flex: 1 }}>
+            <PhotoLibraryIcon />
+          </ToggleButton>
+        </Tooltip>
+      </ToggleButtonGroup>
 
       <Stack
         width="100%"
-        flex="1 1 auto"
         minHeight={0}
+        justifyContent="flex-start"
+        alignItems="center"
+        flex="3"
       >
-        <ToggleButtonGroup
-          value={currentScreen}
-          exclusive
-          onChange={handleAlignment}
-          aria-label="text alignment"
-          sx={{ width: '100%', marginBottom: '10px' }}
-          size="small"
-        >
-          <Tooltip title="Map">
-            <ToggleButton value="map" aria-label="map" sx={{ flex: 1 }}>
-              <MapIcon />
-            </ToggleButton>
-          </Tooltip>
-          <Tooltip title="Challenges">
-            <ToggleButton value="challenges" aria-label="challenges" sx={{ flex: 1 }}>
-              <EmojiEventsIcon />
-            </ToggleButton>
-          </Tooltip>
-          <Tooltip title="Photos">
-            <ToggleButton value="photos" aria-label="photos" sx={{ flex: 1 }}>
-              <PhotoLibraryIcon />
-            </ToggleButton>
-          </Tooltip>
-        </ToggleButtonGroup>
-
-        <Stack
-          width="100%"
-          minHeight={0}
-          justifyContent="flex-start"
-          alignItems="center"
-          flex="3"
-        >
-          <Stack sx={{ display: isActive('map') ? 'flex' : 'none' }} flex="1 1 auto" width="100%" minHeight={0}>
-            {currentSpot ? <Map spot={currentSpot} onSpotChange={setCurrentSpot} /> : <CircularProgress />}
-          </Stack>
-          {isActive('challenges') && <Challenges />}
-          {isActive('photos') && <PhotoGallery />}
+        <Stack sx={{ display: isActive('map') ? 'flex' : 'none' }} flex="1 1 auto" width="100%" minHeight={0}>
+          {currentSpot ? <Map spot={currentSpot} onSpotChange={setCurrentSpot} /> : <CircularProgress />}
         </Stack>
+        {isActive('challenges') && <Challenges />}
+        {isActive('photos') && <PhotoGallery />}
       </Stack>
 
-      <Stack spacing={1.5} sx={{ width: '100%' }}>
-        <Divider sx={{ borderBottomWidth: 5, width: '100%', marginTop: '10px' }} />
-        <IconButton component={Link} to="/">
-          <HomeIcon />
-        </IconButton>
-      </Stack>
-    </Stack>
+    </CommonPage>
   )
 }
 
