@@ -12,7 +12,26 @@ import { DBProvider } from '../hooks/useDataBase'
 
 const theme = createTheme({
   colorSchemes: {
-    dark: true
+    light: {
+      palette: {
+        difficulty: {
+          easy: '#0CC952',
+          medium: '#DE7A00',
+          hard: '#DE0000',
+          dynamisch: '#FF03E2'
+        }
+      }
+    },
+    dark: {
+      palette: {
+        difficulty: {
+          easy: '#0A8A3C',
+          medium: '#B36300',
+          hard: '#A80000',
+          dynamisch: '#C002AD'
+        }
+      }
+    }
   },
   components: {
     MuiCssBaseline: {
@@ -32,12 +51,6 @@ const theme = createTheme({
         }
       })
     }
-  }
-})
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark'
   }
 })
 
