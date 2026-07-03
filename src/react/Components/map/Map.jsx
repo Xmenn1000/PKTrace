@@ -27,12 +27,16 @@ const Map = ({ spot, onSpotChange }) => {
 
   useEffect(
     () => {
-      console.log('change')
       if (latitude == null || longitude == null) return
       mapRef.current.flyTo({ center: [longitude, latitude] })
     },
     [longitude, latitude]
   )
+
+  const autocompleteChange = (newValue) => {
+    if (newValue == null) return
+    onSpotChange(newValue)
+  }
 
   useEffect(
     () => {
@@ -111,7 +115,7 @@ const Map = ({ spot, onSpotChange }) => {
           sx={{ width: '100%' }}
           renderInput={(params) => <TextField {...params} label="Spots" />}
           onChange={(event, newValue) => {
-            onSpotChange(newValue)
+            autocompleteChange(newValue)
           }}
         />
       </Stack>
