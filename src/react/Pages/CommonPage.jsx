@@ -40,9 +40,14 @@ const CommonPage = ({ title, subtitle, backUrl, children }) => (
       {children}
     </Stack>
 
-    <Stack spacing={1.5} sx={{ width: '100%' }}>
+    <Stack spacing={1.5} sx={{ width: '100%' }} justifyContent="center" alignItems="center">
       <Divider sx={{ borderBottomWidth: 5, width: '100%', marginTop: '10px' }} />
-      <IconButton component={Link} to="/">
+      <IconButton
+        component={Link}
+        to="/"
+        sx={{ width: '40px'
+        }}
+      >
         <HomeIcon />
       </IconButton>
     </Stack>
