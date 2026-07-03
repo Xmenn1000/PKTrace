@@ -12,7 +12,7 @@ import Slide from "@mui/material/Slide";
 
 import { challenges, difficultyColors } from "../../../data/challenge";
 import "./Challenge.css";
-import { borderRadius, margin, textAlign } from "@mui/system";
+import { borderRadius, margin, maxWidth, textAlign, width } from "@mui/system";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -41,6 +41,13 @@ function AlertDialogSlide() {
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
+        
+        PaperProps={{
+            sx: {
+                width: "100%",
+                maxWidth: "420px"
+            },
+        }}
       >
         <DialogTitle align="center">Schwierigkeitsgrade</DialogTitle>
 
@@ -51,7 +58,7 @@ function AlertDialogSlide() {
                     <p>Leicht</p>
                     <span 
                         style={{
-                            width: "100px",
+                            width: "80px",
                             height: "50px",
                             backgroundColor: difficultyColors["easy"],
                             display:"inline-block",
@@ -63,7 +70,7 @@ function AlertDialogSlide() {
                     <p>Mittel</p>
                     <span 
                         style={{
-                             width: "100px",
+                             width: "80px",
                             height: "50px",
                             backgroundColor: difficultyColors["medium"],
                             display:"inline-block",
@@ -75,7 +82,7 @@ function AlertDialogSlide() {
                     <p>Schwer</p>
                     <span 
                         style={{
-                             width: "100px",
+                             width: "80px",
                             height: "50px",
                             backgroundColor: difficultyColors["hard"],
                             display:"inline-block",
@@ -84,10 +91,10 @@ function AlertDialogSlide() {
                     ></span>                
                 </div>
                 <div>
-                    <p>Selbstbestimmt</p>
+                    <p>Selbständig</p>
                     <span 
                         style={{
-                             width: "100px",
+                             width: "80px",
                             height: "50px",
                             backgroundColor: difficultyColors["dynamisch"],
                             display:"inline-block",
