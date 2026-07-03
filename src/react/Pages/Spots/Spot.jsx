@@ -68,7 +68,7 @@ const Spot = () => {
           exclusive
           onChange={handleAlignment}
           aria-label="text alignment"
-          sx={{ width: '100%' }}
+          sx={{ width: '100%', marginBottom: '10px' }}
           size="small"
         >
           <Tooltip title="Map">
