@@ -1,28 +1,139 @@
-import { Description } from '@mui/icons-material';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import { title } from 'process';
-import { challenges, difficultyColors } from "../../../data/challenge"
-import "./Challenge.css"
+import * as React from "react";
+import { useState } from "react";
 
-import React, { useState } from 'react'
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Slide from "@mui/material/Slide";
 
-const Challenges = () => <h1>Challenges for you XD</h1>
+import { challenges, difficultyColors } from "../../../data/challenge";
+import "./Challenge.css";
+import { borderRadius, margin, textAlign } from "@mui/system";
 
-const AllChallenges = () => {
-    const [clicked, onClickChange] = useState(null);
-    return(
-        <>
-        <h1>All Challenges</h1>
-        <Stack spacing={2} direction="column">
-            {challenges.map((challenge) => (
-                <Button style={{backgroundColor: difficultyColors[challenge.level]}} variant="contained">{challenge.title}</Button>
-            ))}
-        </Stack>
-        </>
-    );
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+function AlertDialogSlide() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <Button variant="outlined" onClick={handleClickOpen}>
+        INFO
+      </Button>
+
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle align="center">Schwierigkeitsgrade</DialogTitle>
+
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            <Stack spacing={2} direction={"row"}>
+                <div>
+                    <p>Leicht</p>
+                    <span 
+                        style={{
+                            width: "100px",
+                            height: "50px",
+                            backgroundColor: difficultyColors["easy"],
+                            display:"inline-block",
+                            borderRadius: "3px",
+                        }}  
+                    ></span>                
+                </div>
+                <div>
+                    <p>Mittel</p>
+                    <span 
+                        style={{
+                             width: "100px",
+                            height: "50px",
+                            backgroundColor: difficultyColors["medium"],
+                            display:"inline-block",
+                            borderRadius: "3px",
+                        }}  
+                    ></span>                
+                </div>
+                <div>
+                    <p>Schwer</p>
+                    <span 
+                        style={{
+                             width: "100px",
+                            height: "50px",
+                            backgroundColor: difficultyColors["hard"],
+                            display:"inline-block",
+                            borderRadius: "3px",
+                        }}  
+                    ></span>                
+                </div>
+                <div>
+                    <p>Selbstbestimmt</p>
+                    <span 
+                        style={{
+                             width: "100px",
+                            height: "50px",
+                            backgroundColor: difficultyColors["dynamisch"],
+                            display:"inline-block",
+                            borderRadius: "3px",
+                        }}  
+                    ></span>                
+                </div>
+            </Stack>
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleClose}>Schließen</Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+}
+
+const SpotChallenges = () => {
+  const [clicked, onClickChange] = useState(null);
+
+  return (
+    <>
+      <h1>Spot Challenges</h1>
+
+      <AlertDialogSlide />
+
+      <p></p>
+      
+      <Stack spacing={2} direction="column">
+        {challenges.map((challenge) => (
+          <Button
+            key={challenge.id}
+            style={{
+              backgroundColor: difficultyColors[challenge.level],
+            }}
+            variant="contained"
+            onClick={() => onClickChange(challenge)}
+          >
+            {challenge.title}
+          </Button>
+        ))}
+      </Stack>
+    </>
+  );
 };
 
-
-
-export default AllChallenges;
+export default SpotChallenges;
