@@ -13,6 +13,7 @@ import Marker from './Marker'
 import MarkerPopUp from './MarkerPopUp'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import useGeoLocation from '../../../hooks/useGeoLocation'
+import ExploreIcon from '@mui/icons-material/Explore'
 
 const Map = ({ spot, onSpotChange }) => {
   const [center, setCenter] = useState([spot.lng, spot.lat])
@@ -118,6 +119,11 @@ const Map = ({ spot, onSpotChange }) => {
             autocompleteChange(newValue)
           }}
         />
+        <Tooltip title="Center on current Spot">
+          <IconButton onClick={() => flyToSpot(spot)}>
+            <ExploreIcon />
+          </IconButton>
+        </Tooltip>
       </Stack>
       <div className="sidebar">
         Longitude:
