@@ -7,12 +7,8 @@ const ChallengeDBParser = ({ id }) => {
   const getChallengeFromDB = () => {
     console.log(`TestClass, should use ${id}`)
     const images = [
-      {
-        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSmRsHCT597H_wQju_wmNnzsA5V8VVToP5l7e1fp3ujNMvm9PlMgk9ggg&s'
-      },
-      {
-        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1QRHsKZRioSp_kte9ywn_ft-um3nmpEmzePXghOi1vA&s=10'
-      }
+      { url: 'https://picsum.photos/600/400?random=1' },
+      { url: 'https://picsum.photos/600/400?random=2' }
     ]
     const descriptions = [
       'kjjfskjyf kjsh<s kjs<jk fsyjkd fysjkdh fsyjkd fyjks sydhkg sd',

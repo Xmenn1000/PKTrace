@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Button, CardContent, Typography, Stack, Card, Box } from '@mui/material'
 import { Pagination } from 'swiper/modules'
+import PhotoGallery from '../photos/PhotoGallery'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import CommentSection from '../commentSection/CommentSection'
-import CommonPage from '../../Pages/CommonPage'
 import Stopwatch from '../stopwatch/Stopwatch'
+import { borderRadius } from '@mui/system'
 
 const Challenge = ({descriptions = [], images = [], commentSection, onStart }) => {
   const alt = 'Image not Found!'
@@ -32,11 +33,11 @@ const Challenge = ({descriptions = [], images = [], commentSection, onStart }) =
   }
 
   return (
-    <Box sx={{
-      height: '100vh',
-      overflowY: 'auto',
-      WebkitOverflowScrolling: 'touch'
-    }}
+    <Box
+      sx={{
+        flex: 1,
+        overflowY: 'auto'
+      }}
     >
       <Stack spacing={2} alignItems="center">
         <Typography textAlign="center" color="text.secondary">
@@ -51,33 +52,7 @@ const Challenge = ({descriptions = [], images = [], commentSection, onStart }) =
             {'>'}
           </Button>
         </Stack>
-        <Box sx={{
-          pb: 1,
-          width: '100%',
-          '& .swiper-pagination': {
-            bottom: '-20px !important'
-          } }}
-        >
-          <Swiper modules={[Pagination]} pagination={{ el: '.challenge-pagination', clickable: true }}>
-            {images.map((image) => (
-              <SwiperSlide key={image.url}>
-                <Box
-                  component="img"
-                  src={image.url}
-                  alt={alt}
-                  sx={{
-                    width: '100%',
-                    height: 280,
-                    objectFit: 'cover',
-                    display: 'block',
-                    borderRadius: 2
-                  }}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <Box className="challenge-pagination" sx={{ display: 'flex', justifyContent: 'center', mt: 1 }} />
-        </Box>
+        <PhotoGallery images={images} sx={{ pb: 1 }} imageSx={{ height: 350, borderRadius: 4 }} />
 
         <Button variant="contained" onClick={() => setStarted(prev => !prev)}>
           {started ? 'Finish' : 'Start'}
