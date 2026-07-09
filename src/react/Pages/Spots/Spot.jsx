@@ -70,7 +70,9 @@ const Spot = () => {
         <Stack sx={{ display: isActive('map') ? 'flex' : 'none' }} flex="1 1 auto" width="100%" minHeight={0}>
           {currentSpot ? <Map spot={currentSpot} onSpotChange={setCurrentSpot} /> : <CircularProgress />}
         </Stack>
-        {isActive('challenges') && <Challenges />}
+
+        {isActive('challenges') && currentSpot && (<Challenges spot={currentSpot} />)}
+   
         {isActive('photos') && <PhotoGallery />}
       </Stack>
 

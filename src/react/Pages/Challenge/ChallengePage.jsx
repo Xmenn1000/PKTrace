@@ -1,10 +1,39 @@
 import React from 'react'
-import CommonPage from '../CommonPage'
-import ChallengeDBParser from '../../Components/challenge/ChallengeDBParser'
+import { useNavigate } from 'react-router-dom'
+import { Stack, Button, Typography } from '@mui/material'
 
-const ChallengePage = ({ id, title, subtitle, backUrl }) => (
-  <CommonPage title={title} subtitle={subtitle} backUrl={backUrl}>
-    <ChallengeDBParser id={id} />
-  </CommonPage>
-)
+import CommonPage from '../Layouts/CommonPage'
+import { challenges, difficultyColors } from '../../../data/challenge'
+
+const ChallengePage = () => {
+  const navigate = useNavigate()
+
+  return (
+    <CommonPage
+      title="Alle Challenges"
+      subtitle="Wähle eine Challenge aus"
+      backUrl="/"
+    >
+      <Stack spacing={2} width="100%">
+        <Typography color="text.secondary" textAlign="center">
+          Alle verfügbaren Challenges
+        </Typography>
+
+        {challenges.map((challenge) => (
+          <Button
+            key={challenge.id}
+            variant="contained"
+            sx={{
+              backgroundColor: difficultyColors[challenge.level],
+            }}
+            onClick={() => navigate(`/challenge/${challenge.id}`)}
+          >
+            {challenge.title}
+          </Button>
+        ))}
+      </Stack>
+    </CommonPage>
+  )
+}
+
 export default ChallengePage

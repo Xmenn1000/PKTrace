@@ -12,6 +12,7 @@ import Error404 from './Pages/Error404'
 import SkillWizard from './Pages/tutorial/SkillWizard'
 import SpotsList from './Pages/Spots/SpotsList'
 import Spot from './Pages/Spots/Spot'
+import ChallengePage from './Pages/Challenge/ChallengePage'
 
 const AppRoutes = () => (
   <Routes>
@@ -24,6 +25,7 @@ const AppRoutes = () => (
       <Route path="" element={<ProfileOverview />} />
       <Route path="settings" element={<ProfileSettings />} />
     </Route>
+    <Route path="/challenges/all" element={<ChallengePage />} />
     <Route path="*" element={<Error404 />} />
   </Routes>
 )
