@@ -1,17 +1,10 @@
-import React, { useState } from 'react'
+import { Box, Button, Stack, Typography } from '@mui/material'
 import PropTypes from 'prop-types'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Button, CardContent, Typography, Stack, Card, Box } from '@mui/material'
-import { Pagination } from 'swiper/modules'
+import { useState } from 'react'
 import PhotoGallery from '../photos/PhotoGallery'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import CommentSection from '../commentSection/CommentSection'
 import Stopwatch from '../stopwatch/Stopwatch'
-import { borderRadius } from '@mui/system'
 
-const Challenge = ({descriptions = [], images = [], commentSection, onStart }) => {
-  const alt = 'Image not Found!'
+const Challenge = ({ descriptions = [], images = [], commentSection, onStart }) => {
   const [currentDescriptionIndex, setCurrentDescriptionIndex] = useState(0)
   const [started, setStarted] = useState(false)
   const currentDescription = descriptions[currentDescriptionIndex]
@@ -54,7 +47,13 @@ const Challenge = ({descriptions = [], images = [], commentSection, onStart }) =
         </Stack>
         <PhotoGallery images={images} sx={{ pb: 1 }} imageSx={{ height: 350, borderRadius: 4 }} />
 
-        <Button variant="contained" onClick={() => setStarted(prev => !prev)}>
+        <Button
+          variant="contained"
+          onClick={() => {
+            setStarted(prev => !prev)
+            onStart()
+          }}
+        >
           {started ? 'Finish' : 'Start'}
         </Button>
         <Stopwatch isRunning={started} />
