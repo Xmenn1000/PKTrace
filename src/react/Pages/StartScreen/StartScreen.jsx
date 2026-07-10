@@ -1,72 +1,58 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, Divider, Stack, Typography } from '@mui/material'
+import { Button, Stack, Typography } from '@mui/material'
 import { useUser } from '../../../hooks/useUser'
+import CommonPage from '../Layouts/CommonPage'
 
 const StartScreen = () => {
   const { user } = useUser()
   const navigate = useNavigate()
 
   const name = user?.name ?? 'Gast'
-  const level = user?.level ?? ''
+  const level = user?.level || undefined
 
   return (
-    <Stack
-      flex="1 1 auto"
-      justifyContent="center"
-      alignItems="center"
-      spacing={3}
-      sx={{ px: 4, maxWidth: 400, mx: 'auto', width: '100%' }}
-    >
-      <Stack alignItems="center" spacing={0.5}>
-        <Typography variant="h4" fontWeight="bold" textAlign="center">
-          Hallo &quot;
-          {name}
-          &quot;!
+    <CommonPage title={`Hallo "${name}"!`} subtitle={level && `Skill level: ${level}`}>
+      <Stack
+        height="100%"
+        justifyContent="center"
+        alignItems="center"
+        spacing={3}
+        sx={{ px: 4 }}
+      >
+        <Typography variant="body1" textAlign="center">
+          Womit magst du heute Starten?
         </Typography>
-        {level && (
-          <Typography variant="body2" color="text.secondary">
-            Skill level:
-            {' '}
-            {level}
-          </Typography>
-        )}
-      </Stack>
 
-      <Divider sx={{ width: '100%' }} />
+        <Stack spacing={2} width="100%" alignItems="center">
+          <Stack alignItems="center" spacing={1} width="100%">
+            <Button
+              variant="outlined"
+              onClick={() => navigate('/spots')}
+              sx={{ borderRadius: 6, px: 4, py: 1, width: '70%' }}
+            >
+              Trainingsspots
+            </Button>
+            <Typography variant="body2" color="text.secondary" textAlign="center">
+              Finde Beliebte Pakourspots, und starte direkt mit deiner ersten Session!
+            </Typography>
+          </Stack>
 
-      <Typography variant="body1" textAlign="center">
-        Womit magst du heute Starten?
-      </Typography>
-
-      <Stack spacing={2} width="100%" alignItems="center">
-        <Stack alignItems="center" spacing={1} width="100%">
-          <Button
-            variant="outlined"
-            onClick={() => navigate('/spots')}
-            sx={{ borderRadius: 6, px: 4, py: 1, width: '70%' }}
-          >
-            Trainingsspots
-          </Button>
-          <Typography variant="body2" color="text.secondary" textAlign="center">
-            Finde Beliebte Pakourspots, und starte direkt mit deiner ersten Session!
-          </Typography>
-        </Stack>
-
-        <Stack alignItems="center" spacing={1} width="100%">
-          <Button
-            variant="outlined"
-            onClick={() => navigate('/challenges/all')}
-            sx={{ borderRadius: 6, px: 4, py: 1, width: '70%' }}
-          >
-            Challenges
-          </Button>
-          <Typography variant="body2" color="text.secondary" textAlign="center">
-            Finde für dich passende Herrausforderungen um dich und deine Pakourkünste zu verbessern
-          </Typography>
+          <Stack alignItems="center" spacing={1} width="100%">
+            <Button
+              variant="outlined"
+              onClick={() => navigate('/challenges/all')}
+              sx={{ borderRadius: 6, px: 4, py: 1, width: '70%' }}
+            >
+              Challenges
+            </Button>
+            <Typography variant="body2" color="text.secondary" textAlign="center">
+              Finde für dich passende Herrausforderungen um dich und deine Pakourkünste zu verbessern
+            </Typography>
+          </Stack>
         </Stack>
       </Stack>
-    </Stack>
+    </CommonPage>
   )
 }
 
