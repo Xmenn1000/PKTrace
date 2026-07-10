@@ -3,6 +3,8 @@ import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Home from './Pages/Home'
 import Welcome from './Pages/tutorial/Welcome'
+import WelcomeSkill from './Pages/tutorial/WelcomeSkill'
+import SkillResult from './Pages/tutorial/SkillResult'
 import Profile from './Pages/Profile/Profile'
 import Map from './Components/map/Map'
 import ProfileOverview from './Pages/Profile/ProfileOverview'
@@ -25,7 +27,9 @@ const ProtectedRoute = ({ element }) => {
 const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<Welcome />} />
+    <Route path="/welcome/skill" element={<WelcomeSkill />} />
     <Route path="/tutorial" element={<SkillWizard />} />
+    <Route path="/tutorial/result" element={<SkillResult />} />
     <Route path="/start" element={<ProtectedRoute element={<StartScreen />} />} />
     <Route path="/spots" element={<ProtectedRoute element={<SpotsList />} />} />
     <Route path="spot/:spotId" element={<ProtectedRoute element={<Spot />} />} />

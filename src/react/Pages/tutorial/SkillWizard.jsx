@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Stack } from '@mui/system'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { Typography, Button, Divider, LinearProgress } from '@mui/material'
 import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal'
@@ -29,6 +29,8 @@ const NUMBER_OF_QUESTIONS = 7
 
 const SkillWizard = () => {
   const navigate = useNavigate()
+  const location = useLocation()
+  const name = location.state?.name ?? ''
   // one based
   const [progress, setprogress] = useState(1)
   const [years, setYears] = useState('')
@@ -59,8 +61,7 @@ const SkillWizard = () => {
   const handleFinishClick = () => {
     const score = calculteScore()
     const level = calculateSkillLevel(score)
-    console.log(`Your score ${score} is ${level}`)
-    navigate('/', { state: { detectedLevel: level } })
+    navigate('/tutorial/result', { state: { name, detectedLevel: level } })
   }
 
   const handleContinueClick = () => {

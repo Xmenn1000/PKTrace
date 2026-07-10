@@ -24,7 +24,7 @@ export const yearOptions = [
 ]
 
 // Slider Question
-export const standingJumpQuestion = 'Wie weit kannst du aus dem Stand springen?'
+export const standingJumpQuestion = 'Wie weit kannst du aus dem Stand springen? (in Metern)'
 export const standingJumpQuestionOptions = { min: 0, max: 10, step: 1 }
 export const pushupsQuestion = 'Wie viele Liegestütze schaffst du?'
 export const pushupsQuestionOptions = { min: 0, max: 40, step: 5 }
