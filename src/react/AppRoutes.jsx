@@ -14,6 +14,7 @@ import SpotsList from './Pages/Spots/SpotsList'
 import Spot from './Pages/Spots/Spot'
 import ChallengeDBParser from './Components/challenge/ChallengeDBParser'
 import ChallengePage from './Pages/Challenge/ChallengePage'
+import AllChallengePage from './Pages/Challenge/AllChallengesPage'
 
 const AppRoutes = () => (
   <Routes>
@@ -28,7 +29,7 @@ const AppRoutes = () => (
     </Route>
     {/* THIS CHALLENGE ROUTE ONLY FOR TESTING CHALLENGE PAGE AND PHOTOGALLERY COMPONENT PURPOSES */ }
     <Route path="/challenge" element={<ChallengePage id={1} title="Challenge" subtitle="Level: Noob" backUrl="/" />} />
-    <Route path="/challenges/all" element={<ChallengePage />} />
+    <Route path="/challenges/all" element={<AllChallengePage />} />
     <Route path="*" element={<Error404 />} />
   </Routes>
 )
