@@ -13,7 +13,7 @@ const AllChallengePage = () => {
     <CommonPage
       title="Alle Challenges"
       subtitle="Wähle eine Challenge aus"
-      backUrl="/"
+      backUrl="/start"
     >
       <Stack spacing={2} width="100%">
         <Typography color="text.secondary" textAlign="center">
@@ -25,7 +25,7 @@ const AllChallengePage = () => {
             key={challenge.id}
             variant="contained"
             sx={{
-              backgroundColor: difficultyColors[challenge.level],
+              backgroundColor: difficultyColors[challenge.level]
             }}
             onClick={() => navigate(`/challenge/${challenge.id}`)}
           >

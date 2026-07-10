@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Stack, Typography, Divider, List, ListItem, ListItemText, Tooltip, ToggleButton, ListItemButton, ListItemIcon, ToggleButtonGroup, IconButton, Button, CircularProgress } from '@mui/material'
 import StarIcon from '@mui/icons-material/Star'
 import HomeIcon from '@mui/icons-material/Home'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
 import MapIcon from '@mui/icons-material/Map'
@@ -15,8 +15,12 @@ import PhotoGallery from '../../Components/photos/PhotoGallery'
 import CommonPage from '../Layouts/CommonPage'
 
 const Spot = () => {
-  const [currentScreen, setCurrentScreen] = useState('map')
+  const [searchParams, setSearchParams] = useSearchParams({ tab: 'map' })
+
+  const currentScreen = searchParams.get('tab') ?? 'map'
   const [currentSpot, setCurrentSpot] = useState(undefined)
+
+  const setCurrentScreen = (screen) => setSearchParams({ tab: screen })
 
   const isActive = (screen) => currentScreen === screen
 
@@ -72,7 +76,7 @@ const Spot = () => {
         </Stack>
 
         {isActive('challenges') && currentSpot && (<Challenges spot={currentSpot} />)}
-   
+
         {isActive('photos') && <PhotoGallery />}
       </Stack>
 

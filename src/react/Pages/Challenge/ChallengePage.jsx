@@ -12,7 +12,10 @@ const ChallengePage = () => {
   if (!challenge) {
     return (
       <CommonPage title="Challenge nicht gefunden" backUrl="/challenges">
-        <p>Diese Challenge existiert nicht. ID: {id}</p>
+        <p>
+          Diese Challenge existiert nicht. ID:
+          {id}
+        </p>
       </CommonPage>
     )
   }
@@ -21,7 +24,7 @@ const ChallengePage = () => {
     <CommonPage
       title={challenge.title}
       subtitle={challenge.level}
-      backUrl="/challenges/all"
+      showGoBack
     >
       <ChallengeDBParser id={id} />
     </CommonPage>
