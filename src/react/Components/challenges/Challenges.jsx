@@ -14,6 +14,8 @@ import { challenges, difficultyColors } from "../../../data/challenge";
 import "./Challenge.css";
 import { borderRadius, margin, maxWidth, textAlign, width } from "@mui/system";
 
+import { useNavigate } from 'react-router-dom'
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -34,6 +36,8 @@ function AlertDialogSlide() {
       <Button variant="outlined" onClick={handleClickOpen}>
         INFO
       </Button>
+
+      <p></p>
 
       <Dialog
         open={open}
@@ -114,8 +118,13 @@ function AlertDialogSlide() {
   );
 }
 
-const SpotChallenges = () => {
-  const [clicked, onClickChange] = useState(null);
+
+const SpotChallenges = ({ spot }) => {
+  const navigate = useNavigate()
+
+  const spotChallenges = challenges.filter((challenge) =>
+    spot.challenges.includes(challenge.id)
+  )
 
   return (
     <>
@@ -123,24 +132,22 @@ const SpotChallenges = () => {
 
       <AlertDialogSlide />
 
-      <p></p>
-      
-      <Stack spacing={2} direction="column">
-        {challenges.map((challenge) => (
+      <Stack spacing={2} direction="column" sx={{ mt: 3 }}>
+        {spotChallenges.map((challenge) => (
           <Button
             key={challenge.id}
             style={{
               backgroundColor: difficultyColors[challenge.level],
             }}
             variant="contained"
-            onClick={() => onClickChange(challenge)}
+            onClick={() => navigate(`/challenge/${challenge.id}`)}
           >
             {challenge.title}
           </Button>
         ))}
       </Stack>
     </>
-  );
-};
+  )
+}
 
-export default SpotChallenges;
+export default SpotChallenges
