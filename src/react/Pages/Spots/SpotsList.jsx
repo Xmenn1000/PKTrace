@@ -10,7 +10,8 @@ const SpotsList = () => {
 
   return (
 
-    <CommonPage title="Trainingsspots" backUrl="/">
+    <CommonPage title="Trainingsspots" backUrl="/start">
+      \n
 
       <Stack
         width="100%"

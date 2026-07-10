@@ -1,59 +1,38 @@
-import { Card } from '@mui/material'
 import React, { useState } from 'react'
 import Challenge from './Challenge'
 import CommentSection from '../commentSection/CommentSection'
+import { getChallengeById, addComment } from '../../../data/challenge'
 
 const ChallengeDBParser = ({ id }) => {
-  const getChallengeFromDB = () => {
-    console.log(`TestClass, should use ${id}`)
-    const images = [
-      { url: 'https://picsum.photos/600/400?random=1' },
-      { url: 'https://picsum.photos/600/400?random=2' }
-    ]
-    const descriptions = [
-      'kjjfskjyf kjsh<s kjs<jk fsyjkd fysjkdh fsyjkd fyjks sydhkg sd',
-      '56545646584lkjjfjf <jks fj<ksfjk <sfjk <shjkf s<jkf < <jkd fjk<h d    mcnvmxynvkj564 dc5444',
-      'jfh<sfs<fg'
-    ]
-    const doSomething = () => {
-      console.log('Start Button was pressed')
-    }
-    return { images, descriptions, doSomething }
+  const challenge = getChallengeById(id)
+
+  const [comments, setComments] = useState(challenge.comments)
+
+  const handleStart = () => {
+    console.log('Start Button was pressed')
   }
 
-  const { images, descriptions, doSomething } = getChallengeFromDB()
-  const [comments, setComments] = useState([
-    {
-      id: Date.now() + Math.random(),
-      text: 'Eine Oma'
-    },
-    {
-      id: Date.now() + Math.random(),
-      text: 'Random Oma'
-    },
-    {
-      id: Date.now() + Math.random(),
-      text: 'OMAS ÜBERNEHMEN DIE ERDE'
-    },
-    {
-      id: Date.now() + Math.random(),
-      text: 'OMAS ÜBERNEHMEN DAS MULTIVERSUM'
-    }
-  ])
-  const onAddComment = (text) => {
-    setComments(prev => [
-      ...prev,
-      {
-        id: Date.now() + Math.random(),
-        text
-      }
-    ])
+  const handleAddComment = (text) => {
+    const newComment = addComment(challenge.id, text)
+
+    setComments(prev => [...prev, newComment])
   }
+
   const commentSection = (
-    <CommentSection comments={comments} onAddComment={onAddComment} />
+    <CommentSection
+      comments={comments}
+      onAddComment={handleAddComment}
+    />
   )
+
   return (
-    <Challenge images={images} descriptions={descriptions} onStart={doSomething} commentSection={commentSection} />
+    <Challenge
+      images={challenge.images}
+      descriptions={challenge.description}
+      onStart={handleStart}
+      commentSection={commentSection}
+    />
   )
 }
+
 export default ChallengeDBParser
