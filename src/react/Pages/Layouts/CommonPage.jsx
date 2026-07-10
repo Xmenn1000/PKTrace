@@ -6,7 +6,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import PropTypes from 'prop-types'
 
-const CommonPage = ({ title, subtitle, headerAktions, backUrl, showHome, children }) => (
+const CommonPage = ({ title, subtitle, headerAktions, backUrl, children }) => (
   <Stack
     flex="1 1 auto"
     spacing={1}
@@ -42,17 +42,6 @@ const CommonPage = ({ title, subtitle, headerAktions, backUrl, showHome, childre
       {children}
     </Stack>
 
-    {showHome && <Stack spacing={1.5} sx={{ width: '100%' }} justifyContent="center" alignItems="center">
-      <Divider sx={{ borderBottomWidth: 5, width: '100%', marginTop: '10px' }} />
-      <IconButton
-        component={Link}
-        to="/start"
-        sx={{ width: '40px'
-        }}
-      >
-        <HomeIcon />
-      </IconButton>
-    </Stack>}
   </Stack>
 )
 
@@ -61,12 +50,7 @@ CommonPage.propTypes = {
   subtitle: PropTypes.string,
   headerAktions: PropTypes.element,
   backUrl: PropTypes.string,
-  showHome: PropTypes.bool,
   children: PropTypes.element
-}
-
-CommonPage.defaultProps = {
-  showHome: true
 }
 
 export default CommonPage
