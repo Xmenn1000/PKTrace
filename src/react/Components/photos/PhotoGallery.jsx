@@ -19,7 +19,10 @@ const PhotoGallery = ({ images = [], imageSx = {}, sx = {} }) => (
   >
     <Swiper
       modules={[Pagination]}
-      pagination={{ clickable: true }}
+      pagination={{
+        el: '.gallery-pagination',
+        clickable: true
+      }}
       style={{ width: '100%' }}
     >
       {images.map((image) => (
