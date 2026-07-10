@@ -1,11 +1,31 @@
 import React from 'react'
-import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal'
+import { useParams } from 'react-router-dom'
 import CommonPage from '../Layouts/CommonPage'
 import ChallengeDBParser from '../../Components/challenge/ChallengeDBParser'
+import { getChallengeById } from '../../../data/challenge'
 
-const ChallengePage = ({ id, title, subtitle, backUrl }) => (
-  <CommonPage title={title} subtitle={subtitle} headerAktions={<AutoFixNormalIcon />} showHome={false} backUrl={backUrl}>
-    <ChallengeDBParser id={id} />
-  </CommonPage>
-)
+const ChallengePage = () => {
+  const { id } = useParams()
+
+  const challenge = getChallengeById(id)
+
+  if (!challenge) {
+    return (
+      <CommonPage title="Challenge nicht gefunden" backUrl="/challenges">
+        <p>Diese Challenge existiert nicht. ID: {id}</p>
+      </CommonPage>
+    )
+  }
+
+  return (
+    <CommonPage
+      title={challenge.title}
+      subtitle={challenge.level}
+      backUrl="/challenges/all"
+    >
+      <ChallengeDBParser id={id} />
+    </CommonPage>
+  )
+}
+
 export default ChallengePage
