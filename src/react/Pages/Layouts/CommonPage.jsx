@@ -46,7 +46,7 @@ const CommonPage = ({ title, subtitle, headerAktions, backUrl, showHome, childre
       <Divider sx={{ borderBottomWidth: 5, width: '100%', marginTop: '10px' }} />
       <IconButton
         component={Link}
-        to="/"
+        to="/start"
         sx={{ width: '40px'
         }}
       >

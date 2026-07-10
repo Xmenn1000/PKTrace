@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -8,17 +8,19 @@ import {
   Container,
   Paper,
   BottomNavigation,
-  BottomNavigationAction
+  BottomNavigationAction,
+  Snackbar,
+  Alert
 } from '@mui/material'
 
 import {
   HealthAndSafety as HomeIcon,
-  Pets as CatIcon,
   Person4 as ProfileIcon
 } from '@mui/icons-material'
 import MapIcon from '@mui/icons-material/Map'
 
 import AppRoutes from './AppRoutes'
+import { useUser } from '../hooks/useUser'
 
 import AppLogo from '../assets/favicon.svg'
 
@@ -27,10 +29,22 @@ const borderRadius = 6
 const AppLayout = () => {
   const location = useLocation()
   const navigate = useNavigate()
+  const { user } = useUser()
+  const [snackbarOpen, setSnackbarOpen] = useState(false)
+
+  const isLoggedIn = !!user
 
   let navigationIndex = 0
-  if (location.pathname.startsWith('/catnames')) navigationIndex = 1
+  if (location.pathname.startsWith('/spots') || location.pathname.startsWith('/spot/')) navigationIndex = 1
   if (location.pathname.startsWith('/profile')) navigationIndex = 2
+
+  const handleNav = (path) => {
+    if (!isLoggedIn) {
+      setSnackbarOpen(true)
+      return
+    }
+    navigate(path)
+  }
 
   return (
     <Stack
@@ -105,22 +119,32 @@ const AppLayout = () => {
               <BottomNavigationAction
                 label="Home"
                 icon={<HomeIcon />}
-                onClick={() => navigate('/')}
+                onClick={() => handleNav('/start')}
               />
               <BottomNavigationAction
                 label="Locations"
                 icon={<MapIcon />}
-                onClick={() => navigate('/spots')}
+                onClick={() => handleNav('/spots')}
               />
               <BottomNavigationAction
                 label="Profile"
                 icon={<ProfileIcon />}
-                onClick={() => navigate('/profile')}
+                onClick={() => handleNav('/profile')}
               />
             </BottomNavigation>
           </Stack>
         </Paper>
       </Container>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={() => setSnackbarOpen(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert severity="warning" onClose={() => setSnackbarOpen(false)}>
+          Bitte melde dich zuerst an, bevor du die Navigation verwendest.
+        </Alert>
+      </Snackbar>
     </Stack>
   )
 }

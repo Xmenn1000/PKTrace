@@ -11,12 +11,14 @@ import {
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import SkillLevel from './level'
+import { useUser } from '../../../hooks/useUser'
 
 const Welcome = () => {
   const [name, setName] = useState('')
   const [level, setLevel] = useState('')
   const navigate = useNavigate()
   const location = useLocation()
+  const { setUser } = useUser()
 
   useEffect(() => {
     const detectedLevel = location.state?.detectedLevel
@@ -25,7 +27,8 @@ const Welcome = () => {
     }
   }, [location.state])
   const handleClick = () => {
-    navigate('/spots', { state: { name, level } })
+    setUser({ name, level })
+    navigate('/start', { state: { name, level } })
   }
 
   return (
