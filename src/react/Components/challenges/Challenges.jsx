@@ -10,7 +10,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 
-import { challenges, difficultyColors } from "../../../data/challenge";
+import { getAllChallenges, difficultyColors } from '../../../data/challenge'
 import "./Challenge.css";
 import { borderRadius, margin, maxWidth, textAlign, width } from "@mui/system";
 
@@ -121,6 +121,7 @@ function AlertDialogSlide() {
 
 const Challenge = ({ spot }) => {
   const navigate = useNavigate()
+  const challenges = getAllChallenges()
 
   const spotChallenges = challenges.filter((challenge) =>
     spot.challenges.includes(challenge.id)

@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { Stack, Button, Typography } from '@mui/material'
 
 import CommonPage from '../Layouts/CommonPage'
-import { challenges, difficultyColors } from '../../../data/challenge'
+import { getAllChallenges, difficultyColors } from '../../../data/challenge'
 
 const AllChallengePage = () => {
   const navigate = useNavigate()
+  const challenges = getAllChallenges()
 
   return (
     <CommonPage
