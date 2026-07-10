@@ -86,7 +86,7 @@ const challenges = [
 ]
 
 export const initializeDatabaseWithChallenges = () => {
-  export const existingData = localStorage.getItem(STORAGE_KEY)
+  const existingData = localStorage.getItem(STORAGE_KEY)
 
   if (!existingData) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(challenges))
@@ -136,7 +136,7 @@ export const addComment = (challengeId, text) => {
 }
 
 export const getChallengeImages = (imagesId) => {
-  export const context = require.context(
+  const context = require.context(
     './challengeImages',
     true,
     /\.(png|jpe?g|webp)$/i
