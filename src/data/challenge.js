@@ -7,6 +7,12 @@ export const difficultyColors = {
 
 const STORAGE_KEY = 'challenge-app-db'
 
+const imageContext = import.meta.webpackContext('./challengeImages', {
+  recursive: true,
+  regExp: /\.(png|jpe?g|webp)$/i,
+  mode: 'sync'
+})
+
 const challenges = [
   {
     id: 1,
@@ -86,7 +92,7 @@ const challenges = [
 ]
 
 export const initializeDatabaseWithChallenges = () => {
-  export const existingData = localStorage.getItem(STORAGE_KEY)
+  const existingData = localStorage.getItem(STORAGE_KEY)
 
   if (!existingData) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(challenges))
@@ -135,18 +141,10 @@ export const addComment = (challengeId, text) => {
   return comment
 }
 
-export const getChallengeImages = (imagesId) => {
-  export const context = require.context(
-    './challengeImages',
-    true,
-    /\.(png|jpe?g|webp)$/i
-  )
-
-  return context
-    .keys()
-    .filter(path => path.startsWith(`./${imagesId}/`))
-    .map(path => ({
-      url: context(path),
-      alt: 'Challenge image'
-    }))
-}
+export const getChallengeImages = (imagesId) => imageContext
+  .keys()
+  .filter(path => path.startsWith(`./${imagesId}/`))
+  .map(path => ({
+    url: imageContext(path),
+    // alt: 'Challenge image'
+  }))
