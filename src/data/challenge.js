@@ -86,7 +86,7 @@ const challenges = [
 
 ]
 
-export function initializeDatabaseWithChallenges() {
+const initializeDatabaseWithChallenges = () => {
   const existingData = localStorage.getItem(STORAGE_KEY)
 
   if (!existingData) {
@@ -94,7 +94,7 @@ export function initializeDatabaseWithChallenges() {
   }
 }
 
-export function getDatabase() {
+const getDatabase = () => {
   const data = localStorage.getItem(STORAGE_KEY)
 
   if (!data) {
@@ -105,17 +105,17 @@ export function getDatabase() {
   return JSON.parse(data)
 }
 
-export function saveDatabase(database) {
+const saveDatabase = (database) => (
   localStorage.setItem(STORAGE_KEY, JSON.stringify(database))
-}
+)
 
-export function getChallengeById(id) {
-  return getDatabase().find(
+const getChallengeById = (id) => (
+  getDatabase().find(
     challenge => challenge.id === Number(id)
   )
-}
+)
 
-export function addComment(challengeId, text) {
+const addComment = (challengeId, text) => {
   const database = getDatabase()
 
   const challenge = database.find(
@@ -137,3 +137,20 @@ export function addComment(challengeId, text) {
 
   return comment
 }
+
+const getChallengeImages = (imagesId) => {
+  const context = require.context(
+    './challengeImages',
+    true,
+    /\.(png|jpe?g|webp)$/i
+  )
+
+  return context
+    .keys()
+    .filter(path => path.startsWith(`./${imagesId}/`))
+    .map(path => ({
+      url: context(path),
+      alt: 'Challenge image'
+    }))
+}
+export default { initializeDatabaseWithChallenges, getChallengeById, getDatabase, getChallengeImages, addComment, saveDatabase }
