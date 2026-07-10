@@ -12,7 +12,6 @@ import Error404 from './Pages/Error404'
 import SkillWizard from './Pages/tutorial/SkillWizard'
 import SpotsList from './Pages/Spots/SpotsList'
 import Spot from './Pages/Spots/Spot'
-import ChallengeDBParser from './Components/challenge/ChallengeDBParser'
 import ChallengePage from './Pages/Challenge/ChallengePage'
 import AllChallengePage from './Pages/Challenge/AllChallengesPage'
 
