@@ -119,7 +119,7 @@ function AlertDialogSlide() {
 }
 
 
-const SpotChallenges = ({ spot }) => {
+const Challenge = ({ spot }) => {
   const navigate = useNavigate()
 
   const spotChallenges = challenges.filter((challenge) =>
@@ -150,4 +150,4 @@ const SpotChallenges = ({ spot }) => {
   )
 }
 
-export default SpotChallenges
+export default Challenge
