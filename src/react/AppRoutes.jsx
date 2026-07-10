@@ -18,11 +18,7 @@ import Spot from './Pages/Spots/Spot'
 import ChallengePage from './Pages/Challenge/ChallengePage'
 import AllChallengePage from './Pages/Challenge/AllChallengesPage'
 import { useUser } from '../hooks/useUser'
-
-const ProtectedRoute = ({ element }) => {
-  const { user } = useUser()
-  return user ? element : <Navigate to="/" replace />
-}
+import TutorialGuard from './Pages/tutorial/TutorialGuard'
 
 const AppRoutes = () => (
   <Routes>
@@ -30,18 +26,18 @@ const AppRoutes = () => (
     <Route path="/welcome/skill" element={<WelcomeSkill />} />
     <Route path="/tutorial" element={<SkillWizard />} />
     <Route path="/tutorial/result" element={<SkillResult />} />
-    <Route path="/start" element={<ProtectedRoute element={<StartScreen />} />} />
-    <Route path="/spots" element={<ProtectedRoute element={<SpotsList />} />} />
-    <Route path="spot/:spotId" element={<ProtectedRoute element={<Spot />} />} />
-    <Route path="/Home" element={<ProtectedRoute element={<Home />} />} />
-    <Route path="/profile" element={<ProtectedRoute element={<Profile />} />}>
+    <Route path="/start" element={<TutorialGuard element={<StartScreen />} />} />
+    <Route path="/spots" element={<TutorialGuard element={<SpotsList />} />} />
+    <Route path="spot/:spotId" element={<TutorialGuard element={<Spot />} />} />
+    <Route path="/Home" element={<TutorialGuard element={<Home />} />} />
+    <Route path="/profile" element={<TutorialGuard element={<Profile />} />}>
       <Route path="" element={<ProfileOverview />} />
       <Route path="settings" element={<ProfileSettings />} />
     </Route>
     {/* THIS CHALLENGE ROUTE ONLY FOR TESTING CHALLENGE PAGE AND PHOTOGALLERY COMPONENT PURPOSES */ }
     <Route path="/challenge" element={<ChallengePage id={1} title="Challenge" subtitle="Level: Noob" backUrl="/" />} />
     <Route path="/challenge/:id" element={<ChallengePage />} />
-    <Route path="/challenges/all" element={<ProtectedRoute element={<AllChallengePage />} />} />
+    <Route path="/challenges/all" element={<TutorialGuard element={<AllChallengePage />} />} />
     <Route path="*" element={<Error404 />} />
   </Routes>
 )

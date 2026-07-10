@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Stack, Typography } from '@mui/material'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import CommonPage from '../Layouts/CommonPage'
 import SkillLevel from './level'
 import { useUser } from '../../../hooks/useUser'
@@ -25,20 +25,17 @@ const levelConfig = {
 
 const SkillResult = () => {
   const navigate = useNavigate()
-  const location = useLocation()
-  const { setUser } = useUser()
+  const { user } = useUser()
 
-  const name = location.state?.name ?? ''
-  const detectedLevel = location.state?.detectedLevel
+  const detectedLevel = user?.skillLevel
   const config = levelConfig[detectedLevel] ?? levelConfig[SkillLevel.LOW]
 
   const handleWeiter = () => {
-    setUser({ name, level: detectedLevel })
     navigate('/start')
   }
 
   const handleRestart = () => {
-    navigate('/tutorial', { state: { name } })
+    navigate('/tutorial')
   }
 
   return (

@@ -1,15 +1,11 @@
 import { Button, Stack, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import CommonPage from '../Layouts/CommonPage'
+import { useUser } from '../../../hooks/useUser'
 
 const Welcome = () => {
-  const [name, setName] = useState('')
-  const navigate = useNavigate()
-
-  const handleNext = () => {
-    navigate('/welcome/skill', { state: { name } })
-  }
+  const { user, setName } = useUser()
 
   return (
     <CommonPage title="Willkommen bei PK Trace">
@@ -27,16 +23,17 @@ const Welcome = () => {
         <TextField
           label="Name..."
           variant="outlined"
-          value={name}
+          value={user?.name ?? ''}
           required
           fullWidth
           onChange={(event) => setName(event.target.value)}
         />
 
         <Button
+          component={Link}
           variant="contained"
-          disabled={!name}
-          onClick={handleNext}
+          disabled={!user?.name}
+          to="/welcome/skill"
           fullWidth
         >
           Weiter

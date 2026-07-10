@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Stack } from '@mui/system'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { Typography, Button, Divider, LinearProgress } from '@mui/material'
 import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal'
@@ -22,6 +22,7 @@ import { cleanQuestion,
 import MultiSelectionQuestion from '../../Components/skillWizard/MultiSelectionQuestion'
 import SliderQuestion from '../../Components/skillWizard/SliderQuestion'
 import CommonPage from '../Layouts/CommonPage'
+import { useUser } from '../../../hooks/useUser'
 
 // https://mui.com/material-ui/react-progress/
 
@@ -29,8 +30,7 @@ const NUMBER_OF_QUESTIONS = 7
 
 const SkillWizard = () => {
   const navigate = useNavigate()
-  const location = useLocation()
-  const name = location.state?.name ?? ''
+  const { setSkillLevel } = useUser()
   // one based
   const [progress, setprogress] = useState(1)
   const [years, setYears] = useState('')
@@ -40,8 +40,6 @@ const SkillWizard = () => {
   const [standingJumpCount, setStandingJumpCount] = useState('')
   const [pushUpCount, setPushUpCount] = useState('')
   const [correctStickCount, setCorrectStickCount] = useState('')
-  // Effekt: Lade-State. Lädt seine Daten selbst.
-  // Ein State statt vieler kleiner.
 
   const isActive = (number) => progress === number
   const clamp = (val, min, max) => Math.min(Math.max(val, min), max)
@@ -61,7 +59,8 @@ const SkillWizard = () => {
   const handleFinishClick = () => {
     const score = calculteScore()
     const level = calculateSkillLevel(score)
-    navigate('/tutorial/result', { state: { name, detectedLevel: level } })
+    setSkillLevel(level)
+    navigate('/tutorial/result')
   }
 
   const handleContinueClick = () => {
