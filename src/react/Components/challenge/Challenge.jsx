@@ -1,6 +1,6 @@
+import React, { useState } from 'react'
 import { Box, Button, Stack, Typography } from '@mui/material'
 import PropTypes from 'prop-types'
-import { useState } from 'react'
 import PhotoGallery from '../photos/PhotoGallery'
 import Stopwatch from '../stopwatch/Stopwatch'
 
