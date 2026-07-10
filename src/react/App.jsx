@@ -10,7 +10,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import AppLayout from './AppLayout'
 import { DBProvider } from '../hooks/useDataBase'
 import { UserProvider } from '../hooks/useUser'
-import { initializeDatabaseWithChallenges } from '../data/challenge' 
+import { initializeDatabaseWithChallenges } from '../data/challenge'
 
 const theme = createTheme({
   colorSchemes: {

@@ -140,7 +140,6 @@ export const addComment = (challengeId, text) => {
 
   return comment
 }
-
 export const getChallengeImages = (imagesId) => imageContext
   .keys()
   .filter(path => path.startsWith(`./${imagesId}/`))
