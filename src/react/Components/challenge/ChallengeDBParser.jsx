@@ -1,10 +1,20 @@
 import React, { useState } from 'react'
 import Challenge from './Challenge'
 import CommentSection from '../commentSection/CommentSection'
-import { getChallengeById, addComment } from '../../../data/challenge'
+import {
+  getChallengeById,
+  getChallengeImages,
+  addComment
+} from '../../../data/challenge'
 
 const ChallengeDBParser = ({ id }) => {
   const challenge = getChallengeById(id)
+
+  if (!challenge) {
+    return <div>Challenge not found.</div>
+  }
+
+  const images = getChallengeImages(challenge.imagesId)
 
   const [comments, setComments] = useState(challenge.comments)
 
@@ -27,7 +37,7 @@ const ChallengeDBParser = ({ id }) => {
 
   return (
     <Challenge
-      images={challenge.images}
+      images={images}
       descriptions={challenge.description}
       onStart={handleStart}
       commentSection={commentSection}
