@@ -1,4 +1,4 @@
-import { Divider, IconButton, Typography } from '@mui/material'
+import { Divider, IconButton, Typography, Box } from '@mui/material'
 import { Stack } from '@mui/system'
 import React, { Children } from 'react'
 import { Link } from 'react-router-dom'
@@ -17,10 +17,12 @@ const CommonPage = ({ title, subtitle, headerAktions, backUrl, children }) => (
     marginY="20px"
   >
     <Stack width="100%" spacing={1}>
-      <Stack direction="row" spacing={1} justifyContent="center" alignItems="center">
-        {backUrl && <IconButton component={Link} to={backUrl}>
-          <ArrowBackIcon />
-        </IconButton>}
+      <Stack direction="row" spacing={1} display="grid" gridTemplateColumns="1fr auto 1fr" justifyContent="center" alignItems="center">
+        <Box sx={{ justifySelf: 'start' }}>
+          {backUrl && <IconButton component={Link} to={backUrl}>
+            <ArrowBackIcon />
+          </IconButton>}
+        </Box>
         <Stack>
           <Typography variant="h5" textAlign="center">
             {title}
