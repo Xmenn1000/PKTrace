@@ -115,6 +115,7 @@ const SkillWizard = () => {
       <Stack
         width="100%"
         spacing={1.5}
+        padding="10px"
       >
         <Typography variant="body2" textAlign="center">
           Schritt
