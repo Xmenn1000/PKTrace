@@ -10,7 +10,8 @@ import {
   DialogContent,
   DialogActions,
   TextField,
-  Button
+  Button,
+  Card
 } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 
@@ -28,7 +29,7 @@ const CommentSection = ({ comments = [], onAddComment }) => {
   }
 
   return (
-    <Paper sx={{ mt: 3, p: 2, borderRadius: 4 }}>
+    <Paper sx={{ mt: 3, p: 2, borderRadius: 4, width: '100%' }}>
       <Stack spacing={1.5}>
         <Stack direction="row" justifyContent="space-between" alignItems="center">
           <Typography variant="subtitle2" fontWeight={700}>
@@ -38,10 +39,6 @@ const CommentSection = ({ comments = [], onAddComment }) => {
               {comments.length}
             </Box>
           </Typography>
-
-          <IconButton size="small" onClick={() => setOpen(true)}>
-            <AddIcon />
-          </IconButton>
         </Stack>
 
         <Box
@@ -76,6 +73,14 @@ const CommentSection = ({ comments = [], onAddComment }) => {
           </Stack>
         </Box>
       </Stack>
+      <Button
+        variant="outlined"
+        startIcon={<AddIcon />}
+        onClick={() => setOpen(true)}
+        sx={{ marginY: '10px' }}
+      >
+        Kommentieren
+      </Button>
 
       <Dialog open={open} onClose={() => setOpen(false)} fullWidth maxWidth="xs">
         <DialogTitle>Kommentar schreiben</DialogTitle>

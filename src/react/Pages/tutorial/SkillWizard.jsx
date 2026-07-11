@@ -92,7 +92,7 @@ const SkillWizard = () => {
   }
 
   return (
-    <CommonPage title="   PK SkillWizard" headerAktions={<AutoFixNormalIcon />} showHome={false} backUrl="/welcome/skill">
+    <CommonPage title="   PK SkillWizard" headerAktions={<AutoFixNormalIcon />} showHome={false} showGoBack>
 
       <Stack
         width="100%"

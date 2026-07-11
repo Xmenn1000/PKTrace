@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import Challenge from './ChallengeOverview'
+import PropTypes from 'prop-types'
+import ChallengeOverview from './ChallengeOverview'
 import CommentSection from '../commentSection/CommentSection'
 import {
   getChallengeById,
@@ -18,10 +19,6 @@ const ChallengeDBParser = ({ id }) => {
 
   const [comments, setComments] = useState(challenge.comments)
 
-  const handleStart = () => {
-    console.log('Start Button was pressed')
-  }
-
   const handleAddComment = (text) => {
     const newComment = addComment(challenge.id, text)
 
@@ -36,13 +33,17 @@ const ChallengeDBParser = ({ id }) => {
   )
 
   return (
-    <Challenge
+    <ChallengeOverview
+      id={id}
       images={images}
       descriptions={challenge.description}
-      onStart={handleStart}
       commentSection={commentSection}
     />
   )
+}
+
+ChallengeDBParser.propTypes = {
+  id: PropTypes.number
 }
 
 export default ChallengeDBParser

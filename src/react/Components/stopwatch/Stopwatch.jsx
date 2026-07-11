@@ -1,26 +1,31 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Typography, Stack } from '@mui/material'
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
 
-const Stopwatch = ({ isRunning }) => {
-  const [seconds, setSeconds] = useState(0)
-  useEffect(() => {
-    if (!isRunning) return
+const Stopwatch = ({ onTimeElapsed }) => {
+  const [milliseconds, setMilliseconds] = useState(0)
 
+
+  useEffect(() => {
     const interval = setInterval(() => {
-      setSeconds(prev => prev + 1)
-    }, 1000)
+      setMilliseconds(prev => prev + 10)
+    }, 10)
 
     return () => clearInterval(interval)
-  }, [isRunning])
+  }, [])
 
-  const minutes = Math.floor(seconds / 60)
-  const remainingSeconds = seconds % 60
+  useEffect(() => {
+    onTimeElapsed?.(milliseconds)
+  }, [milliseconds, onTimeElapsed])
+
+  const minutes = Math.floor(milliseconds / 60000)
+  const seconds = Math.floor((milliseconds % 60000) / 1000)
+  const millis = milliseconds % 1000
+
   const formattedTime =
-  `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`
-  if (!isRunning) {
-    return null
-  }
+    `${minutes}:${seconds.toString().padStart(2, '0')}.${millis
+      .toString()
+      .padStart(3, '0')}`
 
   return (
     <Stack
@@ -38,4 +43,5 @@ const Stopwatch = ({ isRunning }) => {
     </Stack>
   )
 }
+
 export default Stopwatch

@@ -1,37 +1,66 @@
 import React from 'react'
-import { Stack, Typography, Divider, List, ListItem, ListItemText, ListItemButton, ListItemIcon, IconButton } from '@mui/material'
+import { Stack, Typography, Divider, List, ListItem, ListItemText, ListItemButton, ListItemIcon, IconButton, Chip, Avatar } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { useDataBase } from '../../../hooks/useDataBase'
 import CommonPage from '../Layouts/CommonPage'
+import { useUser } from '../../../hooks/useUser'
 
 const SpotsList = () => {
   const db = useDataBase()
   const spots = db.spots.getAll()
+  const { user } = useUser()
+
+  const calculateNumCompletedChallenges = (singleSpot) => {
+    let count = 0
+    singleSpot.challenges.forEach((challengeId) => {
+      if (user.doneChallenges.find(doneChallenge => doneChallenge.challengeId === challengeId)) {
+        count += 1
+      }
+    })
+    return count
+  }
 
   return (
 
     <CommonPage title="Trainingsspots" backUrl="/start">
 
-      <Stack
-        width="100%"
-        justifyContent="start"
-        alignItems="center"
-        flex="1 1 auto"
-        sx={{ marginBottom: '5px' }}
+      <Typography variant="h6" textAlign="center">
+        Suche dir einen Spot aus
+      </Typography>
+      <List sx={{
+        width: '100%',
+        maxWidth: 360,
+        overflow: 'auto',
+        flex: '1 1 0',
+        minHeight: 0,
+        scrollbarWidth: 'none'
+      }}
       >
-        <Typography variant="h6" textAlign="center">
-          Suche dir einen Spot aus
-        </Typography>
-        <List sx={{ width: '100%', maxWidth: 360, overflow: 'auto', flex: '1 1 0', minHeight: 0 }}>
-          {spots.map((singleSpot) => (
+        {spots.map((singleSpot) => {
+          const numAbsolved = calculateNumCompletedChallenges(singleSpot)
+          return (
             <ListItem key={singleSpot.title} disablePadding sx={{ border: '1px solid', mb: 1, borderRadius: 2, overflow: 'hidden' }}>
-              <ListItemButton LinkComponent={Link} to={`/spot/${singleSpot.id}`}>
+
+              <ListItemButton
+                component={Link}
+                to={`/spot/${singleSpot.id}`}
+                sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+              >
                 <ListItemText primary={singleSpot.title} />
+
+                {numAbsolved > 0 && (
+                <Chip
+                  color="primary"
+                  size="small"
+                  avatar={<Avatar>{numAbsolved}</Avatar>}
+                  label="Absolviert"
+                />
+                )}
               </ListItemButton>
             </ListItem>
-          ))}
-        </List>
-      </Stack>
+          )
+        })}
+      </List>
     </CommonPage>
   )
 }

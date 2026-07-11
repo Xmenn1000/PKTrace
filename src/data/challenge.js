@@ -144,6 +144,6 @@ export const getChallengeImages = (imagesId) => imageContext
   .keys()
   .filter(path => path.startsWith(`./${imagesId}/`))
   .map(path => ({
-    url: imageContext(path),
+    url: imageContext(path)
     // alt: 'Challenge image'
   }))

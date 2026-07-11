@@ -6,7 +6,7 @@ import { getChallengeById } from '../../../data/challenge'
 
 const ChallengePage = () => {
   const { id } = useParams()
-
+  const challengeId = Number(id)
   const challenge = getChallengeById(id)
 
   if (!challenge) {
@@ -26,7 +26,7 @@ const ChallengePage = () => {
       subtitle={challenge.level}
       showGoBack
     >
-      <ChallengeDBParser id={id} />
+      <ChallengeDBParser id={challengeId} />
     </CommonPage>
   )
 }
