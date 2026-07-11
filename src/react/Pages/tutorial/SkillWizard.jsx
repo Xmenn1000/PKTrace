@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Stack } from '@mui/system'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,15 +9,10 @@ import YesNoQuestion from '../../Components/skillWizard/YesNoQuestion'
 import SkillLevel from './level'
 import { cleanQuestion,
   jumpQuestion,
-  knownMovesOptions,
   knownMovesQuestion,
   pushupsQuestion,
-  pushupsQuestionOptions,
   standingJumpQuestion,
-  standingJumpQuestionOptions,
   stickQuestion,
-  stickQuestionOptions,
-  yearOptions,
   yearQuestion } from '../../../data/questions'
 import MultiSelectionQuestion from '../../Components/skillWizard/MultiSelectionQuestion'
 import SliderQuestion from '../../Components/skillWizard/SliderQuestion'
@@ -25,7 +20,6 @@ import CommonPage from '../Layouts/CommonPage'
 import { useUser } from '../../../hooks/useUser'
 
 // https://mui.com/material-ui/react-progress/
-
 const NUMBER_OF_QUESTIONS = 7
 
 const SkillWizard = () => {
@@ -33,13 +27,34 @@ const SkillWizard = () => {
   const { setSkillLevel } = useUser()
   // one based
   const [progress, setprogress] = useState(1)
-  const [years, setYears] = useState('')
-  const [canDoJump, setCanDoJump] = useState('')
-  const [canDoCleanMoves, setcanDoCleanMoves] = useState('')
-  const [knowMoves, setKnowMoves] = useState([])
-  const [standingJumpCount, setStandingJumpCount] = useState('')
-  const [pushUpCount, setPushUpCount] = useState('')
-  const [correctStickCount, setCorrectStickCount] = useState('')
+
+  const [questions, setQuestionAnswers] = useState(() => {
+    try {
+      return new Map(JSON.parse(localStorage.getItem('questions')))
+    } catch {
+      return new Map()
+    }
+  })
+
+  const setQuestion = (id, answer) => {
+    const newQuestions = new Map(questions)
+
+    newQuestions.set(id, answer)
+
+    setQuestionAnswers(newQuestions)
+  }
+
+  useEffect(() => {
+    localStorage.setItem('questions', JSON.stringify(Array.from(questions.entries())))
+  }, [questions])
+
+  const years = questions.get(yearQuestion.id) ?? ''
+  const canDoJump = questions.get(jumpQuestion.id) ?? ''
+  const canDoCleanMoves = questions.get(cleanQuestion.id) ?? ''
+  const knowMoves = questions.get(knownMovesQuestion.id) ?? []
+  const standingJumpCount = questions.get(standingJumpQuestion.id) ?? ''
+  const pushUpCount = questions.get(pushupsQuestion.id) ?? ''
+  const correctStickCount = questions.get(stickQuestion.id) ?? ''
 
   const isActive = (number) => progress === number
   const clamp = (val, min, max) => Math.min(Math.max(val, min), max)
@@ -103,13 +118,13 @@ const SkillWizard = () => {
           paddingY: 3
         }}
       >
-        {isActive(1) && <SingleSelectionQuestion question={yearQuestion} onSelect={setYears} options={yearOptions} currentValue={years} />}
-        {isActive(2) && <YesNoQuestion question={jumpQuestion} onSelect={setCanDoJump} currentValue={canDoJump} />}
-        {isActive(3) && <MultiSelectionQuestion question={knownMovesQuestion} options={knownMovesOptions} onSelect={setKnowMoves} currentValues={knowMoves} />}
-        {isActive(4) && <YesNoQuestion question={cleanQuestion} onSelect={setcanDoCleanMoves} currentValue={canDoCleanMoves} />}
-        {isActive(5) && <SliderQuestion question={standingJumpQuestion} options={standingJumpQuestionOptions} currentValue={standingJumpCount} onSelect={setStandingJumpCount} />}
-        {isActive(6) && <SliderQuestion question={pushupsQuestion} options={pushupsQuestionOptions} currentValue={pushUpCount} onSelect={setPushUpCount} />}
-        {isActive(7) && <SliderQuestion question={stickQuestion} options={stickQuestionOptions} currentValue={correctStickCount} onSelect={setCorrectStickCount} />}
+        {isActive(1) && <SingleSelectionQuestion question={yearQuestion.question} options={yearQuestion.options} currentValue={years} onSelect={(value) => setQuestion(yearQuestion.id, value)} />}
+        {isActive(2) && <YesNoQuestion question={jumpQuestion.question} currentValue={canDoJump} onSelect={(value) => setQuestion(jumpQuestion.id, value)} />}
+        {isActive(3) && <MultiSelectionQuestion question={knownMovesQuestion.question} options={knownMovesQuestion.options} currentValues={knowMoves} onSelect={(value) => setQuestion(knownMovesQuestion.id, value)} />}
+        {isActive(4) && <YesNoQuestion question={cleanQuestion.question} currentValue={canDoCleanMoves} onSelect={(value) => setQuestion(cleanQuestion.id, value)} />}
+        {isActive(5) && <SliderQuestion question={standingJumpQuestion.question} options={standingJumpQuestion.options} currentValue={standingJumpCount} onSelect={(value) => setQuestion(standingJumpQuestion.id, value)} />}
+        {isActive(6) && <SliderQuestion question={pushupsQuestion.question} options={pushupsQuestion.options} currentValue={pushUpCount} onSelect={(value) => setQuestion(pushupsQuestion.id, value)} />}
+        {isActive(7) && <SliderQuestion question={stickQuestion.question} options={stickQuestion.options} currentValue={correctStickCount} onSelect={(value) => setQuestion(stickQuestion.id, value)} />}
       </Stack>
 
       <Stack

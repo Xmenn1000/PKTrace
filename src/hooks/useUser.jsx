@@ -17,8 +17,7 @@ export const UserProvider = ({ children }) => {
       return {
         name: '',
         skillLevel: '',
-        doneChallenges: [],
-        answeredQuestions: []
+        doneChallenges: []
       }
     }
   })
@@ -30,6 +29,7 @@ export const UserProvider = ({ children }) => {
   const setName = (name) => setUser((prev) => ({ ...prev, name }))
   const setSkillLevel = (skillLevel) => setUser((prev) => ({ ...prev, skillLevel }))
   const isUserValid = () => Boolean(user?.name && user?.skillLevel)
+
   const addDoneChallenge = (id, timeElapsed) => {
     setUser(prev => {
       const doneChallenges = prev.doneChallenges ?? []
@@ -57,23 +57,9 @@ export const UserProvider = ({ children }) => {
       }
     })
   }
-  const setAnsweredQuestion = (question, answer) => setUser((prev) => {
-    const answeredQuestions = prev.answeredQuestions ?? []
-    return {
-      ...prev,
-      answeredQuestions: [
-        ...answeredQuestions,
-        {
-          questionName: question,
-          questionAnswer: answer
-        }
-
-      ]
-    }
-  })
 
   return (
-    <UserContext.Provider value={{ user, setUser, setName, setSkillLevel, isUserValid, addDoneChallenge, setAnsweredQuestion }}>
+    <UserContext.Provider value={{ user, setUser, setName, setSkillLevel, isUserValid, addDoneChallenge }}>
       {children}
     </UserContext.Provider>
   )
