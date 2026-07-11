@@ -73,7 +73,7 @@ CommonPage.propTypes = {
   headerAktions: PropTypes.element,
   backUrl: PropTypes.string,
   showGoBack: PropTypes.bool,
-  children: PropTypes.element
+  children: PropTypes.node
 }
 
 export default CommonPage

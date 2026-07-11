@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Challenge from './Challenge'
+import Challenge from './ChallengeOverview'
 import CommentSection from '../commentSection/CommentSection'
 import {
   getChallengeById,
