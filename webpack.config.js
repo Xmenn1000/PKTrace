@@ -17,7 +17,7 @@ require('dotenv').config()
 const pkg = require('./package.json')
 
 const plugins = [
-  new webpack.EnvironmentPlugin(['NODE_ENV']),
+  new webpack.EnvironmentPlugin(['NODE_ENV', 'MAPBOX_TOKEN', 'STREET_VIEW_KEY']),
   new webpack.ProvidePlugin({
     process: 'process/browser.js',
     Buffer: ['buffer', 'Buffer']
@@ -25,7 +25,6 @@ const plugins = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     'process.env.TARGET': JSON.stringify('web'),
-    'process.env.MAPBOX_TOKEN': JSON.stringify(process.env.MAPBOX_TOKEN),
     TARGET: JSON.stringify('web')
   }),
   new HtmlWebpackPlugin({
