@@ -1,4 +1,4 @@
-import { Button, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material'
+import { Button, FormControl, InputLabel, MenuItem, Select, Stack, Typography, Alert, AlertTitle } from '@mui/material'
 import React from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import CommonPage from '../Layouts/CommonPage'
@@ -41,13 +41,17 @@ const WelcomeSkill = () => {
           ... oder lasse deinen Skill einschätzen
         </Typography>
 
-        <Button
-          component={Link}
-          to="/tutorial"
-          fullWidth
+        <Alert
+          severity="info"
+          variant="outlined"
         >
-          Skilltest
-        </Button>
+          <AlertTitle>
+            <Button component={Link} to="/tutorial" size="small" variant="outlined">
+              Skilltest
+            </Button>
+          </AlertTitle>
+          Kein Stress, den Skilltest kannst du jederzeit später im Profil nachholen.
+        </Alert>
 
         <Button
           component={Link}
