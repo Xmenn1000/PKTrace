@@ -9,7 +9,7 @@ const StartScreen = () => {
   const navigate = useNavigate()
 
   const name = user?.name ?? 'Gast'
-  const level = user?.level || undefined
+  const level = user?.skillLevel || undefined
 
   return (
     <CommonPage title={`Hallo "${name}"!`} subtitle={level && `Skill level: ${level}`}>
