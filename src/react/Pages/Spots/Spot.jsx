@@ -42,6 +42,7 @@ const Spot = () => {
       <ToggleButtonGroup
         value={currentScreen}
         exclusive
+        color="primary"
         onChange={handleAlignment}
         aria-label="text alignment"
         sx={{ width: '100%', marginBottom: '10px' }}
