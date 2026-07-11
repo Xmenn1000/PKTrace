@@ -1,5 +1,6 @@
 import React from 'react'
-import { Slider, Typography, FormControl, Stack } from '@mui/material'
+import { Slider, Typography, FormControl, Stack, Box } from '@mui/material'
+import { TextFormat } from '@mui/icons-material'
 
 const SliderQuestion
  = ({ question, options, onSelect, currentValue }) => (
@@ -25,6 +26,14 @@ const SliderQuestion
          max={options.max}
          valueLabelDisplay="auto"
        />
+       <Typography
+         variant="h6"
+         textAlign="center"
+         color="primary.main"
+         sx={{ mt: 1 }}
+       >
+         {currentValue}
+       </Typography>
      </FormControl>
    </Stack>
  )
