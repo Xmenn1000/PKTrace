@@ -9,6 +9,7 @@ import Map from '../../Components/map/Map'
 import Challenges from '../../Components/challenges/Challenges'
 import PhotoGallery from '../../Components/photos/PhotoGallery'
 import CommonPage from '../Layouts/CommonPage'
+import StreetView from '../../Components/StreetView/StreetView'
 
 const Spot = () => {
   const [searchParams, setSearchParams] = useSearchParams({ tab: 'map' })
@@ -74,7 +75,7 @@ const Spot = () => {
 
         {isActive('challenges') && currentSpot && (<Challenges spot={currentSpot} />)}
 
-        {isActive('photos') && <PhotoGallery />}
+        {isActive('photos') && (currentSpot ? <StreetView lat={currentSpot.lat} lng={currentSpot.lng} /> : <CircularProgress />)}
       </Stack>
 
     </CommonPage>

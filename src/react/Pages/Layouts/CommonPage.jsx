@@ -1,8 +1,7 @@
 import { Divider, IconButton, Typography, Box } from '@mui/material'
 import { Stack } from '@mui/system'
-import React, { Children } from 'react'
+import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import HomeIcon from '@mui/icons-material/Home'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import PropTypes from 'prop-types'
 

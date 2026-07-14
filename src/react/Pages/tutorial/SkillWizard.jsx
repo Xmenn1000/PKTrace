@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Stack } from '@mui/system'
 import { useNavigate } from 'react-router-dom'
 
@@ -41,16 +41,37 @@ const SkillWizard = () => {
   const { setSkillLevel } = useUser()
   // one based
   const [progress, setprogress] = useState(1)
-  const [years, setYears] = useState('')
-  const [canDoJump, setCanDoJump] = useState('')
-  const [canDoCleanMoves, setcanDoCleanMoves] = useState('')
-  const [knowMoves, setKnowMoves] = useState([])
-  const [standingJumpCount, setStandingJumpCount] = useState('')
-  const [pushUpCount, setPushUpCount] = useState('')
-  const [correctStickCount, setCorrectStickCount] = useState('')
-  const [conditionCount, setConditionCount] = useState('')
-  const [canJumpHigh, setCanJumpHigh] = useState('')
-  const [canCrouchBalance, setCanCrouchBalance] = useState('')
+
+  const [questions, setQuestionAnswers] = useState(() => {
+    try {
+      return new Map(JSON.parse(localStorage.getItem('questions')))
+    } catch {
+      return new Map()
+    }
+  })
+
+  const setQuestion = (id, answer) => {
+    const newQuestions = new Map(questions)
+
+    newQuestions.set(id, answer)
+
+    setQuestionAnswers(newQuestions)
+  }
+
+  useEffect(() => {
+    localStorage.setItem('questions', JSON.stringify(Array.from(questions.entries())))
+  }, [questions])
+
+  const years = questions.get(yearQuestion.id) ?? ''
+  const canDoJump = questions.get(jumpQuestion.id) ?? ''
+  const canDoCleanMoves = questions.get(cleanQuestion.id) ?? ''
+  const knowMoves = questions.get(knownMovesQuestion.id) ?? []
+  const standingJumpCount = questions.get(standingJumpQuestion.id) ?? ''
+  const pushUpCount = questions.get(pushupsQuestion.id) ?? ''
+  const correctStickCount = questions.get(stickQuestion.id) ?? ''
+  const conditionCount = questions.get(condiQuestion.id) ?? ''
+  const canJumpHigh = questions.get(jumpHighQuestion.id) ?? ''
+  const canCrouchBalance = questions.get(crouchBalance.id) ?? ''
 
   const isActive = (number) => progress === number
   const clamp = (val, min, max) => Math.min(Math.max(val, min), max)

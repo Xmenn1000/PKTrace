@@ -29,6 +29,7 @@ export const UserProvider = ({ children }) => {
   const setName = (name) => setUser((prev) => ({ ...prev, name }))
   const setSkillLevel = (skillLevel) => setUser((prev) => ({ ...prev, skillLevel }))
   const isUserValid = () => Boolean(user?.name && user?.skillLevel)
+
   const addDoneChallenge = (id, timeElapsed) => {
     setUser(prev => {
       const doneChallenges = prev.doneChallenges ?? []
