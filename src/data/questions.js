@@ -53,7 +53,7 @@ export const pushupsQuestion = {
   }
 }
 
-export const stickQuestion = {
+export const stickQuestion = { //12
   question: 'Springe 10 Sticks (gestandene Präzis), wie viele hast du wirklich gestickt?',
   options: { min: 0, max: 10, step: 1 },
   valuePoints: (value) => {
@@ -65,20 +65,13 @@ export const stickQuestion = {
   }
 }
 
-export const condiQuestion =  {
-  question: 'Wie gut ist deine Ausdauer?',
-  options: { min: 0, max: 2, step: 1 },
-  labels: {
-    0: "Schlecht",
-    1: "Gut",
-    2: "Sehr Gut"
-  },
-  valuePoints: {
-    0: 0,
-    1: 1,
-    2: 2
-  }
-}
+export const condiQuestion = "Wie gut ist deine Ausdauer ?"
+
+export const conditionOptions = [
+  { value: '1', label: 'Schlecht', points: 1},
+  { value: '2', label: 'Gut', points: 2 },
+  { value: '3', label: 'Sehr Gut', points: 3 },
+]
 
 export const jumpHighQuestion = {
   question: 'Such dir ein Hinderniss für die jeweilige Höhe, wie hoch kannst du springen (Anlauf ist erlaubt) ?',
@@ -92,7 +85,7 @@ export const jumpHighQuestion = {
     6: "Hals",
     7: "Augen",
     8: "Kopf",
-    9: "Höher als Körpergröße"
+    9: "Höher"
   },
   valuePoints: (value) => {
     if (value <= 2) return 1;
