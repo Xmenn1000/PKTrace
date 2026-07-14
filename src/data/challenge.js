@@ -1,8 +1,20 @@
 export const difficultyColors = {
-  easy: '#0CC952',
-  medium: '#DE7A00',
-  hard: '#DE0000',
-  dynamisch: '#FF03E2'
+   easy: {
+    backgroundColor: "#167A3E",
+    color: "#FFFFFF",
+  },
+  medium: {
+    backgroundColor: "#8A4B00",
+    color: "#FFFFFF",
+  },
+  hard: {
+    backgroundColor: "#B42318",
+    color: "#FFFFFF",
+  },
+  dynamisch: {
+    backgroundColor: "#6F2DBD",
+    color: "#FFFFFF",
+  },
 }
 
 const STORAGE_KEY = 'challenge-app-db'
