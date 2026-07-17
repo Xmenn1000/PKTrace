@@ -55,7 +55,7 @@ const AlertDialogSlide = () => {
                   style={{
                     width: '80px',
                     height: '50px',
-                    backgroundColor: difficultyColors.easy,
+                    backgroundColor: difficultyColors.easy.backgroundColor,
                     display: 'inline-block',
                     borderRadius: '3px'
                   }}
@@ -67,7 +67,7 @@ const AlertDialogSlide = () => {
                   style={{
                     width: '80px',
                     height: '50px',
-                    backgroundColor: difficultyColors.medium,
+                    backgroundColor: difficultyColors.medium.backgroundColor,
                     display: 'inline-block',
                     borderRadius: '3px'
                   }}
@@ -79,7 +79,7 @@ const AlertDialogSlide = () => {
                   style={{
                     width: '80px',
                     height: '50px',
-                    backgroundColor: difficultyColors.hard,
+                    backgroundColor: difficultyColors.hard.backgroundColor,
                     display: 'inline-block',
                     borderRadius: '3px'
                   }}
@@ -91,7 +91,7 @@ const AlertDialogSlide = () => {
                   style={{
                     width: '80px',
                     height: '50px',
-                    backgroundColor: difficultyColors.dynamisch,
+                    backgroundColor: difficultyColors.dynamisch.backgroundColor,
                     display: 'inline-block',
                     borderRadius: '3px'
                   }}
