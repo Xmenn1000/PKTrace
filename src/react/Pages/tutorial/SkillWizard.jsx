@@ -150,9 +150,7 @@ const SkillWizard = () => {
 
   const isActive = (number) => progress === number
 
-  const clamp = (value, min, max) => {
-    return Math.min(Math.max(value, min), max)
-  }
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
 
   const currentProgress = () => {
     const percentage = Math.ceil(
@@ -425,7 +423,13 @@ const SkillWizard = () => {
             variant="body2"
             textAlign="center"
           >
-            Schritt {progress} von {NUMBER_OF_QUESTIONS}
+            Schritt
+            {' '}
+            {progress}
+            {' '}
+            von
+            {' '}
+            {NUMBER_OF_QUESTIONS}
           </Typography>
 
           <LinearProgress

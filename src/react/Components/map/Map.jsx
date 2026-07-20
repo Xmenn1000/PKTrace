@@ -96,16 +96,11 @@ const Map = ({ spot, onSpotChange }) => {
 
   const options = db.spots.getAll()
 
-  const filterOptions = createFilterOptions({
-    limit: 5
-  })
-
   return (
     <Stack width="100%" flex="1 1 auto" minHeight={0}>
       <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" marginBottom="5px">
         <Autocomplete
           options={options}
-          filterOptions={filterOptions}
           getOptionLabel={(option) => option.title}
           isOptionEqualToValue={(option, value) => option.id === value.id}
           sx={{ width: '100%' }}
@@ -120,7 +115,7 @@ const Map = ({ spot, onSpotChange }) => {
           </IconButton>
         </Tooltip>
       </Stack>
-      <div className="sidebar">
+      {/* <div className="sidebar">
         Longitude:
         {' '}
         {center[0].toFixed(4)}
@@ -132,7 +127,7 @@ const Map = ({ spot, onSpotChange }) => {
         | Zoom:
         {' '}
         {zoom.toFixed(2)}
-      </div>
+      </div> */}
       <div style={{ position: 'relative', width: '100%', flex: '1 1 auto', minHeight: 0 }}>
         <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }} />
         <div style={{ position: 'absolute', right: 5, top: 5 }}>

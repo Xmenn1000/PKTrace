@@ -14,28 +14,29 @@ const MultiSelectionQuestion = ({ question, options, onSelect, currentValues }) 
     )
   }
 
-  return (<Stack sx={{
-    justifyContent: 'center',
-    alignItems: 'center'
-  }}
-  >
-    <Typography
-      variant="h5"
-      textAlign="center"
-      sx={{ marginBottom: 2 }}
+  return (
+    <Stack sx={{
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}
     >
-      { question }
-    </Typography>
-    <FormControl>
-      {options.map((singleOption) => (
-        <FormControlLabel
-          key={singleOption.value}
-          value={singleOption.value}
-          control={<Checkbox checked={currentValues.includes(singleOption.value)} onChange={() => toggle(singleOption.value)} />}
-          label={singleOption.label}
-        />))}
-    </FormControl>
-  </Stack>
+      <Typography
+        variant="h5"
+        textAlign="center"
+        sx={{ marginBottom: 2 }}
+      >
+        { question }
+      </Typography>
+      <FormControl>
+        {options.map((singleOption) => (
+          <FormControlLabel
+            key={singleOption.value}
+            value={singleOption.value}
+            control={<Checkbox checked={currentValues.includes(singleOption.value)} onChange={() => toggle(singleOption.value)} />}
+            label={singleOption.label}
+          />))}
+      </FormControl>
+    </Stack>
   )
 }
 

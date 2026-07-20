@@ -1,21 +1,21 @@
-//https://ux.stackexchange.com/questions/25546/which-colors-would-best-convey-3-difficulty-levels
+// https://ux.stackexchange.com/questions/25546/which-colors-would-best-convey-3-difficulty-levels
 export const difficultyColors = {
-   easy: {
-    backgroundColor: "#2ECC71",
-    color: "#FFFFFF",
+  easy: {
+    backgroundColor: '#2ECC71',
+    color: '#FFFFFF'
   },
   medium: {
-    backgroundColor: "#F1C40F",
-    color: "#FFFFFF",
+    backgroundColor: '#F1C40F',
+    color: '#FFFFFF'
   },
   hard: {
-    backgroundColor: "#E74C3C",
-    color: "#FFFFFF",
+    backgroundColor: '#E74C3C',
+    color: '#FFFFFF'
   },
   dynamisch: {
-    backgroundColor: "#9B59B6",
-    color: "#FFFFFF",
-  },
+    backgroundColor: '#9B59B6',
+    color: '#FFFFFF'
+  }
 }
 
 const STORAGE_KEY = 'challenge-app-db'
