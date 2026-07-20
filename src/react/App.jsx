@@ -39,12 +39,6 @@ const theme = createTheme({
 
 initializeDatabaseWithChallenges()
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark'
-  }
-})
-
 const container = document.getElementById('app')
 const root = createRoot(container)
 root.render(
