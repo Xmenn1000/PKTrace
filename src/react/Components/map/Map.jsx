@@ -2,20 +2,19 @@ import React, { useRef, useEffect, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './Map.css'
-import { Stack, IconButton, TextField, Autocomplete, createFilterOptions, Tooltip, useColorScheme, CircularProgress } from '@mui/material'
+import { Stack, IconButton, TextField, Autocomplete, Tooltip, useColorScheme, CircularProgress } from '@mui/material'
 import MyLocationIcon from '@mui/icons-material/MyLocation'
 import ExploreIcon from '@mui/icons-material/Explore'
+import PropTypes from 'prop-types'
 import { useDataBase } from '../../../hooks/useDataBase'
 import Marker from './Marker'
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import useGeoLocation from '../../../hooks/useGeoLocation'
 
 const Map = ({ spot, onSpotChange }) => {
-  const [center, setCenter] = useState([spot.lng, spot.lat])
-  const [zoom, setZoom] = useState(spot.zoom)
   const [mapReady, setMapReady] = useState(false)
   const { mode } = useColorScheme()
-  const { longitude, latitude, error: locationError, getGeoLocation, loading: loadingLocation } = useGeoLocation()
+  const { longitude, latitude, getGeoLocation, loading: loadingLocation } = useGeoLocation()
 
   const db = useDataBase()
   const mapRef = useRef()
@@ -34,6 +33,10 @@ const Map = ({ spot, onSpotChange }) => {
     onSpotChange(newValue)
   }
 
+  const flyToSpot = (spotToFlyTo) => {
+    mapRef.current.flyTo({ center: [spotToFlyTo.lng, spotToFlyTo.lat], zoom: spotToFlyTo.zoom })
+  }
+
   useEffect(
     () => {
       if (mapRef.current && spot) {
@@ -42,10 +45,6 @@ const Map = ({ spot, onSpotChange }) => {
     },
     [mapRef.current, spot]
   )
-
-  const flyToSpot = (spot) => {
-    mapRef.current.flyTo({ center: [spot.lng, spot.lat], zoom: spot.zoom })
-  }
 
   const onGetGeoLocaton = () => {
     getGeoLocation()
@@ -65,26 +64,6 @@ const Map = ({ spot, onSpotChange }) => {
           lightPreset: mode === 'light' ? 'day' : 'night'
         }
       }
-    })
-
-    // // https://docs.mapbox.com/api/search/geocoding/
-    // mapRef.current.addControl(
-    //   new MapboxGeocoder({
-    //     accessToken: process.env.MAPBOX_TOKEN,
-    //     useBrowserFocus: true,
-    //     mapboxgl,
-    //     autocomplete: true,
-    //     limit: 5,
-    //     bbox: [13.088, 52.338, 13.761, 52.675],
-    //     proximity: [13.4055, 52.5200]
-    //   })
-    // )
-
-    mapRef.current.on('move', () => {
-      const mapCenter = mapRef.current.getCenter()
-      const mapZoom = mapRef.current.getZoom()
-      setCenter([mapCenter.lng, mapCenter.lat])
-      setZoom(mapZoom)
     })
 
     mapRef.current.on('load', () => setMapReady(true))
@@ -132,7 +111,8 @@ const Map = ({ spot, onSpotChange }) => {
         <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }} />
         <div style={{ position: 'absolute', right: 5, top: 5 }}>
           {loadingLocation && <CircularProgress aria-label="Loading…" />}
-          {!loadingLocation && <Tooltip title="find Location">
+          {!loadingLocation &&
+          <Tooltip title="find Location">
             <IconButton aria-label="mylocation" color="primary" onClick={() => onGetGeoLocaton()}>
               <MyLocationIcon />
             </IconButton>
@@ -145,6 +125,15 @@ const Map = ({ spot, onSpotChange }) => {
       <Stack />
     </Stack>
   )
+}
+
+Map.propTypes = {
+  spot: PropTypes.shape({
+    lng: PropTypes.number.isRequired,
+    lat: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired
+  }).isRequired,
+  onSpotChange: PropTypes.func.isRequired
 }
 
 export default Map

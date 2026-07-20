@@ -1,5 +1,6 @@
 import React from 'react'
 import { InputLabel, Select, MenuItem, FormControl } from '@mui/material'
+import PropTypes from 'prop-types'
 import SkillLevel from '../../Pages/tutorial/level'
 
 const PickDifficulty = ({ currentDifficulty, setDifficulty }) => (
@@ -17,5 +18,10 @@ const PickDifficulty = ({ currentDifficulty, setDifficulty }) => (
       <MenuItem value={SkillLevel.HIGH}>{SkillLevel.HIGH}</MenuItem>
     </Select>
   </FormControl>)
+
+PickDifficulty.propTypes = {
+  currentDifficulty: PropTypes.oneOf([...Object.values(SkillLevel), '']).isRequired,
+  setDifficulty: PropTypes.func.isRequired
+}
 
 export default PickDifficulty

@@ -12,6 +12,7 @@ import {
   Button
 } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
+import PropTypes from 'prop-types'
 
 const CommentSection = ({ comments = [], onAddComment }) => {
   const [open, setOpen] = useState(false)
@@ -108,6 +109,14 @@ const CommentSection = ({ comments = [], onAddComment }) => {
       </Dialog>
     </Paper>
   )
+}
+
+CommentSection.propTypes = {
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired
+  })),
+  onAddComment: PropTypes.func
 }
 
 export default CommentSection

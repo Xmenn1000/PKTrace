@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
 
 const UserContext = createContext(null)
 
@@ -25,11 +26,10 @@ export const UserProvider = ({ children }) => {
     localStorage.setItem('user', JSON.stringify(user))
   }, [user])
 
-  const setName = (name) => setUser((prev) => ({ ...prev, name }))
-  const setSkillLevel = (skillLevel) => setUser((prev) => ({ ...prev, skillLevel }))
-  const isUserValid = () => Boolean(user?.name && user?.skillLevel)
-
-  const addDoneChallenge = (id, timeElapsed) => {
+  const setName = useCallback((name) => setUser((prev) => ({ ...prev, name })), [])
+  const setSkillLevel = useCallback((skillLevel) => setUser((prev) => ({ ...prev, skillLevel })), [])
+  const isUserValid = useCallback(() => Boolean(user?.name && user?.skillLevel), [user])
+  const addDoneChallenge = useCallback((id, timeElapsed) => {
     setUser(prev => {
       const doneChallenges = prev.doneChallenges ?? []
 
@@ -55,13 +55,22 @@ export const UserProvider = ({ children }) => {
         ]
       }
     })
-  }
+  }, [])
+
+  const contextValue = useMemo(
+    () => ({ user, setUser, setName, setSkillLevel, isUserValid, addDoneChallenge }),
+    [user, setName, setSkillLevel, isUserValid, addDoneChallenge]
+  )
 
   return (
-    <UserContext.Provider value={{ user, setUser, setName, setSkillLevel, isUserValid, addDoneChallenge }}>
+    <UserContext.Provider value={contextValue}>
       {children}
     </UserContext.Provider>
   )
+}
+
+UserProvider.propTypes = {
+  children: PropTypes.node.isRequired
 }
 
 export const useUser = () => useContext(UserContext)

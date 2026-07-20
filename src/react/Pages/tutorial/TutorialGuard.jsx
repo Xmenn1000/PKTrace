@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { useUser } from '../../../hooks/useUser'
 
 // https://medium.com/@dineshjalagam/securing-your-react-application-implementing-route-guards-with-react-router-1ed9d11518e5
@@ -11,6 +12,10 @@ const TutorialGuard = ({ element }) => {
     if (!user?.skillLevel) return <Navigate to="/welcome/skill" replace />
   }
   return element
+}
+
+TutorialGuard.propTypes = {
+  element: PropTypes.element.isRequired
 }
 
 export default TutorialGuard

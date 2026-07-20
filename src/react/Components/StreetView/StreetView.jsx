@@ -1,75 +1,56 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import PropTypes from 'prop-types'
 import { Viewer } from 'mapillary-js'
 import 'mapillary-js/dist/mapillary.css'
 
 const StreetView = ({ lat, lng }) => {
   const key = process.env.STREET_VIEW_KEY
-  const [currentImgId, setCurrentImgId] = useState()
-
-  const url = `https://graph.mapillary.com/images?access_token=${key}&fields=id,geometry,captured_at,compass_angle&lat=${lat}&lng=${lng}&radius=50&limit=10`
-  console.log(url)
-
-  const fetchNewId = async (lng, lat) => {
-    try {
-      const response = await fetch(url)
-      if (!response.ok) {
-        console.log('STATUS', response.status)
-        throw new Error(`Response status: ${response.status}`)
-      }
-
-      const result = await response.json()
-      console.log('JSON', result)
-      return result
-    } catch (error) {
-      console.error(error.message)
-    }
-  }
+  const containerRef = useRef(null)
+  const viewerRef = useRef(null)
+  const [currentImgId, setCurrentImgId] = useState(null)
 
   useEffect(() => {
+    const url = `https://graph.mapillary.com/images?access_token=${key}&fields=id,geometry,captured_at,compass_angle&lat=${lat}&lng=${lng}&radius=50&limit=10`
     const load = async () => {
-      const result = await fetchNewId(lng, lat)
-
-      console.log('RESULT', result)
-      const newImageId = result.data[0].id
-      console.log('FIRST ITEM', newImageId)
-      setCurrentImgId(newImageId)
-    }
-    load()
-  }, [lng, lat])
-
-  class ViewerComponent extends React.Component {
-    constructor(props) {
-      super(props)
-      this.containerRef = React.createRef()
-    }
-
-    componentDidMount() {
-      this.viewer = new Viewer({
-        accessToken: key,
-        container: this.containerRef.current,
-        imageId: currentImgId
-      })
-    }
-
-    componentWillUnmount() {
-      if (this.viewer) {
-        this.viewer.remove()
+      try {
+        const response = await fetch(url)
+        if (!response.ok) throw new Error(`Response status: ${response.status}`)
+        const result = await response.json()
+        const first = result?.data?.[0]
+        if (first) setCurrentImgId(first.id)
+      } catch (error) {
+        console.error(error.message)
       }
     }
+    load()
+  }, [lat, lng, key])
 
-    render() {
-      return <div ref={this.containerRef} style={this.props.style} />
+  useEffect(() => {
+    if (!currentImgId) return
+    if (!viewerRef.current) {
+      viewerRef.current = new Viewer({
+        accessToken: key,
+        container: containerRef.current,
+        imageId: currentImgId
+      })
+    } else {
+      viewerRef.current.moveTo(currentImgId).catch((e) => console.error(e))
     }
-  }
+  }, [currentImgId, key])
 
-  return (
+  useEffect(() => () => {
+    if (viewerRef.current) {
+      viewerRef.current.remove()
+      viewerRef.current = null
+    }
+  }, [])
 
-    <ViewerComponent
-      accessToken={key}
-      imageId={currentImgId}
-      style={{ width: '100%', height: '100%' }}
-    />
-  )
+  return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
+}
+
+StreetView.propTypes = {
+  lat: PropTypes.number.isRequired,
+  lng: PropTypes.number.isRequired
 }
 
 export default StreetView

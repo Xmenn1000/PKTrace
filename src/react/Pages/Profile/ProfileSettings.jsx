@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useOutletContext } from 'react-router-dom'
 
 import { FormControl, RadioGroup, FormControlLabel, Radio, useColorScheme, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
@@ -9,7 +9,6 @@ import { useUser } from '../../../hooks/useUser'
 import PickName from '../../Components/common/PickName'
 
 const ProfileSettings = () => {
-  const navigate = useNavigate()
   const { user, setSkillLevel, setName } = useUser()
   const { mode, setMode } = useColorScheme()
   const { setSubtitle } = useOutletContext()

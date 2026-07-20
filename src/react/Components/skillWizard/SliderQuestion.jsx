@@ -5,6 +5,7 @@ import {
   FormControl,
   Stack
 } from '@mui/material'
+import PropTypes from 'prop-types'
 
 const SliderQuestion = ({
   question,
@@ -49,6 +50,21 @@ const SliderQuestion = ({
       </FormControl>
     </Stack>
   )
+}
+
+SliderQuestion.propTypes = {
+  question: PropTypes.string.isRequired,
+  options: PropTypes.shape({
+    min: PropTypes.number.isRequired,
+    max: PropTypes.number.isRequired,
+    step: PropTypes.number.isRequired
+  }).isRequired,
+  labels: PropTypes.objectOf(PropTypes.string),
+  onSelect: PropTypes.func.isRequired,
+  currentValue: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.oneOf([''])
+  ])
 }
 
 export default SliderQuestion

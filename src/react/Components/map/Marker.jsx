@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import mapboxgl from 'mapbox-gl'
 import { Button } from '@mui/material'
+import PropTypes from 'prop-types'
 import parkourImg from '../../../assets/MarkerGimp.png'
 
 // example code from https://docs.mapbox.com/mapbox-gl-js/guides/add-your-data/markers/
@@ -58,6 +59,20 @@ const Marker = ({ map, coordinates, spot, onSelect }) => {
       )}
     </>
   )
+}
+
+Marker.propTypes = {
+  map: PropTypes.shape({
+    current: PropTypes.object
+  }).isRequired,
+  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+  spot: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    lng: PropTypes.number.isRequired,
+    lat: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired
+  }).isRequired,
+  onSelect: PropTypes.func.isRequired
 }
 
 export default Marker

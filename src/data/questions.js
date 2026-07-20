@@ -2,13 +2,10 @@
 export const knownMovesQuestion = 'Welche dieser Parkour-Moves beherrschst du?'
 export const knownMovesOptions = [
   { value: '1', label: 'Passement Rapide', points: 1 },
-  { value: '2', label: 'Präzi mit Stick', points: 1 },
   { value: '3', label: 'Katzensprung', points: 2 },
   { value: '4', label: 'Armsprung', points: 2 },
   { value: '5', label: 'Handwechsler', points: 1 },
   { value: '6', label: 'Retour', points: 3 },
-  { value: '7', label: 'Dive-Cat', points: 3 },
-  { value: '8', label: 'Double-Cat', points: 3 },
   { value: '9', label: 'Dash', points: 2 }
 ]
 
