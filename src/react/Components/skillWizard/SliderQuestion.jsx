@@ -18,9 +18,7 @@ const SliderQuestion = ({
       ? options.min
       : Number(currentValue)
 
-  const formatValueLabel = (value) => {
-    return labels?.[value] ?? value
-  }
+  const formatValueLabel = (value) => labels?.[value] ?? value
 
   return (
     <Stack
