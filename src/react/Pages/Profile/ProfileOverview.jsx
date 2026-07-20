@@ -22,14 +22,14 @@ const ProfileOverview = () => {
         startIcon={<SettingsIcon />}
         onClick={() => navigate('/profile/settings')}
       >
-        Go to Settings
+        Zu den Einstellungen
       </Button>
       <Button
         variant="outlined"
         startIcon={<WizardIcon />}
         onClick={() => navigate('/tutorial')}
       >
-        Skill Test 
+        Skill Test
       </Button>
     </Stack>
   )
