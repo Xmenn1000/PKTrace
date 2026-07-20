@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext, useMemo } from 'react'
+import React, { useState, createContext, useContext, useMemo } from 'react'
 import spotsData from '../data/SpotsData.json'
 
 const DBContext = createContext()
