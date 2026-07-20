@@ -33,9 +33,9 @@ const ProfileOverview = () => {
       </Button>
       <Button
         variant="outlined"
-        onClick={() => navigate('/tutorial')}
+        onClick={() => navigate('/challenges/my')}
       >
-        Meine CHallenges
+        Meine Challenges
       </Button>
 
     </Stack>

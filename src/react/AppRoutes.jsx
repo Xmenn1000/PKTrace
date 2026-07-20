@@ -17,6 +17,7 @@ import Spot from './Pages/Spots/Spot'
 import ChallengePage from './Pages/Challenge/ChallengePage'
 import AllChallengePage from './Pages/Challenge/AllChallengesPage'
 import TutorialGuard from './Pages/tutorial/TutorialGuard'
+import MyChallengesPage from './Pages/Challenge/MyChallengesPage'
 
 const AppRoutes = () => (
   <Routes>
@@ -35,6 +36,7 @@ const AppRoutes = () => (
     {/* THIS CHALLENGE ROUTE ONLY FOR TESTING CHALLENGE PAGE AND PHOTOGALLERY COMPONENT PURPOSES */ }
     <Route path="/challenge/:id" element={<ChallengePage />} />
     <Route path="/challenges/all" element={<TutorialGuard element={<AllChallengePage />} />} />
+    <Route path="/challenges/my" element={<MyChallengesPage />}/>
     <Route path="*" element={<Error404 />} />
   </Routes>
 )

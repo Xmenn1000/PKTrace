@@ -19,6 +19,7 @@ export const difficultyColors = {
 }
 
 const STORAGE_KEY = 'challenge-app-db'
+const COMPLETED_STORAGE_KEY = 'challenge-app-completed'
 
 const imageContext = import.meta.webpackContext('./challengeImages', {
   recursive: true,
