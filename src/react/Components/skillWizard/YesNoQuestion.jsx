@@ -1,6 +1,5 @@
 import React from 'react'
-import { Typography, FormControl, FormLabel, FormControlLabel, RadioGroup, Radio, Stack, FormHelperText } from '@mui/material'
-import { margin } from '@mui/system'
+import { Typography, FormControl, FormControlLabel, RadioGroup, Radio, Stack } from '@mui/material'
 
 const YesNoQuestion = ({ question, onSelect, currentValue }) => (
   <Stack sx={{

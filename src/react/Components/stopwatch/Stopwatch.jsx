@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Typography, Stack } from '@mui/material'
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
 
 const Stopwatch = ({ onTimeElapsed }) => {
   const [milliseconds, setMilliseconds] = useState(0)
-
 
   useEffect(() => {
     const interval = setInterval(() => {

@@ -7,7 +7,6 @@ import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary'
 import { useDataBase } from '../../../hooks/useDataBase'
 import Map from '../../Components/map/Map'
 import Challenges from '../../Components/challenges/Challenges'
-import PhotoGallery from '../../Components/photos/PhotoGallery'
 import CommonPage from '../Layouts/CommonPage'
 import StreetView from '../../Components/StreetView/StreetView'
 

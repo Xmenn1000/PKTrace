@@ -8,6 +8,8 @@ import {
 } from '@mui/material'
 import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal'
 
+import { Typography, Button, LinearProgress } from '@mui/material'
+import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal'
 import SingleSelectionQuestion from '../../Components/skillWizard/SingleSelectionQuestion'
 import YesNoQuestion from '../../Components/skillWizard/YesNoQuestion'
 import MultiSelectionQuestion from '../../Components/skillWizard/MultiSelectionQuestion'

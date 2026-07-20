@@ -1,12 +1,12 @@
 import React from 'react'
 import Grid from '@mui/material/Grid2'
 import PropTypes from 'prop-types'
-import ChallengeCard from './ChallengeCard'
 import { Box } from '@mui/system'
+import ChallengeCard from './ChallengeCard'
 
 const ChallengeGrid = ({ challenges }) => (
 
-  <Box sx={{ 
+  <Box sx={{
     maxHeight: 180,
     overflowY: 'auto',
     scrollbarWidth: 'none'

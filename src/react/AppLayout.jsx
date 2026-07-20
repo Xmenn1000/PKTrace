@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 import { useLocation, useNavigate } from 'react-router-dom'
 
@@ -9,7 +9,6 @@ import {
   Paper,
   BottomNavigation,
   BottomNavigationAction,
-  Snackbar,
   Alert
 } from '@mui/material'
 
@@ -29,10 +28,17 @@ const borderRadius = 6
 const AppLayout = () => {
   const location = useLocation()
   const navigate = useNavigate()
-  const { user } = useUser()
+  const { isUserValid } = useUser()
   const [snackbarOpen, setSnackbarOpen] = useState(false)
+  const timerRef = useRef(null)
 
-  const isLoggedIn = !!user
+  const showError = () => {
+    setSnackbarOpen(true)
+    clearTimeout(timerRef.current)
+    timerRef.current = setTimeout(() => setSnackbarOpen(false), 3000)
+  }
+
+  const isLoggedIn = isUserValid()
 
   let navigationIndex = 0
   if (location.pathname.startsWith('/spots') || location.pathname.startsWith('/spot/')) navigationIndex = 1
@@ -40,7 +46,7 @@ const AppLayout = () => {
 
   const handleNav = (path) => {
     if (!isLoggedIn) {
-      setSnackbarOpen(true)
+      showError()
       return
     }
     navigate(path)
@@ -87,6 +93,7 @@ const AppLayout = () => {
         <Paper
           elevation={6}
           sx={{
+            position: 'relative',
             flex: '1 1 auto',
             display: 'flex',
             flexDirection: 'column',
@@ -99,6 +106,23 @@ const AppLayout = () => {
             background: theme => theme.palette.grey[900]
           }}
         >
+          {snackbarOpen && (
+            <Alert
+              severity="warning"
+              onClose={() => setSnackbarOpen(false)}
+              sx={{
+                position: 'absolute',
+                bottom: 64,
+                left: 8,
+                right: 8,
+                zIndex: 10,
+                borderRadius: 2,
+                boxShadow: 3
+              }}
+            >
+              Bitte gib zuerst deinen Namen und dein Skill-Level an!
+            </Alert>
+          )}
           <Stack
             flex="1 1 auto"
             direction="column"
@@ -135,16 +159,6 @@ const AppLayout = () => {
           </Stack>
         </Paper>
       </Container>
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={3000}
-        onClose={() => setSnackbarOpen(false)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      >
-        <Alert severity="warning" onClose={() => setSnackbarOpen(false)}>
-          Bitte melde dich zuerst an, bevor du die Navigation verwendest.
-        </Alert>
-      </Snackbar>
     </Stack>
   )
 }

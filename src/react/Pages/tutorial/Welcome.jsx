@@ -1,8 +1,9 @@
-import { Button, Stack, TextField, Typography } from '@mui/material'
+import { Button, Stack, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import CommonPage from '../Layouts/CommonPage'
 import { useUser } from '../../../hooks/useUser'
+import PickName from '../../Components/common/PickName'
 
 const Welcome = () => {
   const { user, setName } = useUser()
@@ -20,14 +21,7 @@ const Welcome = () => {
           Verrate uns wie du heißen willst...
         </Typography>
 
-        <TextField
-          label="Name..."
-          variant="outlined"
-          value={user?.name ?? ''}
-          required
-          fullWidth
-          onChange={(event) => setName(event.target.value)}
-        />
+        <PickName value={user?.name ?? ''} setValue={setName} />
 
         <Button
           component={Link}

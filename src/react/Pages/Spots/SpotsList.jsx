@@ -52,7 +52,29 @@ const SpotsList = () => {
                 <Chip
                   color="primary"
                   size="small"
-                  avatar={<Avatar>{numAbsolved}</Avatar>}
+                  avatar={
+                    <Avatar
+                      variant="rounded"
+                      sx={{
+                        width: 'auto',
+                        minWidth: 32,
+                        height: 24,
+                        px: 0.75,
+                        borderRadius: 999,
+                        fontSize: '0.7rem',
+                        fontWeight: 700,
+                        bgcolor: 'transparent',
+                        color: 'inherit',
+                        border: '1px solid',
+                        borderColor: 'currentColor',
+                        fontVariantNumeric: 'tabular-nums'
+                      }}
+                    >
+                      {numAbsolved}
+                      /
+                      {singleSpot.challenges.length}
+                    </Avatar>
+                  }
                   label="Absolviert"
                 />
                 )}

@@ -1,7 +1,7 @@
 const SkillLevel = {
-  LOW: 'low',
-  MID: 'mid',
-  HIGH: 'high'
+  LOW: 'Anfänger',
+  MID: 'Fortgeschritten',
+  HIGH: 'Profi'
 }
 
 export default SkillLevel

@@ -1,12 +1,11 @@
 import React from 'react'
 
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import Home from './Pages/Home'
 import Welcome from './Pages/tutorial/Welcome'
 import WelcomeSkill from './Pages/tutorial/WelcomeSkill'
 import SkillResult from './Pages/tutorial/SkillResult'
 import Profile from './Pages/Profile/Profile'
-import Map from './Components/map/Map'
 import ProfileOverview from './Pages/Profile/ProfileOverview'
 import ProfileSettings from './Pages/Profile/ProfileSettings'
 
@@ -17,7 +16,6 @@ import SpotsList from './Pages/Spots/SpotsList'
 import Spot from './Pages/Spots/Spot'
 import ChallengePage from './Pages/Challenge/ChallengePage'
 import AllChallengePage from './Pages/Challenge/AllChallengesPage'
-import { useUser } from '../hooks/useUser'
 import TutorialGuard from './Pages/tutorial/TutorialGuard'
 
 const AppRoutes = () => (

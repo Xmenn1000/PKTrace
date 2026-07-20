@@ -16,7 +16,7 @@
   "scripts": {
     "start": "cd build && ws --spa index.html",
     "start:dev": "cd build && ws --spa index.html",
-    "lint:fix": "eslint --fix src/",
+    "lint:fix": "eslint --fix --ext .js,.jsx src/",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down -v",
     "build": "yarn clean && yarn webpack",
@@ -61,6 +61,7 @@
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-unused-imports": "^4.4.1",
     "favicons": "^7.0.1",
     "favicons-webpack-plugin": "^6.0.1",
     "file-loader": "^6.2.0",
