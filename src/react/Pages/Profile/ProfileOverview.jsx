@@ -31,6 +31,13 @@ const ProfileOverview = () => {
       >
         Skill Test
       </Button>
+      <Button
+        variant="outlined"
+        onClick={() => navigate('/tutorial')}
+      >
+        Meine CHallenges
+      </Button>
+
     </Stack>
   )
 }
