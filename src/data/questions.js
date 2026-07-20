@@ -68,9 +68,9 @@ export const stickQuestion = { // 12
 export const condiQuestion = 'Wie gut ist deine Ausdauer ?'
 
 export const conditionOptions = [
-  { value: '1', label: 'Schlecht', points: 1 },
+  { value: '1', label: 'Sehr Gut', points: 3 },
   { value: '2', label: 'Gut', points: 2 },
-  { value: '3', label: 'Sehr Gut', points: 3 }
+  { value: '3', label: 'Schlecht', points: 1 }
 ]
 
 export const jumpHighQuestion = {
