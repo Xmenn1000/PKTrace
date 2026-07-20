@@ -19,7 +19,6 @@ export const difficultyColors = {
 }
 
 const STORAGE_KEY = 'challenge-app-db'
-const COMPLETED_STORAGE_KEY = 'challenge-app-completed'
 
 const imageContext = import.meta.webpackContext('./challengeImages', {
   recursive: true,
@@ -146,6 +145,24 @@ const challenges = [
     title: 'Sei der Affe',
     description: ['Hangel dich 3 mal innerhalb 10 Minuten die Grünen Stangen entlang'],
     level: 'hard',
+    comments: [
+      {
+        id: 1,
+        text: 'Ich fühle meine Arme nicht nehr'
+      },
+      {
+        id: 2,
+        text: '...Das mach ich nie wieder!'
+      }
+    ]
+  },
+
+  {
+    id: 8,
+    imagesId: 8,
+    title: 'Rolle Rolle Rotation',
+    description: ['Mache 10 saubere Parkourollen (Wenn zu einfach von einer Erhöhung runter)'],
+    level: 'medium',
     comments: [
       {
         id: 1,
