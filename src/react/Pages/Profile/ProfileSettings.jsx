@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useOutletContext } from 'react-router-dom'
 
@@ -13,6 +13,12 @@ const ProfileSettings = () => {
   const { mode, setMode } = useColorScheme()
   const { setSubtitle } = useOutletContext()
   useEffect(() => { setSubtitle('Einstellungen') }, [])
+
+  const [nameDraft, setNameDraft] = useState(user?.name ?? '')
+
+  useEffect(() => {
+    if (nameDraft.trim()) setName(nameDraft.trim())
+  }, [nameDraft, setName])
 
   return (
     <Stack
@@ -61,7 +67,7 @@ const ProfileSettings = () => {
         <Typography variant="body1" textAlign="center" mb="4px">
           Name
         </Typography>
-        <PickName value={user?.name ?? ''} setValue={setName} />
+        <PickName value={nameDraft} setValue={setNameDraft} />
       </stack>
       <stack>
         <Typography variant="body1" textAlign="center" mb="4px">
