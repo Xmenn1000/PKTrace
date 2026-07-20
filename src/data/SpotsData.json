@@ -6,7 +6,7 @@
     "lat": 52.529389,
     "lng": 13.450667,
     "zoom": 17.32,
-    "challenges": [1, 5, 6, 8]
+    "challenges": [1, 2, 4, 5, 6, 8]
   },
   {
     "id": 2,
@@ -15,7 +15,7 @@
     "lat": 52.5353,
     "lng": 13.4457,
     "zoom": 16.5,
-    "challenges": [2, 4, 5, 8]
+    "challenges": [1, 2, 4, 5]
   },
   {
     "id": 3,
@@ -24,59 +24,59 @@
     "lat": 52.528,
     "lng": 13.4362,
     "zoom": 16,
-    "challenges": [5, 8]
+    "challenges": [1, 2, 5, 8]
   },
   {
     "id": 4,
-    "title": "Kulturforum Potsdamer Platz",
+    "title": "Tilla-Durieux-Park Potsdamer Platz",
     "description": "Bekannter Spot rund um das Kulturforum mit Treppen, Geländern und offenen Plätzen – urbane Architektur direkt am Potsdamer Platz.",
-    "lat": 52.5085,
-    "lng": 13.3666,
+    "lat": 52.506186,
+    "lng": 13.374879,
     "zoom": 16.5,
-    "challenges": [1, 3, 5, 8]
+    "challenges": [1, 2, 3, 5, 8]
   },
   {
     "id": 5,
     "title": "Weinbergspark",
     "description": "Parkanlage in Mitte mit Hängen, Treppen und Mauern. Fester Trainingsort von ParkourONE, gut für Anfänger und Fortgeschrittene.",
-    "lat": 52.53,
-    "lng": 13.4022,
+    "lat": 52.532972,
+    "lng": 13.402590,
     "zoom": 16.5,
-    "challenges": [2, 5, 7, 8]
+    "challenges": [1, 2, 5, 7, 8]
   },
   {
     "id": 6,
     "title": "Brosepark Niederschönhausen",
     "description": "Ruhiger Park im Norden Berlins, von ParkourONE für Trainings genutzt. Grünanlage mit Wegen, Stufen und Bewegungsflächen.",
-    "lat": 52.5808,
-    "lng": 13.4045,
+    "lat": 52.58381,
+    "lng": 13.4056,
     "zoom": 16.5,
-    "challenges": [4, 5, 8]
+    "challenges": [1, 2, 4, 5, 8]
   },
   {
     "id": 7,
     "title": "Parkour-Anlage Gropiusstadt",
     "description": "Öffentliche, kostenlose Outdoor-Parkour-Anlage in Buckow/Neukölln, Teil der erneuerten Gropiusmeile am Wildmeisterdamm. Mauern, Stufen und Hindernisse für jedes Level.",
-    "lat": 52.428,
-    "lng": 13.46,
+    "lat": 52.426501,
+    "lng": 13.458307,
     "zoom": 16.5,
-    "challenges": [1, 2, 5, 8]
+    "challenges": [1, 2, 4, 5, 8]
   },
   {
     "id": 8,
-    "title": "Parkour-Anlage Stadtpark Steglitz",
+    "title": "Parkour-Anlage Sundi",
     "description": "Dedizierte Parkour-Anlage auf dem Campus Albert Schweitzer im Stadtpark Steglitz – beliebt bei Fitness- und Parkour-Fans.",
-    "lat": 52.4575,
-    "lng": 13.327,
+    "lat": 52.437104,
+    "lng": 13.278364,
     "zoom": 16.5,
-    "challenges": [1, 2, 5, 8]
+    "challenges": [1, 2, 4, 5, 8]
   },
   {
     "id": 9,
     "title": "Parkour-Insel Tempelhofer Feld",
     "description": "Parkour-Bereich auf dem weitläufigen ehemaligen Flughafengelände – viel Platz, freie Sicht und urbanes Flair.",
-    "lat": 52.4813,
-    "lng": 13.4125,
+    "lat": 52.472877,
+    "lng": 13.416275,
     "zoom": 16,
     "challenges": [1, 2, 4, 5, 8]
   },
@@ -84,18 +84,9 @@
     "id": 10,
     "title": "PK Park Spandau - Spektesee",
     "description": "Kostenlose, öffentliche Outdoor-Anlage am Spektesee in Spandau – Fitness- und Parkour-Hotspot in naturnaher Lage am Wasser.",
-    "lat": 52.5493,
-    "lng": 13.1668,
+    "lat": 52.549347,
+    "lng": 13.166810,
     "zoom": 16.5,
-    "challenges": [1, 5, 8]
-  },
-  {
-    "id": 11,
-    "title": "X-Move Obstallee Spandau",
-    "description": "Bewegungs- und Parkour-Spot an der Obstallee in Spandau, gut erreichbar im Wohnumfeld.",
-    "lat": 52.532,
-    "lng": 13.172,
-    "zoom": 16.5,
-    "challenges": [4, 5, 8]
+    "challenges": [1, 2, 4, 5, 8]
   }
 ]
