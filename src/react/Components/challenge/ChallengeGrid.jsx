@@ -7,7 +7,7 @@ import ChallengeCard from './ChallengeCard'
 const ChallengeGrid = ({ challenges }) => (
 
   <Box sx={{
-    maxHeight: 180,
+    maxHeight: '100%',
     overflowY: 'auto',
     scrollbarWidth: 'none'
   }}
