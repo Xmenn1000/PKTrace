@@ -26,7 +26,10 @@ const theme = createTheme({
         body: {
           width: '100%',
           height: '100%',
-          background: defaultTheme.palette.grey[200]
+          background: defaultTheme.palette.grey[200],
+          ...defaultTheme.applyStyles('dark', {
+            background: defaultTheme.palette.grey[800]
+          })
         },
         '#app': {
           width: '100%',
