@@ -12,18 +12,15 @@ const MyChallengesPage = () => {
   const allChallenges = getAllChallenges()
   const doneChallenges = user?.doneChallenges ?? []
 
-  const completedChallenges = allChallenges.filter((challenge) =>
-    doneChallenges.some(
-      (doneChallenge) =>
-        Number(doneChallenge.challengeId) === Number(challenge.id)
-    )
-  )
+  const completedChallenges = allChallenges.filter((challenge) => doneChallenges.some(
+    (doneChallenge) => Number(doneChallenge.challengeId) === Number(challenge.id)
+  ))
 
   return (
     <CommonPage
       title="Meine Challenges"
       subtitle="Deine abgeschlossenen Challenges"
-      backUrl="/start"
+      showGoBack
     >
       <Stack spacing={2} width="100%">
         {completedChallenges.length === 0 ? (

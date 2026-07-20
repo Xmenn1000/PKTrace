@@ -36,7 +36,7 @@ const AppRoutes = () => (
     {/* THIS CHALLENGE ROUTE ONLY FOR TESTING CHALLENGE PAGE AND PHOTOGALLERY COMPONENT PURPOSES */ }
     <Route path="/challenge/:id" element={<ChallengePage />} />
     <Route path="/challenges/all" element={<TutorialGuard element={<AllChallengePage />} />} />
-    <Route path="/challenges/my" element={<MyChallengesPage />}/>
+    <Route path="/challenges/my" element={<MyChallengesPage />} />
     <Route path="*" element={<Error404 />} />
   </Routes>
 )
