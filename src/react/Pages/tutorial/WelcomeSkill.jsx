@@ -31,9 +31,9 @@ const WelcomeSkill = () => {
             label="Level auswählen"
             onChange={(event) => setSkillLevel(event.target.value)}
           >
-            <MenuItem value={SkillLevel.LOW}>Beginner</MenuItem>
-            <MenuItem value={SkillLevel.MID}>Medium</MenuItem>
-            <MenuItem value={SkillLevel.HIGH}>Expert</MenuItem>
+            <MenuItem value={SkillLevel.LOW}>{SkillLevel.LOW}</MenuItem>
+            <MenuItem value={SkillLevel.MID}>{SkillLevel.MID}</MenuItem>
+            <MenuItem value={SkillLevel.HIGH}>{SkillLevel.HIGH}</MenuItem>
           </Select>
         </FormControl>
 
