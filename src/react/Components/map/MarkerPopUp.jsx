@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Modal } from '@mui/material'
 
 const MarkerPopUp = ({ isOpen, spot, onClose }) => (

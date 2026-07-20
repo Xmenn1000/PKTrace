@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Stack } from '@mui/system'
 import { useNavigate } from 'react-router-dom'
 
-import { Typography, Button, Divider, LinearProgress } from '@mui/material'
+import { Typography, Button, LinearProgress } from '@mui/material'
 import AutoFixNormalIcon from '@mui/icons-material/AutoFixNormal'
 import SingleSelectionQuestion from '../../Components/skillWizard/SingleSelectionQuestion'
 import YesNoQuestion from '../../Components/skillWizard/YesNoQuestion'

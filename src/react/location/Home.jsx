@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import GeoInfo from './GeoForm'
 import WeatherGraph from './WeatherGraph'
@@ -7,7 +7,7 @@ import useWeather from '../hooks/useWeather'
 import useGeoLocation from '../hooks/useGeoLocation'
 
 const Home = () => {
-  const { watchId, longitude, latitude, error : locationError } = useGeoLocation();
+  const { watchId, longitude, latitude, error: locationError } = useGeoLocation()
   const { loading, weather } = useWeather(latitude, longitude, 3000)
 
   return (
@@ -36,7 +36,7 @@ const Home = () => {
           The current weather is:
         </h3>
         {
-          locationError && <b style={{ color: "red" }}>Could not get geolocation</b>
+          locationError && <b style={{ color: 'red' }}>Could not get geolocation</b>
         }
         {
           loading

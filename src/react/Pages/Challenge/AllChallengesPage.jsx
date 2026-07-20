@@ -1,9 +1,7 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Stack, Button, Typography } from '@mui/material'
 
 import CommonPage from '../Layouts/CommonPage'
-import { getAllChallenges, difficultyColors } from '../../../data/challenge'
+import { getAllChallenges } from '../../../data/challenge'
 import ChallengeGrid from '../../Components/challenge/ChallengeGrid'
 
 const AllChallengePage = () => {

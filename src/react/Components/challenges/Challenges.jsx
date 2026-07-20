@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useState } from 'react'
 
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
@@ -9,8 +8,6 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import Slide from '@mui/material/Slide'
-
-import { borderRadius, margin, maxWidth, textAlign, width } from '@mui/system'
 
 import { useNavigate } from 'react-router-dom'
 import { getAllChallenges, difficultyColors } from '../../../data/challenge'

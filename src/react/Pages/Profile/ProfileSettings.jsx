@@ -2,8 +2,7 @@ import React, { useEffect } from 'react'
 
 import { useNavigate, useOutletContext } from 'react-router-dom'
 
-import { Button, FormControl, RadioGroup, FormLabel, FormControlLabel, Radio, useColorScheme, Typography } from '@mui/material'
-import { ArrowBack as BackIcon } from '@mui/icons-material'
+import { FormControl, RadioGroup, FormControlLabel, Radio, useColorScheme, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import PickDifficulty from '../../Components/common/PickDifficulty'
 import { useUser } from '../../../hooks/useUser'

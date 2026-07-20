@@ -16,7 +16,7 @@
   "scripts": {
     "start": "cd build && ws --spa index.html",
     "start:dev": "cd build && ws --spa index.html",
-    "lint:fix": "eslint --fix src/",
+    "lint:fix": "eslint --fix --ext .js,.jsx src/",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down -v",
     "build": "yarn clean && yarn webpack",

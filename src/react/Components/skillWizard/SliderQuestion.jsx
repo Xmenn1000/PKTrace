@@ -1,6 +1,5 @@
 import React from 'react'
-import { Slider, Typography, FormControl, Stack, Box } from '@mui/material'
-import { TextFormat } from '@mui/icons-material'
+import { Slider, Typography, FormControl, Stack } from '@mui/material'
 
 const SliderQuestion
  = ({ question, options, onSelect, currentValue }) => (

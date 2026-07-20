@@ -1,6 +1,6 @@
 import React from 'react'
 
-const GeoInfo = ({ lat, long}) => (
+const GeoInfo = ({ lat, long }) => (
   <div
     style={{
       display: 'flex',
