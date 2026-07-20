@@ -102,6 +102,60 @@ const challenges = [
         text: 'Boar easy ist ja wirklich einfach!'
       }
     ]
+  },
+
+  {
+    id: 5,
+    imagesId: 5,
+    title: 'Passement Rapide',
+    description: ['10 Passement Rapide über ein Hüfthohes Hinderniss'],
+    level: 'easy',
+    comments: [
+      {
+        id: 1,
+        text: 'Habs direkt geschaft!'
+      },
+      {
+        id: 2,
+        text: 'Boar easy ist ja wirklich einfach!'
+      }
+    ]
+  },
+
+  {
+    id: 6,
+    imagesId: 6,
+    title: 'Mauer Krafttraining',
+    description: ['Schaffe es innerhalb 10 Minuten 10 mal alle Mauern von unten nach oben zu überwinden'],
+    level: 'hard',
+    comments: [
+      {
+        id: 1,
+        text: 'Keine Chance!'
+      },
+      {
+        id: 2,
+        text: 'Send Help'
+      }
+    ]
+  },
+
+  {
+    id: 7,
+    imagesId: 7,
+    title: 'Sei der Affe',
+    description: ['Hangel dich 3 mal innerhalb 10 Minuten die Grünen Stangen entlang'],
+    level: 'hard',
+    comments: [
+      {
+        id: 1,
+        text: 'Ich fühle meine Arme nicht nehr'
+      },
+      {
+        id: 2,
+        text: '...Das mach ich nie wieder!'
+      }
+    ]
   }
 ]
 
