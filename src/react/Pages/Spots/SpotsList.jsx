@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, List, ListItem, ListItemText, ListItemButton, Chip, Avatar } from '@mui/material'
+import { Typography, List, ListItem, ListItemText, ListItemButton, Chip, Avatar, Box } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { useDataBase } from '../../../hooks/useDataBase'
 import CommonPage from '../Layouts/CommonPage'
@@ -52,7 +52,29 @@ const SpotsList = () => {
                 <Chip
                   color="primary"
                   size="small"
-                  avatar={<Avatar>{numAbsolved}</Avatar>}
+                  avatar={
+                    <Avatar
+                      variant="rounded"
+                      sx={{
+                        width: 'auto',
+                        minWidth: 32,
+                        height: 24,
+                        px: 0.75,
+                        borderRadius: 999,
+                        fontSize: '0.7rem',
+                        fontWeight: 700,
+                        bgcolor: 'transparent',
+                        color: 'inherit',
+                        border: '1px solid',
+                        borderColor: 'currentColor',
+                        fontVariantNumeric: 'tabular-nums'
+                      }}
+                    >
+                      {numAbsolved}
+                      /
+                      {singleSpot.challenges.length}
+                    </Avatar>
+                  }
                   label="Absolviert"
                 />
                 )}
