@@ -85,36 +85,44 @@ const StreetView = ({ lat, lng }) => {
   return (
     <Card
       sx={{
+        position: 'relative',
         width: '100%',
         height: '100%',
-        minHeight: 400,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
+        minHeight: 400
       }}
     >
       <div
         ref={containerRef}
         style={{
-          width: '100%',
-          height: '100%',
-          display: status === 'ready' ? 'flex' : 'none'
+          position: 'absolute',
+          inset: 0
         }}
       />
 
-      {status === 'loading' && (
-        <Box>
-          <CircularProgress />
-          <Typography>Lädt...</Typography>
+      {status !== 'ready' && (
+        <Box
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            display: 'grid',
+            placeItems: 'center',
+            textAlign: 'center',
+            backgroundColor: 'background.paper',
+            zIndex: 1
+          }}
+        >
+          {status === 'loading' ? (
+            <div>
+              <CircularProgress />
+              <Typography>Lädt...</Typography>
+            </div>
+          ) : (
+            <Typography>
+              Tut uns leid, aber diese Ressource kann für diesen Ort nicht geladen
+              werden!
+            </Typography>
+          )}
         </Box>
-      )}
-
-      {status === 'error' && (
-          <Typography>
-            Tut uns leid, aber diese Ressource kann für diesen Ort nicht geladen
-            werden!
-          </Typography>
       )}
     </Card>
   )
