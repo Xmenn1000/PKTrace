@@ -1,5 +1,6 @@
 import React from 'react'
 import { Typography, FormControl, FormControlLabel, RadioGroup, Radio, Stack } from '@mui/material'
+import PropTypes from 'prop-types'
 
 const YesNoQuestion = ({ question, onSelect, currentValue }) => (
   <Stack sx={{
@@ -28,5 +29,11 @@ const YesNoQuestion = ({ question, onSelect, currentValue }) => (
     </FormControl>
   </Stack>
 )
+
+YesNoQuestion.propTypes = {
+  question: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  currentValue: PropTypes.oneOf(['yes', 'no', ''])
+}
 
 export default YesNoQuestion

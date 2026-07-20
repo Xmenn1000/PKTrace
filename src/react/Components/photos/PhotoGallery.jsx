@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Box } from '@mui/material'
+/* eslint-disable import/no-unresolved */
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
-
 import 'swiper/css'
 import 'swiper/css/pagination'
+/* eslint-enable import/no-unresolved */
 
 const PhotoGallery = ({ images = [], imageSx = {}, sx = {} }) => (
   <Box

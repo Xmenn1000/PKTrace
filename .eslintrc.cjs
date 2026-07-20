@@ -63,6 +63,7 @@ module.exports = {
     'react/sort-comp': ['warn', {
       order: ['type-annotations', 'static-methods', 'lifecycle', 'everything-else', 'render']
     }],
+    'react/jsx-props-no-spreading': 'off',
     'react/jsx-no-bind': 'off',
     'react/forbid-prop-types': 'off',
     'react/require-default-props': 'off',

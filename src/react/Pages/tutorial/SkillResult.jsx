@@ -8,15 +8,24 @@ import { useUser } from '../../../hooks/useUser'
 const levelConfig = {
   [SkillLevel.LOW]: {
     description:
-      'Du stehst noch am Anfang deiner Parkour-Reise. Konzentriere dich auf grundlegende Bewegungen wie Rollen, Balance und einfache Sprünge – du hast wenig Erfahrung mit Jumps und kennst noch nicht viele Moves. Jeder Profi hat mal hier angefangen!'
+      'Du stehst noch am Anfang deiner Parkour-Reise. Konzentriere dich auf '
+      + 'grundlegende Bewegungen wie Rollen, Balance und einfache Sprünge – '
+      + 'du hast wenig Erfahrung mit Jumps und kennst noch nicht viele Moves. '
+      + 'Jeder Profi hat mal hier angefangen!'
   },
   [SkillLevel.MID]: {
     description:
-      'Du hast bereits eine solide Basis und kennst einige Parkour-Moves. Du kannst Sprünge ausführen und weißt, worauf es beim sauberen Landen ankommt. Arbeite daran, deine Technik zu verfeinern und neue Herausforderungen zu meistern.'
+      'Du hast bereits eine solide Basis und kennst einige Parkour-Moves. '
+      + 'Du kannst Sprünge ausführen und weißt, worauf es beim sauberen '
+      + 'Landen ankommt. Arbeite daran, deine Technik zu verfeinern und '
+      + 'neue Herausforderungen zu meistern.'
   },
   [SkillLevel.HIGH]: {
     description:
-      'Beeindruckend! Du bringst mehrere Jahre Erfahrung mit, beherrschst fortgeschrittene Techniken und kannst komplexe Bewegungsabläufe sauber und sicher ausführen. Setze neue Maßstäbe und inspiriere andere!'
+      'Beeindruckend! Du bringst mehrere Jahre Erfahrung mit, beherrschst '
+      + 'fortgeschrittene Techniken und kannst komplexe Bewegungsabläufe '
+      + 'sauber und sicher ausführen. Setze neue Maßstäbe und inspiriere '
+      + 'andere!'
   }
 }
 

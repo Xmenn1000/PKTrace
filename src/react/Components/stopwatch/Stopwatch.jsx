@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Typography, Stack } from '@mui/material'
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
+import PropTypes from 'prop-types'
 
 const Stopwatch = ({ onTimeElapsed }) => {
   const [milliseconds, setMilliseconds] = useState(0)
@@ -41,6 +42,9 @@ const Stopwatch = ({ onTimeElapsed }) => {
       </Typography>
     </Stack>
   )
+}
+Stopwatch.propTypes = {
+  onTimeElapsed: PropTypes.func
 }
 
 export default Stopwatch
