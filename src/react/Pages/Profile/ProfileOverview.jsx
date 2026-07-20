@@ -29,7 +29,7 @@ const ProfileOverview = () => {
         startIcon={<WizardIcon />}
         onClick={() => navigate('/tutorial')}
       >
-        Skill Test wiederholen
+        Skill Test 
       </Button>
     </Stack>
   )
