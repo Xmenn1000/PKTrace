@@ -3,6 +3,7 @@ import * as React from 'react'
 import Stack from '@mui/material/Stack'
 
 import PropTypes from 'prop-types'
+import { Typography } from '@mui/material'
 import { getAllChallenges } from '../../../data/challenge'
 import ChallengeCard from '../challenge/ChallengeCard'
 import DifficultyLegend from './DifficultyLegend'
@@ -14,10 +15,15 @@ const Challenge = ({ spot }) => {
 
   return (
     <>
-      <h1>Spot Challenges</h1>
+      <Typography
+        variant="h5"
+        textAlign="center"
+      >
+        Spot Challenges
+      </Typography>
 
       <Stack sx={{ flex: '1 1 auto', justifyContent: 'space-between', minHeight: 0 }}>
-        <Stack spacing={2} direction="column" sx={{ mt: 3 }}>
+        <Stack spacing={2} direction="column" sx={{ mt: 3, overflow: 'auto', height: '100%' }}>
           {spotChallenges.map((challenge) => (
             <ChallengeCard key={challenge.id} challenge={challenge} />
           ))}
