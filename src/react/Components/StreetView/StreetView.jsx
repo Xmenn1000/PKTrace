@@ -2,40 +2,77 @@ import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Viewer } from 'mapillary-js'
 import 'mapillary-js/dist/mapillary.css'
+import { Card, CircularProgress, Typography } from '@mui/material'
+import { Box } from '@mui/system'
 
 const StreetView = ({ lat, lng }) => {
   const key = process.env.STREET_VIEW_KEY
   const containerRef = useRef(null)
   const viewerRef = useRef(null)
   const [currentImgId, setCurrentImgId] = useState(null)
+  const [status, setStatus] = useState('loading')
 
   useEffect(() => {
+
+    const controller = new AbortController()
+
+    const timoutId = setTimeout(() => {
+      controller.abort()
+      setStatus('error')
+    }, 9000)
+
     const url = `https://graph.mapillary.com/images?access_token=${key}&fields=id,geometry,captured_at,compass_angle&lat=${lat}&lng=${lng}&radius=50&limit=10`
     const load = async () => {
+      setStatus('loading')
+      setCurrentImgId(null)
       try {
-        const response = await fetch(url)
+        const response = await fetch(url, {
+          signal: controller.signal
+        })
         if (!response.ok) throw new Error(`Response status: ${response.status}`)
         const result = await response.json()
         const first = result?.data?.[0]
-        if (first) setCurrentImgId(first.id)
+        if (!first) {
+          setStatus('error')
+          return
+        } 
+          
+        setCurrentImgId(first.id)
       } catch (error) {
-        console.error(error.message)
+        if (error.name !== 'AbortError') {
+          console.error(error.message)
+        }
+        setStatus('error')
+      } finally {
+        clearTimeout(timoutId)
       }
     }
     load()
   }, [lat, lng, key])
 
   useEffect(() => {
-    if (!currentImgId) return
-    if (!viewerRef.current) {
-      viewerRef.current = new Viewer({
-        accessToken: key,
-        container: containerRef.current,
-        imageId: currentImgId
-      })
-    } else {
-      viewerRef.current.moveTo(currentImgId).catch((e) => console.error(e))
+    if (!currentImgId || !containerRef.current) return
+
+    const loadViewer = async () => {
+      try {
+        if (!viewerRef.current) {
+          viewerRef.current = new Viewer({
+            accessToken: key,
+            container: containerRef.current,
+            imageId: currentImgId
+          })
+        } else {
+          await viewerRef.current.moveTo(currentImgId)
+        }
+
+        setStatus('ready')
+      } catch (error) {
+        console.error(error)
+        setStatus('error')
+      }
     }
+
+    loadViewer()
   }, [currentImgId, key])
 
   useEffect(() => () => {
@@ -45,7 +82,50 @@ const StreetView = ({ lat, lng }) => {
     }
   }, [])
 
-  return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
+  return (
+    <Card
+      sx={{
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+        minHeight: 400
+      }}
+    >
+      <div
+        ref={containerRef}
+        style={{
+          position: 'absolute',
+          inset: 0
+        }}
+      />
+
+      {status !== 'ready' && (
+        <Box
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            display: 'grid',
+            placeItems: 'center',
+            textAlign: 'center',
+            backgroundColor: 'background.paper',
+            zIndex: 1
+          }}
+        >
+          {status === 'loading' ? (
+            <div>
+              <CircularProgress />
+              <Typography>Lädt...</Typography>
+            </div>
+          ) : (
+            <Typography>
+              Tut uns leid, aber diese Ressource kann für diesen Ort nicht geladen
+              werden!
+            </Typography>
+          )}
+        </Box>
+      )}
+    </Card>
+  )
 }
 
 StreetView.propTypes = {

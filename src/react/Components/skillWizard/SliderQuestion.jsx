@@ -6,6 +6,7 @@ import {
   Stack
 } from '@mui/material'
 import PropTypes from 'prop-types'
+import { color } from '@mui/system'
 
 const SliderQuestion = ({
   question,
@@ -47,6 +48,7 @@ const SliderQuestion = ({
           valueLabelDisplay="auto"
           valueLabelFormat={formatValueLabel}
         />
+        <Typography textAlign='center' sx={{ fontWeight: 600, color: "primary", fontSize: 18 }} > {sliderValue} </Typography>
       </FormControl>
     </Stack>
   )
