@@ -30,7 +30,7 @@ const ProfileSettings = () => {
       }}
     >
 
-      <stack>
+      <Stack>
         <Typography variant="body1" textAlign="center">
           Theme
         </Typography>
@@ -47,6 +47,7 @@ const ProfileSettings = () => {
             minHeight: '56px'
           }}
         >
+          {mode !== undefined && (
           <FormControl>
             <RadioGroup
               aria-labelledby="demo-theme-toggle"
@@ -60,21 +61,22 @@ const ProfileSettings = () => {
               <FormControlLabel value="dark" control={<Radio />} label="Dark" />
             </RadioGroup>
           </FormControl>
+          )}
         </Box>
-      </stack>
+      </Stack>
 
-      <stack>
+      <Stack>
         <Typography variant="body1" textAlign="center" mb="4px">
           Name
         </Typography>
         <PickName value={nameDraft} setValue={setNameDraft} />
-      </stack>
-      <stack>
+      </Stack>
+      <Stack>
         <Typography variant="body1" textAlign="center" mb="4px">
           SkillLevel
         </Typography>
         <PickDifficulty currentDifficulty={user.skillLevel} setDifficulty={setSkillLevel} />
-      </stack>
+      </Stack>
     </Stack>
   )
 }
